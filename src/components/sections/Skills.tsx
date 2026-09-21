@@ -17,8 +17,8 @@ export function Skills() {
       id="skills"
       index="02"
       eyebrow="Skills"
-      title="What I work with"
-      description="Grouped by where each thing sits in a system. Highlighted items are ones I’ve used in my internship or in a project, not just read about."
+      title="Skills and tools"
+      description="Grouped by where they fit. The highlighted ones are what I’ve used in my internship or in a project."
       aside={<Legend />}
     >
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

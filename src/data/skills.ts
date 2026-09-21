@@ -10,7 +10,7 @@ export const skillCategories: SkillCategory[] = [
     id: 'programming',
     title: 'Programming',
     icon: Code2,
-    description: 'Java and Python are what I write most; SQL sits alongside both.',
+    description: 'Java and Python are the two I write most. SQL comes into almost everything.',
     items: [
       { name: 'Java', applied: true },
       { name: 'Python', applied: true },
@@ -24,7 +24,7 @@ export const skillCategories: SkillCategory[] = [
     id: 'backend',
     title: 'Backend',
     icon: Server,
-    description: 'The two frameworks I’ve actually built and shipped APIs with.',
+    description: 'I’ve used Spring Boot during my internship and FastAPI in my projects.',
     items: [
       { name: 'Spring Boot', applied: true },
       { name: 'FastAPI', applied: true },
@@ -36,7 +36,7 @@ export const skillCategories: SkillCategory[] = [
     id: 'data',
     title: 'Data & Analytics',
     icon: ChartColumn,
-    description: 'Cleaning and exploring datasets with SQL and Python, then reporting on them.',
+    description: 'I use SQL and Python to clean data, analyse it and build simple reports.',
     items: [
       { name: 'SQL', applied: true },
       { name: 'Pandas', applied: true },
@@ -51,7 +51,7 @@ export const skillCategories: SkillCategory[] = [
     id: 'databases',
     title: 'Databases',
     icon: Database,
-    description: 'Schema design, joins and transactions — through JDBC and through an ORM.',
+    description: 'Mostly PostgreSQL. I’ve written SQL through JDBC and through an ORM.',
     items: [
       { name: 'PostgreSQL', applied: true },
       { name: 'SQL', applied: true },
@@ -65,7 +65,7 @@ export const skillCategories: SkillCategory[] = [
     id: 'frontend',
     title: 'Frontend',
     icon: LayoutPanelTop,
-    description: 'Enough React to build and wire up the interfaces my backends serve.',
+    description: 'Enough React to build the front end for my own projects.',
     items: [
       { name: 'React', applied: true },
       { name: 'TypeScript', applied: true },
@@ -78,7 +78,7 @@ export const skillCategories: SkillCategory[] = [
     id: 'tools',
     title: 'Testing & Tools',
     icon: Wrench,
-    description: 'Tests written alongside the fix, and the tooling I use day to day.',
+    description: 'Testing I did during my internship, plus my day-to-day tools.',
     items: [
       { name: 'Unit testing', applied: true },
       { name: 'Integration testing', applied: true },

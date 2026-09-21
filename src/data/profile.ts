@@ -10,8 +10,8 @@ export const profile: Profile = {
   role: 'Entry-Level Software Engineer | Data Analyst',
   specialties: ['Java', 'Python', 'SQL'],
   intro:
-    'I worked on Java and Spring Boot REST APIs during my internship, and I build backend projects in Python. I also work with data — SQL queries, Pandas and Power BI. Final-year B.E. student at NMIT Bangalore, graduating in 2026.',
-  tagline: 'Entry-level software engineer and data analyst — Java, Python & SQL.',
+    'I’m a 2026 engineering graduate from NMIT Bangalore. My internship was in Java and Spring Boot. Python and SQL are what I use for my own projects and for data work.',
+  tagline: 'Entry-level software engineer and data analyst. Java, Python and SQL.',
   location: 'Bengaluru, India',
   availability: 'Open to full-time roles',
   email: 'anubhavkumarkanth123@gmail.com',
@@ -48,9 +48,9 @@ export const profile: Profile = {
   coreStack: ['Java', 'Python', 'SQL', 'Spring Boot', 'FastAPI', 'PostgreSQL', 'React', 'Power BI'],
   about: {
     paragraphs: [
-      'I’m in my final year of B.E. Electronics and Communication Engineering at Nitte Meenakshi Institute of Technology, Bangalore, graduating in 2026.',
-      'During my internship at Redevelopers Automate Solution I worked on the backend. I developed RESTful APIs in Java and Spring Boot, worked with SQL and NoSQL for data persistence, and wrote unit and integration tests for the defects I fixed. That’s where I learned what a real codebase and a real review cycle feel like.',
-      'On my own I build in Python and SQL — a FastAPI and PostgreSQL app, a Core Java order system over JDBC, and a calorie-prediction model built from public health data. I also do the data side of that work: cleaning the raw files, writing the queries and reporting what the numbers actually show.',
+      'I’m in my final year of B.E. Electronics and Communication Engineering at Nitte Meenakshi Institute of Technology, Bangalore. I graduate in 2026.',
+      'My internship was at Redevelopers Automate Solution. I spent three months on the backend of a Java and Spring Boot application, writing REST APIs, working with the SQL and NoSQL layer, and fixing bugs with tests to cover them.',
+      'Most of my own projects are in Python and SQL. One is a FastAPI and PostgreSQL app, another is an order system in Core Java, and a third is a calorie prediction model trained on public health data. The data side interests me too: cleaning the files, writing the queries and putting together simple reports.',
     ],
     facts: [
       { label: 'Education', value: 'B.E. ECE · NMIT Bangalore · 2026' },
@@ -63,7 +63,7 @@ export const profile: Profile = {
   seo: {
     title: 'Anubhav Kumar — Entry-Level Software Engineer | Data Analyst · Java, Python & SQL',
     description:
-      'Anubhav Kumar is a final-year B.E. student (Class of 2026, NMIT Bangalore) looking for entry-level software engineering and data analyst roles. Java and Spring Boot from a backend internship; Python, SQL, Pandas and Power BI from personal projects and coursework.',
+      'Anubhav Kumar, B.E. Electronics and Communication Engineering at NMIT Bangalore, Class of 2026. Java and Spring Boot from an internship, Python and SQL from personal projects, plus data analysis with Pandas and Power BI. Looking for an entry-level role.',
     keywords: [
       'Anubhav Kumar',
       'entry level software engineer',

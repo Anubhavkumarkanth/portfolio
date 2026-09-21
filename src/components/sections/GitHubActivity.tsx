@@ -252,7 +252,7 @@ export function GitHubActivity() {
       index="08"
       eyebrow="GitHub"
       title="On GitHub"
-      description="My public repositories and recent activity, pulled live from GitHub."
+      description="My public repositories and recent activity."
       aside={
         <a
           href={profile.socials.github.href}

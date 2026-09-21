@@ -145,7 +145,7 @@ export function Contact() {
       title={
 "Get in touch"
       }
-      description="If you’re hiring, or want to talk through something I’ve built, my inbox is open. I usually reply the same day."
+      description="I’m looking for an entry-level role at the moment. You can reach me at any of these."
     >
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
         <Reveal>
@@ -199,7 +199,7 @@ export function Contact() {
                     <Check className="size-6" aria-hidden="true" />
                   </span>
                   <p className="mt-5 text-lg font-medium text-fg">
-                    {status === 'sent' ? 'Message sent — thank you.' : 'Your email app should now be open.'}
+                    {status === 'sent' ? 'Message sent. Thank you.' : 'Your email app should now be open.'}
                   </p>
                   <p className="mt-2 max-w-sm text-sm text-fg-muted">
                     {status === 'sent' ? (

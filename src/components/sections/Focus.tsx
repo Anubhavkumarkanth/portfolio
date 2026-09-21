@@ -10,7 +10,7 @@ export function Focus() {
       index="07"
       eyebrow="Career focus"
       title="Roles I’m applying for"
-      description="Two tracks, and I’d be glad to take either. Building software in Java or Python, or working with data in SQL, Python and Power BI."
+      description="I’m open to both of these."
     >
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
         {profile.targetRoles.map((group, i) => (
@@ -36,7 +36,7 @@ export function Focus() {
       <Reveal delay={0.12}>
         <div className="mt-5 flex flex-col gap-3 rounded-xl border border-dashed border-line-strong p-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-fg-muted">
-            Graduating in 2026 and available to start full time. Happy to talk about any of these.
+            I graduate in 2026 and can start full time after that.
           </p>
           <a
             href="#contact"

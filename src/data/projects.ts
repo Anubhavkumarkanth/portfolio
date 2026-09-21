@@ -10,7 +10,7 @@ export const projects: Project[] = [
     slug: 'sip-friction-analyzer',
     name: 'SIP Friction Analyzer',
     kind: 'Full-stack · Python',
-    tagline: 'A web app that works out what skipping or pausing SIP instalments actually costs over the long run.',
+    tagline: 'A tool that shows how skipped or reduced SIP contributions affect the final amount.',
     summary:
       'A Python simulation engine behind a FastAPI + React app. You set up a monthly SIP plan, add real-life “friction” — a skipped month, a six-month pause, a year at half the amount — and it puts a number on it: compounding loss, a contribution compliance rate, a 0–100 discipline score, and a Monte Carlo range over 1,000 return paths. Every run is stored in PostgreSQL with the events that produced it.',
     problem:
@@ -89,9 +89,9 @@ export const projects: Project[] = [
     ],
     tags: ['Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy', 'React', 'TypeScript'],
     highlights: [
-      'Python simulation engine behind a FastAPI backend, with JWT sign-in',
-      'PostgreSQL schema that saves each run together with the events behind it',
-      'React and TypeScript frontend; 17 backend tests running in CI',
+      'Simulation engine in Python, served through a FastAPI backend',
+      'PostgreSQL stores every run along with the events behind it',
+      'React and TypeScript front end, with tests running in CI',
     ],
     links: {
       github: 'https://github.com/Anubhavkumarkanth/sip-friction-analyzer',
@@ -102,7 +102,7 @@ export const projects: Project[] = [
     slug: 'dietbot',
     name: 'Dietbot',
     kind: 'Python · machine learning',
-    tagline: 'A calorie-intake model trained on public health survey data, kept only because it beat the standard formula.',
+    tagline: 'A model that predicts daily calorie intake, trained on public health survey data.',
     summary:
       'I built a training set from raw CDC survey files (three NHANES 2017–2018 tables joined into 4,624 usable adult records), tested four model designs against baselines, and kept the one that won: a Random Forest that predicts daily calorie intake more accurately than the Mifflin-St Jeor formula. It powers a Streamlit app that turns an athlete’s profile into calorie and macro targets and a meal plan. The project started as someone else’s prototype, which I rebuilt into a tested Python package.',
     problem:
@@ -186,9 +186,9 @@ export const projects: Project[] = [
     ],
     tags: ['Python', 'Pandas', 'scikit-learn', 'NumPy', 'PostgreSQL', 'Streamlit'],
     highlights: [
-      'Dataset built from raw CDC NHANES files: three tables joined down to 4,624 adults',
-      'Random Forest tested against the standard formula on held-out data (MAE 633 vs 651 kcal)',
-      'Rebuilt an inherited prototype as a tested Python package with PostgreSQL storage',
+      'Dataset put together from raw CDC survey files, down to 4,624 adults',
+      'Random Forest compared against the standard formula on held-out data',
+      'An older prototype rebuilt into a tested Python package',
     ],
     links: {
       github: 'https://github.com/Anubhavkumarkanth/Dietbot_For_Athletes',
@@ -207,7 +207,7 @@ export const projects: Project[] = [
     slug: 'order-management-system',
     name: 'Order Management System',
     kind: 'Java · SQL',
-    tagline: 'A console order system written in Core Java over PostgreSQL, using plain JDBC and hand-written SQL.',
+    tagline: 'A console order system in Core Java, running on PostgreSQL over plain JDBC.',
     summary:
       'A seven-table PostgreSQL database in 3NF with six analytical reporting queries (CTEs, window functions, correlated subqueries) and an index evaluated with EXPLAIN ANALYZE. A small Core Java console app drives it over plain JDBC with no ORM, so every query is visible SQL. Placing an order locks the product rows and writes the order, line items, stock change, inventory log and payment in one transaction: all of it commits, or none of it does.',
     problem:
@@ -312,8 +312,8 @@ ORDER BY category, rank_in_category;`,
     ],
     tags: ['Java', 'JDBC', 'PostgreSQL', 'SQL', 'Transactions'],
     highlights: [
-      'Seven-table schema in 3NF, with the constraints enforced in the database',
-      'Order placement wrapped in a transaction with row locks and rollback',
+      'Seven tables in 3NF, with the constraints kept in the database',
+      'Orders written in a single transaction, with row locks and rollback',
       'Six reporting queries using CTEs, window functions and subqueries',
     ],
     links: {

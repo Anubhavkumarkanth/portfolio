@@ -9,8 +9,8 @@ export function Projects() {
       id="projects"
       index="04"
       eyebrow="Projects"
-      title="Things I’ve built"
-      description="Three projects I built end to end. Open any one for the full write-up — how it works, the decisions behind it and what it doesn’t do. None of them are deployed; the code is on GitHub."
+      title="Projects"
+      description="A few things I built while learning. Open any one to read more about how it works. None of them are deployed, but the code is on GitHub."
     >
       {projects.length === 0 ? (
         <p className="rounded-xl border border-dashed border-line p-10 text-center text-fg-muted">
