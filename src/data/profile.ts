@@ -37,12 +37,12 @@ export const profile: Profile = {
     {
       group: 'Software',
       roles: ['Software Engineer', 'Java Developer', 'Python Developer', 'Backend Developer', 'Full-Stack Developer'],
-      note: 'Backend and full-stack work using Java, Spring Boot, Python and React.',
+      note: 'Java, Python, backend and full-stack development.',
     },
     {
       group: 'Data',
       roles: ['Data Analyst', 'BI Analyst'],
-      note: 'SQL-based analysis, data cleaning and reporting using Python, Pandas and Power BI.',
+      note: 'SQL, Python and practical data analysis.',
     },
   ],
   coreStack: ['Java', 'Python', 'SQL', 'Spring Boot', 'FastAPI', 'PostgreSQL', 'React', 'Power BI'],

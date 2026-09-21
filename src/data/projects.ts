@@ -9,7 +9,7 @@ export const projects: Project[] = [
   {
     slug: 'sip-friction-analyzer',
     name: 'SIP Friction Analyzer',
-    kind: 'Full-stack · Python',
+    kind: 'Python · backend · SQL',
     tagline: 'A tool that shows how skipped or reduced SIP contributions affect the final amount.',
     summary:
       'A Python simulation engine behind a FastAPI + React app. You set up a monthly SIP plan, add real-life “friction” — a skipped month, a six-month pause, a year at half the amount — and it puts a number on it: compounding loss, a contribution compliance rate, a 0–100 discipline score, and a Monte Carlo range over 1,000 return paths. Every run is stored in PostgreSQL with the events that produced it.',
@@ -101,7 +101,7 @@ export const projects: Project[] = [
   {
     slug: 'dietbot',
     name: 'Dietbot',
-    kind: 'Python · machine learning',
+    kind: 'Python · data analysis',
     tagline: 'A model that predicts daily calorie intake, trained on public health survey data.',
     summary:
       'I built a training set from raw CDC survey files (three NHANES 2017–2018 tables joined into 4,624 usable adult records), tested four model designs against baselines, and kept the one that won: a Random Forest that predicts daily calorie intake more accurately than the Mifflin-St Jeor formula. It powers a Streamlit app that turns an athlete’s profile into calorie and macro targets and a meal plan. The project started as someone else’s prototype, which I rebuilt into a tested Python package.',
