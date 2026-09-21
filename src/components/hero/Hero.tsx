@@ -29,7 +29,7 @@ function HeroBackground() {
 export function Hero() {
   const school = education[0]
   const job = experience[0]
-  const specialties = 'Java, Python & SQL'
+  const specialties = 'Java · Python · SQL · Data Analytics'
 
   const meta = [
     { icon: GraduationCap, text: `B.E. ECE · NMIT Bangalore · Class of ${school.graduation}` },
@@ -127,7 +127,7 @@ export function Hero() {
             {profile.coreStack.map((tech, i) => (
               <li key={tech} className="flex items-center gap-5">
                 {i > 0 && <span className="size-1 rounded-full bg-line-strong" aria-hidden="true" />}
-                {tech}
+                <span className={i < 3 ? 'text-fg' : undefined}>{tech}</span>
               </li>
             ))}
           </ul>

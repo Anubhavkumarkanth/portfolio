@@ -10,7 +10,7 @@ export const profile: Profile = {
   role: 'Entry-Level Software Engineer | Data Analyst',
   specialties: ['Java', 'Python', 'SQL'],
   intro:
-    'I’m a 2026 engineering graduate from NMIT Bangalore. My internship was in Java and Spring Boot. Python and SQL are what I use for my own projects and for data work.',
+    'I’m a 2026 engineering graduate from NMIT Bangalore. My internship was in Java and Spring Boot, and I use Python and SQL for my projects, for backend work and for data analysis.',
   tagline: 'Entry-level software engineer and data analyst. Java, Python and SQL.',
   location: 'Bengaluru, India',
   availability: 'Open to full-time roles',

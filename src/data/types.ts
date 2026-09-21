@@ -62,6 +62,8 @@ export interface SkillCategory {
   extra?: { label: string; items: string[] }
   appliedIn: string[]
   wide?: boolean
+  /** 'support' renders smaller, below the four main pillars. */
+  tier?: 'pillar' | 'support'
 }
 
 export interface ProjectEvaluationRow {
