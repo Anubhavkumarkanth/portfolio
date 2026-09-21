@@ -70,7 +70,8 @@ function pickRepos(repos: RawRepo[]): GitHubRepo[] {
     return i === -1 ? Number.POSITIVE_INFINITY : i
   }
   return repos
-    .filter((repo) => !repo.fork && !repo.archived)
+    // The <username>/<username> repo only holds the GitHub profile README, so it isn't a project.
+    .filter((repo) => !repo.fork && !repo.archived && repo.name.toLowerCase() !== site.github.username.toLowerCase())
     .sort((a, b) => rank(a) - rank(b) || Date.parse(b.pushed_at) - Date.parse(a.pushed_at))
     .slice(0, site.github.repoLimit)
     .map(({ id, name, description, html_url, language, stargazers_count, forks_count, pushed_at }) => ({
