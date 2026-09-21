@@ -12,7 +12,7 @@ export function ExperienceTimeline() {
       index="03"
       eyebrow="Experience"
       title="Internship experience"
-      description="Three months on a backend team, working in Java and Spring Boot."
+      description="Three months on a backend team — my only professional experience so far, and the part of my background I lean on most."
     >
       <div className="relative">
         {/* Rail */}

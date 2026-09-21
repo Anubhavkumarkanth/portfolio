@@ -52,7 +52,7 @@ export function Hero() {
             className="inline-flex items-center gap-2.5 rounded-full border border-line bg-white/[0.03] py-1 pr-3.5 pl-2.5 text-xs text-fg-muted"
           >
             <span className="size-2 rounded-full bg-ok" aria-hidden="true" />
-            {profile.availability} · Class of {school.graduation}
+            {profile.availability}
           </m.p>
 
           <h1 id="home-heading" className="mt-6">

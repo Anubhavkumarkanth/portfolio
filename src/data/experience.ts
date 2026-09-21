@@ -8,7 +8,7 @@ export const experience: Experience[] = [
     start: '2026-02',
     end: '2026-04',
     location: 'MP, India',
-    summary: 'My first professional role. I worked on the backend of a Java and Spring Boot application, alongside the team’s existing codebase.',
+    summary: 'My first professional role. I worked inside an existing codebase alongside the team’s own developers, picking up tickets and getting my work reviewed.',
     highlights: [
       'Developed RESTful backend APIs using Java and Spring Boot.',
       'Worked with SQL and NoSQL technologies for application data persistence.',

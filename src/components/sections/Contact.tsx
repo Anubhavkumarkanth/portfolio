@@ -145,7 +145,7 @@ export function Contact() {
       title={
 "Get in touch"
       }
-      description="I’m looking for entry-level software, backend, full-stack and data roles. If you’re hiring or want to talk through something I’ve built, my inbox is open."
+      description="If you’re hiring, or want to talk through something I’ve built, my inbox is open. I usually reply the same day."
     >
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
         <Reveal>

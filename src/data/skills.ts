@@ -24,7 +24,7 @@ export const skillCategories: SkillCategory[] = [
     id: 'backend',
     title: 'Backend',
     icon: Server,
-    description: 'Spring Boot from my internship, FastAPI from my own projects.',
+    description: 'The two frameworks I’ve actually built and shipped APIs with.',
     items: [
       { name: 'Spring Boot', applied: true },
       { name: 'FastAPI', applied: true },

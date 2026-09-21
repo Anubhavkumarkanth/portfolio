@@ -41,7 +41,7 @@ export function Education() {
 
                   <div className="border-t border-line bg-ink-950/40 p-6 sm:p-8 md:border-t-0 md:border-l">
                     <p className="font-mono text-[11px] tracking-[0.18em] text-fg-subtle uppercase">Class of</p>
-                    <p className="mt-1 font-mono text-5xl font-medium tracking-tight text-fg">{edu.graduation}</p>
+                    <p className="mt-1 font-mono text-3xl font-medium tracking-tight text-fg">{edu.graduation}</p>
                     <dl className="mt-6 divide-y divide-line">
                       {rows.map((row) => (
                         <div key={row.label} className="flex justify-between gap-6 py-2.5 text-sm">
