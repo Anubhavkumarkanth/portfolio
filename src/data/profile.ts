@@ -10,8 +10,8 @@ export const profile: Profile = {
   role: 'Entry-Level Software Engineer | Data Analyst',
   specialties: ['Java', 'Python', 'SQL'],
   intro:
-    'I’m a 2026 engineering graduate from NMIT Bangalore. My internship was in Java and Spring Boot, and I use Python and SQL for my projects, for backend work and for data analysis.',
-  tagline: 'Entry-level software engineer and data analyst. Java, Python and SQL.',
+    'A 2026 engineering graduate from NMIT Bangalore, with Java and Spring Boot internship experience and hands-on work in Python, SQL and data analysis.',
+  tagline: 'Java · Python · SQL · Data Analytics',
   location: 'Bengaluru, India',
   availability: 'Open to full-time roles',
   email: 'anubhavkumarkanth123@gmail.com',
@@ -61,9 +61,9 @@ export const profile: Profile = {
     ],
   },
   seo: {
-    title: 'Anubhav Kumar — Entry-Level Software Engineer | Data Analyst · Java, Python & SQL',
+    title: 'Anubhav Kumar — Entry-Level Software Engineer | Data Analyst',
     description:
-      'Anubhav Kumar, B.E. Electronics and Communication Engineering at NMIT Bangalore, Class of 2026. Java and Spring Boot from an internship, Python and SQL from personal projects, plus data analysis with Pandas and Power BI. Looking for an entry-level role.',
+      'Anubhav Kumar, B.E. ECE at NMIT Bangalore, Class of 2026. Java and Spring Boot from an internship, Python and SQL from personal projects, and practical data analytics with Pandas and Power BI. Open to entry-level software and data analyst roles.',
     keywords: [
       'Anubhav Kumar',
       'entry level software engineer',

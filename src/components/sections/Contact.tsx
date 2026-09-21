@@ -145,7 +145,7 @@ export function Contact() {
       title={
 "Get in touch"
       }
-      description="I’m looking for an entry-level role at the moment. You can reach me at any of these."
+      description="I’m currently looking for an entry-level role in software or data. You can reach me at any of these."
     >
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
         <Reveal>
