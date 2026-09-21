@@ -56,7 +56,7 @@ export const profile: Profile = {
       { label: 'Education', value: 'B.E. ECE · NMIT Bangalore · 2026' },
       { label: 'Based in', value: 'Bengaluru, India' },
       { label: 'Internship', value: 'Java Full Stack Dev · Feb–Apr 2026' },
-      { label: 'Works with', value: 'Java · Python · SQL' },
+      { label: 'Core skills', value: 'Java · Python · SQL · Data Analytics' },
       { label: 'Looking for', value: 'Software engineering or data analysis' },
     ],
   },
