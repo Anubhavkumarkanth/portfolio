@@ -39,7 +39,7 @@ a component to update the site.
 | Name, role, intro, email, location, About text       | `src/data/profile.ts`                                   |
 | GitHub / LinkedIn links                              | `src/data/profile.ts` → `socials`                       |
 | Page title, meta description, keywords               | `src/data/profile.ts` → `seo`                           |
-| Resume PDF                                           | Replace `public/resume/Anubhav_Kumar_Resume.pdf`        |
+| Resume PDF                                           | Replace `public/resume/Anubhav-Kumar-Resume.pdf`        |
 | Projects, GitHub links, live demo links              | `src/data/projects.ts`                                  |
 | Skills and their groupings                           | `src/data/skills.ts`                                    |
 | Internship / jobs                                    | `src/data/experience.ts`                                |
@@ -52,7 +52,7 @@ a component to update the site.
 
 ### Common tasks
 
-**Update the resume.** Drop the new PDF at `public/resume/Anubhav_Kumar_Resume.pdf`. To use a different
+**Update the resume.** Drop the new PDF at `public/resume/Anubhav-Kumar-Resume.pdf`. To use a different
 file name, change `profile.resume.href` and `profile.resume.fileName`.
 
 **Change the email, GitHub or LinkedIn.** Edit `profile.email` and `profile.socials` in

@@ -15,9 +15,11 @@ export const profile: Profile = {
   location: 'India',
   availability: 'Open to entry-level roles',
   email: 'anubhavkumarkanth123@gmail.com',
+  phone: '+91 72238 27840',
+  phoneHref: '+917223827840',
   resume: {
-    href: 'resume/Anubhav_Kumar_Resume.pdf',
-    fileName: 'Anubhav_Kumar_Resume.pdf',
+    href: 'resume/Anubhav-Kumar-Resume.pdf',
+    fileName: 'Anubhav-Kumar-Resume.pdf',
   },
   socials: {
     github: {

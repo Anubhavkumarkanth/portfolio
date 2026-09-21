@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { AnimatePresence, m } from 'framer-motion'
-import { Check, CircleAlert, Copy, Download, LoaderCircle, Mail, MapPin, Send } from 'lucide-react'
+import { Check, CircleAlert, Copy, Download, LoaderCircle, Mail, MapPin, Phone, Send } from 'lucide-react'
 import { site } from '../../config/site'
 import { profile } from '../../data/profile'
 import { buttonClasses } from '../../lib/button'
@@ -29,15 +29,15 @@ function mailtoHref({ name, email, message }: Fields) {
   return `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
 }
 
-function CopyEmail() {
+function CopyButton({ value, label, fallbackHref }: { value: string; label: string; fallbackHref: string }) {
   const [copied, setCopied] = useState(false)
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(profile.email)
+      await navigator.clipboard.writeText(value)
       setCopied(true)
       window.setTimeout(() => setCopied(false), 1800)
     } catch {
-      window.location.href = `mailto:${profile.email}`
+      window.location.href = fallbackHref
     }
   }
   return (
@@ -45,7 +45,7 @@ function CopyEmail() {
       type="button"
       onClick={copy}
       className={buttonClasses({ variant: 'ghost', size: 'icon-sm' })}
-      aria-label={copied ? 'Email address copied' : 'Copy email address'}
+      aria-label={copied ? `${label} copied` : `Copy ${label.toLowerCase()}`}
     >
       {copied ? <Check className="size-4 text-ok" /> : <Copy className="size-4" />}
     </button>
@@ -104,7 +104,14 @@ export function Contact() {
       label: 'Email',
       value: profile.email,
       href: `mailto:${profile.email}`,
-      extra: <CopyEmail />,
+      extra: <CopyButton value={profile.email} label="Email address" fallbackHref={`mailto:${profile.email}`} />,
+    },
+    {
+      icon: <Phone className="size-4" aria-hidden="true" />,
+      label: 'Phone',
+      value: profile.phone,
+      href: `tel:${profile.phoneHref}`,
+      extra: <CopyButton value={profile.phone} label="Phone number" fallbackHref={`tel:${profile.phoneHref}`} />,
     },
     {
       icon: <LinkedInIcon className="size-4" />,

@@ -19,6 +19,10 @@ export interface Profile {
   location: string
   availability: string
   email: string
+  /** Display form of the phone number, e.g. "+91 72238 27840". */
+  phone: string
+  /** Same number in tel: form, digits and a leading + only. */
+  phoneHref: string
   resume: {
     /** Path inside /public, without a leading slash. */
     href: string
