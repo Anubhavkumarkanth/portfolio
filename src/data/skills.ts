@@ -1,4 +1,3 @@
-import { ChartColumn, Code2, Coffee, Database, LayoutPanelTop, Wrench } from 'lucide-react'
 import type { SkillCategory } from './types'
 
 // Four pillars first, at equal weight: Java, Python, SQL and data analytics.
@@ -9,7 +8,6 @@ export const skillCategories: SkillCategory[] = [
   {
     id: 'java',
     title: 'Java',
-    icon: Coffee,
     description: 'From my internship and my order management project.',
     tier: 'pillar',
     items: [
@@ -26,7 +24,6 @@ export const skillCategories: SkillCategory[] = [
   {
     id: 'python',
     title: 'Python',
-    icon: Code2,
     description: 'What I write most of my own projects in.',
     tier: 'pillar',
     items: [
@@ -42,7 +39,6 @@ export const skillCategories: SkillCategory[] = [
   {
     id: 'sql',
     title: 'SQL',
-    icon: Database,
     description: 'Schema design, reporting queries and transactions.',
     tier: 'pillar',
     items: [
@@ -60,7 +56,6 @@ export const skillCategories: SkillCategory[] = [
   {
     id: 'data',
     title: 'Data Analytics',
-    icon: ChartColumn,
     description: 'Cleaning data, digging through it and reporting on it.',
     tier: 'pillar',
     items: [
@@ -77,7 +72,6 @@ export const skillCategories: SkillCategory[] = [
   {
     id: 'frontend',
     title: 'Frontend',
-    icon: LayoutPanelTop,
     description: 'Enough React to build the front end for my own projects.',
     tier: 'support',
     items: [
@@ -91,7 +85,6 @@ export const skillCategories: SkillCategory[] = [
   {
     id: 'tools',
     title: 'Tools',
-    icon: Wrench,
     description: 'What I use day to day.',
     tier: 'support',
     items: [

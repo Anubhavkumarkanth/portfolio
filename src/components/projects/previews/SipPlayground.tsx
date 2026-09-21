@@ -24,7 +24,7 @@ function Slider({
         <label htmlFor={id} className="text-sm text-fg">
           {label}
         </label>
-        <output htmlFor={id} className="font-mono text-sm text-accent-strong tabular-nums">
+        <output htmlFor={id} className="text-sm text-fg tabular-nums">
           {value} mo
         </output>
       </div>
@@ -63,12 +63,12 @@ export function SipPlayground() {
   const metrics = [
     { label: 'Ideal corpus', value: formatINRCompact(result.ideal) },
     { label: 'Actual corpus', value: formatINRCompact(result.actual) },
-    { label: 'Compounding loss', value: formatINRCompact(result.cld), accent: true },
+    { label: 'Compounding loss', value: formatINRCompact(result.cld) },
     { label: 'Compliance rate', value: `${(result.ccr * 100).toFixed(1)}%` },
   ]
 
   return (
-    <div className="grid grid-cols-1 gap-6 rounded-xl border border-line bg-ink-950/60 p-5 sm:p-6 lg:grid-cols-[0.8fr_1.2fr]">
+    <div className="grid grid-cols-1 gap-6 rounded-md border border-line p-5 sm:p-6 lg:grid-cols-[0.8fr_1.2fr]">
       <div className="flex flex-col gap-6">
         <Slider
           label="Pause contributions"
@@ -83,10 +83,10 @@ export function SipPlayground() {
           onChange={setReduceMonths}
         />
 
-        <div className="rounded-lg border border-line bg-white/[0.02] p-4">
+        <div className="rounded-md border border-line p-4">
           <div className="flex items-baseline justify-between">
             <p className="text-sm text-fg-muted">Discipline score</p>
-            <p className="font-mono text-2xl text-fg tabular-nums" aria-live="polite">
+            <p className="text-2xl text-fg tabular-nums" aria-live="polite">
               {result.disciplineScore.toFixed(1)}
               <span className="text-sm text-fg-subtle">/100</span>
             </p>
@@ -94,7 +94,7 @@ export function SipPlayground() {
           <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/[0.07]">
             <div
               className={cn(
-                'h-full rounded-full transition-[width,background-color] duration-300',
+                'h-full rounded-full',
                 result.disciplineScore >= 90 ? 'bg-ok' : 'bg-accent',
               )}
               style={{ width: `${result.disciplineScore}%` }}
@@ -114,9 +114,9 @@ export function SipPlayground() {
         </div>
         <dl className="mt-5 grid grid-cols-2 gap-2">
           {metrics.map((m) => (
-            <div key={m.label} className="rounded-md border border-line bg-white/[0.02] px-3 py-2.5">
+            <div key={m.label} className="rounded-md border border-line px-3 py-2.5">
               <dt className="text-[11px] text-fg-subtle">{m.label}</dt>
-              <dd className={cn('mt-1 font-mono text-sm tabular-nums', m.accent ? 'text-accent-strong' : 'text-fg')}>{m.value}</dd>
+              <dd className="mt-1 text-sm text-fg tabular-nums">{m.value}</dd>
             </div>
           ))}
         </dl>

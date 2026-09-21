@@ -8,8 +8,6 @@ export function withBase(path: string) {
   return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
 }
 
-export const EASE_OUT = [0.16, 1, 0.3, 1] as const
-
 export function scrollToSection(id: string, smooth = true) {
   const el = document.getElementById(id)
   if (!el) return

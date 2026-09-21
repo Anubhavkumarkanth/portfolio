@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
-import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion'
 import { Hero } from './components/hero/Hero'
-import { ScrollProgress, SkipLink } from './components/layout/Chrome'
+import { SkipLink } from './components/layout/Chrome'
 import { Footer } from './components/layout/Footer'
 import { Navbar } from './components/layout/Navbar'
 import { About } from './components/sections/About'
@@ -16,7 +15,11 @@ import { Skills } from './components/sections/Skills'
 import { ProjectModalProvider } from './context/ProjectModalProvider'
 
 function Divider() {
-  return <div aria-hidden="true" className="section-divider mx-auto max-w-6xl" />
+  return (
+    <div aria-hidden="true" className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="h-px bg-line" />
+    </div>
+  )
 }
 
 export default function App() {
@@ -28,35 +31,30 @@ export default function App() {
   }, [])
 
   return (
-    <MotionConfig reducedMotion="user">
-      <LazyMotion features={domAnimation} strict>
-        <ProjectModalProvider>
-          <SkipLink />
-          <ScrollProgress />
-          <Navbar />
-          <main id="main" tabIndex={-1} className="relative focus:outline-none">
-            <Hero />
-            <About />
-            <Divider />
-            <Skills />
-            <Divider />
-            <ExperienceTimeline />
-            <Divider />
-            <Projects />
-            <Divider />
-            <Education />
-            <Divider />
-            <Certifications />
-            <Divider />
-            <Focus />
-            <Divider />
-            <GitHubActivity />
-            <Divider />
-            <Contact />
-          </main>
-          <Footer />
-        </ProjectModalProvider>
-      </LazyMotion>
-    </MotionConfig>
+    <ProjectModalProvider>
+      <SkipLink />
+      <Navbar />
+      <main id="main" tabIndex={-1} className="focus:outline-none">
+        <Hero />
+        <About />
+        <Divider />
+        <Skills />
+        <Divider />
+        <ExperienceTimeline />
+        <Divider />
+        <Projects />
+        <Divider />
+        <Education />
+        <Divider />
+        <Certifications />
+        <Divider />
+        <Focus />
+        <Divider />
+        <GitHubActivity />
+        <Divider />
+        <Contact />
+      </main>
+      <Footer />
+    </ProjectModalProvider>
   )
 }

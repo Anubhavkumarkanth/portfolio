@@ -1,5 +1,4 @@
 import { Component, Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { AnimatePresence } from 'framer-motion'
 import { CircleAlert, LoaderCircle, RotateCw, X } from 'lucide-react'
 import { getProject } from '../data/projects'
 import type { Project } from '../data/types'
@@ -70,24 +69,22 @@ export function ProjectModalProvider({ children }: { children: ReactNode }) {
   return (
     <ProjectModalContext.Provider value={api}>
       {children}
-      <AnimatePresence>
-        {project && (
-          <ModalErrorBoundary key="project-modal" project={project} onClose={closeProject}>
-            <Suspense fallback={<ModalLoading />}>
-              <ProjectModal project={project} onClose={closeProject} onSwitch={openProject} />
-            </Suspense>
-          </ModalErrorBoundary>
-        )}
-      </AnimatePresence>
+      {project && (
+        <ModalErrorBoundary key="project-modal" project={project} onClose={closeProject}>
+          <Suspense fallback={<ModalLoading />}>
+            <ProjectModal project={project} onClose={closeProject} onSwitch={openProject} />
+          </Suspense>
+        </ModalErrorBoundary>
+      )}
     </ProjectModalContext.Provider>
   )
 }
 
 function ModalLoading() {
   return (
-    <div className="fixed inset-0 z-[70] grid place-items-center bg-black/60 backdrop-blur-sm">
-      <p role="status" className="flex items-center gap-3 rounded-lg border border-line bg-ink-900 px-4 py-3 text-sm text-fg-muted">
-        <LoaderCircle className="size-4 animate-spin text-accent" aria-hidden="true" />
+    <div className="fixed inset-0 z-[70] grid place-items-center bg-black/60">
+      <p role="status" className="flex items-center gap-3 rounded-md border border-line bg-ink-900 px-4 py-3 text-sm text-fg-muted">
+        <LoaderCircle className="size-4 animate-spin text-fg-subtle" aria-hidden="true" />
         Loading project details…
       </p>
     </div>
@@ -112,8 +109,8 @@ class ModalErrorBoundary extends Component<BoundaryProps, { failed: boolean }> {
     if (!this.state.failed) return this.props.children
     const { project, onClose } = this.props
     return (
-      <div className="fixed inset-0 z-[70] grid place-items-center bg-black/70 p-5 backdrop-blur-sm">
-        <div role="alertdialog" aria-labelledby="modal-error-title" className="w-full max-w-md rounded-xl border border-line-strong bg-ink-900 p-6">
+      <div className="fixed inset-0 z-[70] grid place-items-center bg-black/70 p-5">
+        <div role="alertdialog" aria-labelledby="modal-error-title" className="w-full max-w-md rounded-lg border border-line-strong bg-ink-900 p-6">
           <div className="flex items-start justify-between gap-4">
             <CircleAlert className="size-5 shrink-0 text-danger" aria-hidden="true" />
             <button type="button" onClick={onClose} className={buttonClasses({ variant: 'ghost', size: 'icon-sm' })} aria-label="Close">

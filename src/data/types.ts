@@ -56,7 +56,6 @@ export interface SkillItem {
 export interface SkillCategory {
   id: string
   title: string
-  icon: LucideIcon
   description: string
   items: SkillItem[]
   extra?: { label: string; items: string[] }

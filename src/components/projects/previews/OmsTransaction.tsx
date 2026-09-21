@@ -1,6 +1,5 @@
-import { m } from 'framer-motion'
 import { Check, CircleAlert, Lock, Minus, RotateCcw } from 'lucide-react'
-import { EASE_OUT, cn } from '../../../lib/utils'
+import { cn } from '../../../lib/utils'
 
 // The statement sequence of OrderDao.placeOrder(), in the order the code runs it.
 const STEPS: { sql: string; note?: string; kind: 'lock' | 'write' }[] = [
@@ -15,7 +14,7 @@ const STEPS: { sql: string; note?: string; kind: 'lock' | 'write' }[] = [
 export type OmsMode = 'commit' | 'rollback'
 
 /** A trace of the order transaction: the commit path, or a rollback on insufficient stock. */
-export function OmsTransaction({ mode = 'commit', animate = false }: { mode?: OmsMode; animate?: boolean }) {
+export function OmsTransaction({ mode = 'commit' }: { mode?: OmsMode }) {
   const rollback = mode === 'rollback'
   const rows = [
     { key: 'begin', node: <Row icon={null} sql="BEGIN" note="setAutoCommit(false)" tone="control" /> },
@@ -42,25 +41,14 @@ export function OmsTransaction({ mode = 'commit', animate = false }: { mode?: Om
   return (
     <div className="font-mono text-[11.5px] leading-5 sm:text-[12px]">
       <ol className="space-y-1">
-        {rows.map((row, i) => (
-          <m.li
-            key={`${mode}-${row.key}`}
-            initial={animate ? { opacity: 0, x: -6 } : false}
-            whileInView={animate ? { opacity: 1, x: 0 } : undefined}
-            viewport={{ once: true }}
-            transition={{ duration: 0.35, delay: 0.1 + i * 0.07, ease: EASE_OUT }}
-          >
+        {rows.map((row) => (
+          <li key={`${mode}-${row.key}`}>
             {row.node}
             {'after' in row && row.after}
-          </m.li>
+          </li>
         ))}
       </ol>
-      <m.div
-        key={`${mode}-result`}
-        initial={animate ? { opacity: 0 } : false}
-        whileInView={animate ? { opacity: 1 } : undefined}
-        viewport={{ once: true }}
-        transition={{ duration: 0.4, delay: 0.1 + rows.length * 0.07 }}
+      <div
         className={cn(
           'mt-3 flex items-center justify-between gap-3 rounded-md border px-3 py-2',
           rollback ? 'border-danger/30 bg-danger/[0.08] text-danger' : 'border-ok/25 bg-ok/[0.07] text-ok',
@@ -71,7 +59,7 @@ export function OmsTransaction({ mode = 'commit', animate = false }: { mode?: Om
           {rollback ? 'ROLLBACK' : 'COMMIT'}
         </span>
         <span className="truncate text-fg-muted">{rollback ? 'zero partial rows written' : 'all writes land together'}</span>
-      </m.div>
+      </div>
     </div>
   )
 }

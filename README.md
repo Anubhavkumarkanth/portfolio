@@ -1,12 +1,11 @@
 # Anubhav Kumar — Portfolio
 
-Personal portfolio for Anubhav Kumar, an early-career software engineer focused on Python, data analysis
-and machine learning, targeting both software and data roles. It's a single-page React app with a dark,
-engineering-style design: an interactive terminal in the hero, case-study modals (a live SIP simulator,
-a model-evaluation table, featured SQL and a transaction walkthrough), a timeline, and a GitHub section
-that loads live data.
+Personal portfolio for Anubhav Kumar, an entry-level software engineer and data analyst working across
+Java, Python, SQL and data analytics. It's a single-page React app with a plain, mostly static dark
+design: case-study modals (a live SIP simulator, a model-evaluation table, featured SQL and a transaction
+walkthrough) and a GitHub section that loads live data.
 
-**Stack:** React 19 · TypeScript · Vite 8 · Tailwind CSS 4 · Framer Motion · Lucide icons
+**Stack:** React 19 · TypeScript · Vite 8 · Tailwind CSS 4 · Lucide icons
 
 ---
 
@@ -45,10 +44,10 @@ a component to update the site.
 | Internship / jobs                                    | `src/data/experience.ts`                                |
 | Degree, college, university                          | `src/data/education.ts`                                 |
 | Certifications and certificate links                 | `src/data/certifications.ts`                            |
-| "What I can do" and "Career focus" cards             | `src/data/capabilities.ts`                              |
+| Roles I'm applying for (Career focus)                | `src/data/profile.ts` → `targetRoles`                   |
 | Nav items, GitHub section settings                   | `src/config/site.ts`                                    |
 | Site URL, contact form endpoint, base path           | `.env` (copy from `.env.example`)                       |
-| Colours, fonts, animations                           | `src/index.css` → `@theme`                              |
+| Colours and fonts                                    | `src/index.css` → `@theme`                              |
 
 ### Common tasks
 
@@ -158,17 +157,17 @@ portfolio/
     ├── config/site.ts          # Nav, section order, GitHub settings, env values
     ├── data/                   # ← all personal content (typed)
     │   ├── profile.ts  skills.ts  projects.ts  experience.ts
-    │   ├── education.ts  certifications.ts  capabilities.ts  types.ts
+    │   ├── education.ts  certifications.ts  types.ts
     ├── context/                # Case-study modal state (synced to ?project=<slug>)
-    ├── hooks/                  # Scroll spy, GitHub fetch, focus trap, scroll lock, reduced motion
+    ├── hooks/                  # Scroll spy, GitHub fetch, focus trap, scroll lock
     ├── lib/                    # Helpers, button styles, TypeScript port of the SIP engine
     └── components/
-        ├── layout/             # Navbar (+ mobile menu), Footer, scroll progress, skip link
-        ├── hero/               # Hero, interactive Terminal
+        ├── layout/             # Navbar (+ mobile menu), Footer, skip link
+        ├── hero/               # Hero
         ├── projects/           # ProjectCard, ProjectModal (lazy-loaded), previews/
         ├── sections/           # About, Skills, Projects, ExperienceTimeline, Education,
-        │                       # Certifications, Capabilities, Focus, GitHubActivity, Contact
-        └── ui/                 # Section, Card, Tag, Reveal, brand icons, ProofLink
+        │                       # Certifications, Focus, GitHubActivity, Contact
+        └── ui/                 # Section, Card, Tag, brand icons
 ```
 
 ---
@@ -177,15 +176,13 @@ portfolio/
 
 - **Deep links.** Sections are addressable (`/#projects`), and each case study has its own URL
   (`/?project=sip-friction-analyzer`). The browser Back button closes the modal.
-- **Terminal.** The hero terminal accepts `help`, `whoami`, `stack`, `projects`, `open <project>`,
-  `experience`, `ls`, `cd <section>`, `contact`, `resume` and `clear`. Arrow keys cycle through history.
 - **SIP playground.** The case study includes an interactive simulator. It's a TypeScript port of the
   project's `engine/simulation.py` and `engine/friction.py`, using the same compounding loop and formulas.
   Its output was checked against the Python engine for the default scenario, and both give identical
   results.
 - **Accessibility.** Semantic landmarks, skip link, visible focus rings, focus-trapped modal with Escape
-  to close, labelled form errors, `prefers-reduced-motion` respected (animations and smooth scrolling
-  switch off).
+  to close, labelled form errors. The site has almost no motion; with `prefers-reduced-motion` set,
+  smooth scrolling and the remaining colour transitions switch off too.
 - **Performance.** Self-hosted variable fonts (only the subsets a page uses are downloaded), the
   case-study modal is code-split and prefetched on hover, and GitHub data loads lazily. Local Lighthouse
   runs on the production build scored Performance 100 (desktop) / ~94 (mobile, simulated slow 4G), and

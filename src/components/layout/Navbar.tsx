@@ -1,21 +1,18 @@
-import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, m } from 'framer-motion'
-import { Download, FileText, Mail, Menu, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Download, Mail, Menu, X } from 'lucide-react'
 import { navItems, sectionIds } from '../../config/site'
 import { profile } from '../../data/profile'
 import { useActiveSection } from '../../hooks/useActiveSection'
 import { useScrollLock } from '../../hooks/useScrollLock'
 import { buttonClasses } from '../../lib/button'
-import { EASE_OUT, cn, withBase } from '../../lib/utils'
+import { cn, withBase } from '../../lib/utils'
 import { GitHubIcon, LinkedInIcon } from '../ui/BrandIcons'
-import { Container, Monogram } from '../ui/primitives'
+import { Container } from '../ui/primitives'
 
 export function Navbar() {
   const active = useActiveSection(sectionIds)
   const [scrolled, setScrolled] = useState(() => window.scrollY > 8)
   const [open, setOpen] = useState(false)
-  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({})
-  const indicatorRef = useRef<HTMLSpanElement>(null)
 
   useScrollLock(open)
 
@@ -39,101 +36,51 @@ export function Navbar() {
     }
   }, [open])
 
-  // Slide the highlight pill under the active link. Measured in the next frame
-  // (not during commit) and only when the desktop nav is actually shown, so it
-  // never forces a synchronous layout on load.
-  useEffect(() => {
-    const desktop = window.matchMedia('(min-width: 1024px)')
-    let frame = 0
-    const move = () => {
-      cancelAnimationFrame(frame)
-      frame = requestAnimationFrame(() => {
-        const indicator = indicatorRef.current
-        const link = linkRefs.current[active]
-        if (!indicator || !desktop.matches) return
-        if (!link) {
-          indicator.style.opacity = '0'
-          return
-        }
-        indicator.style.opacity = '1'
-        indicator.style.width = `${link.offsetWidth}px`
-        indicator.style.transform = `translateX(${link.offsetLeft}px)`
-      })
-    }
-    move()
-    window.addEventListener('resize', move)
-    return () => {
-      cancelAnimationFrame(frame)
-      window.removeEventListener('resize', move)
-    }
-  }, [active])
-
-  const isActive = (id: string) => active === id
-
   return (
-    <m.header
-      initial={{ y: -12, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: EASE_OUT }}
-      className="fixed inset-x-0 top-0 z-50"
-    >
+    <header className="fixed inset-x-0 top-0 z-50">
       <div
         className={cn(
-          'border-b transition-[background-color,border-color,backdrop-filter] duration-300',
-          scrolled || open
-            ? 'border-line bg-ink-950/75 backdrop-blur-xl backdrop-saturate-150'
-            : 'border-transparent bg-transparent',
+          'border-b transition-colors duration-200',
+          scrolled || open ? 'border-line bg-ink-950' : 'border-transparent bg-transparent',
         )}
       >
         <Container>
-          <nav aria-label="Primary" className="flex h-16 items-center justify-between gap-4">
+          <nav aria-label="Primary" className="flex h-14 items-center justify-between gap-4">
             <a
               href="#home"
-              aria-label={`${profile.name} — back to top`}
-              className="group flex items-center gap-2.5 rounded-lg"
+              aria-label={`${profile.name}, back to top`}
+              className="rounded-sm text-[15px] font-semibold tracking-tight text-fg"
               onClick={() => setOpen(false)}
             >
-              <Monogram />
-              <span className="hidden text-sm font-medium tracking-tight text-fg sm:inline lg:hidden xl:inline">
-                {profile.name}
-              </span>
+              {profile.name}
             </a>
 
-            <div className="relative hidden items-center lg:flex">
-              <span
-                ref={indicatorRef}
-                aria-hidden="true"
-                className="absolute top-[calc(50%-1rem)] left-0 h-8 rounded-md bg-white/[0.06] opacity-0 ring-1 ring-white/[0.08] ring-inset transition-[transform,width,opacity] duration-300 ease-out"
-              />
-              <ul className="flex items-center">
-                {navItems.map((item) => (
-                  <li key={item.id}>
-                    <a
-                      ref={(el) => {
-                        linkRefs.current[item.id] = el
-                      }}
-                      href={`#${item.id}`}
-                      aria-current={isActive(item.id) ? 'location' : undefined}
-                      className={cn(
-                        'relative block rounded-md px-3 py-1.5 text-[13px] transition-colors',
-                        isActive(item.id) ? 'text-fg' : 'text-fg-muted hover:text-fg',
-                      )}
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <ul className="hidden items-center lg:flex">
+              {navItems.map((item) => (
+                <li key={item.id}>
+                  <a
+                    href={`#${item.id}`}
+                    aria-current={active === item.id ? 'location' : undefined}
+                    className={cn(
+                      'block rounded-sm px-3 py-1.5 text-[13px] transition-colors',
+                      active === item.id
+                        ? 'text-fg underline decoration-fg/40 underline-offset-[6px]'
+                        : 'text-fg-muted hover:text-fg',
+                    )}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
 
             <div className="flex items-center gap-2">
               <a
                 href={withBase(profile.resume.href)}
                 target="_blank"
                 rel="noopener"
-                className={buttonClasses({ variant: 'accent-outline', size: 'sm' })}
+                className={buttonClasses({ variant: 'secondary', size: 'sm' })}
               >
-                <FileText className="size-4" aria-hidden="true" />
                 Resume
               </a>
               <button
@@ -151,46 +98,31 @@ export function Navbar() {
         </Container>
       </div>
 
-      <AnimatePresence>
-        {open && <MobileMenu active={active} onNavigate={() => setOpen(false)} />}
-      </AnimatePresence>
-    </m.header>
+      {open && <MobileMenu active={active} onNavigate={() => setOpen(false)} />}
+    </header>
   )
 }
 
 function MobileMenu({ active, onNavigate }: { active: string; onNavigate: () => void }) {
   return (
-    <m.div
-      id="mobile-menu"
-      initial={{ opacity: 0, y: -8 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      transition={{ duration: 0.22, ease: EASE_OUT }}
-      className="h-[calc(100dvh-4rem)] overflow-y-auto border-b border-line bg-ink-950/95 backdrop-blur-xl lg:hidden"
-    >
-      <Container className="flex min-h-full flex-col py-6">
+    <div id="mobile-menu" className="h-[calc(100dvh-3.5rem)] overflow-y-auto border-b border-line bg-ink-950 lg:hidden">
+      <Container className="flex min-h-full flex-col py-4">
         <nav aria-label="Mobile">
           <ul className="flex flex-col">
-            {navItems.map((item, i) => (
-              <m.li
-                key={item.id}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.03 * i, ease: EASE_OUT }}
-              >
+            {navItems.map((item) => (
+              <li key={item.id}>
                 <a
                   href={`#${item.id}`}
                   onClick={onNavigate}
                   aria-current={active === item.id ? 'location' : undefined}
                   className={cn(
-                    'flex items-baseline gap-4 border-b border-line py-3.5 text-2xl font-medium tracking-tight transition-colors',
+                    'block border-b border-line py-3 text-lg transition-colors',
                     active === item.id ? 'text-fg' : 'text-fg-muted',
                   )}
                 >
-                  <span className="w-6 font-mono text-xs text-accent">{String(i + 1).padStart(2, '0')}</span>
                   {item.label}
                 </a>
-              </m.li>
+              </li>
             ))}
           </ul>
         </nav>
@@ -204,7 +136,7 @@ function MobileMenu({ active, onNavigate }: { active: string; onNavigate: () => 
             <Download className="size-4" aria-hidden="true" />
             Download resume
           </a>
-          <div className="mt-4 grid grid-cols-3 gap-2">
+          <div className="mt-3 grid grid-cols-3 gap-2">
             <a href={profile.socials.github.href} target="_blank" rel="noreferrer" className={buttonClasses({ variant: 'secondary', size: 'sm' })}>
               <GitHubIcon className="size-4" />
               GitHub
@@ -220,6 +152,6 @@ function MobileMenu({ active, onNavigate }: { active: string; onNavigate: () => 
           </div>
         </div>
       </Container>
-    </m.div>
+    </div>
   )
 }

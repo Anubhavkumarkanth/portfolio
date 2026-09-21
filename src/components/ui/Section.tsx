@@ -1,11 +1,9 @@
 import type { ReactNode } from 'react'
 import { cn } from '../../lib/utils'
-import { Container, Reveal } from './primitives'
+import { Container } from './primitives'
 
 interface SectionProps {
   id: string
-  index: string
-  eyebrow: string
   title: ReactNode
   description?: ReactNode
   children: ReactNode
@@ -14,29 +12,21 @@ interface SectionProps {
   aside?: ReactNode
 }
 
-export function Section({ id, index, eyebrow, title, description, children, className, aside }: SectionProps) {
+export function Section({ id, title, description, children, className, aside }: SectionProps) {
   const headingId = `${id}-heading`
   return (
-    <section id={id} aria-labelledby={headingId} className={cn('relative py-20 sm:py-28', className)}>
+    <section id={id} aria-labelledby={headingId} className={cn('py-16 sm:py-20', className)}>
       <Container>
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <Reveal className="max-w-2xl">
-            <p className="flex items-center gap-3 font-mono text-[11px] tracking-[0.18em] uppercase">
-              <span className="text-accent">{index}</span>
-              <span aria-hidden="true" className="h-px w-8 bg-line-strong" />
-              <span className="text-fg-subtle">{eyebrow}</span>
-            </p>
-            <h2
-              id={headingId}
-              className="mt-4 text-3xl font-semibold tracking-[-0.025em] text-balance text-fg sm:text-[2.5rem] sm:leading-[1.1]"
-            >
+        <div className="flex flex-col items-start gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl">
+            <h2 id={headingId} className="text-2xl font-semibold tracking-tight text-balance text-fg sm:text-[1.75rem]">
               {title}
             </h2>
-            {description && <p className="mt-4 text-base leading-relaxed text-pretty text-fg-muted">{description}</p>}
-          </Reveal>
-          {aside && <Reveal delay={0.1}>{aside}</Reveal>}
+            {description && <p className="mt-3 leading-relaxed text-pretty text-fg-muted">{description}</p>}
+          </div>
+          {aside}
         </div>
-        <div className="mt-10 sm:mt-14">{children}</div>
+        <div className="mt-8 sm:mt-10">{children}</div>
       </Container>
     </section>
   )

@@ -1,12 +1,11 @@
 import { useState, type FormEvent } from 'react'
-import { AnimatePresence, m } from 'framer-motion'
 import { Check, CircleAlert, Copy, Download, LoaderCircle, Mail, MapPin, Phone, Send } from 'lucide-react'
 import { site } from '../../config/site'
 import { profile } from '../../data/profile'
 import { buttonClasses } from '../../lib/button'
 import { cn, withBase } from '../../lib/utils'
 import { GitHubIcon, LinkedInIcon } from '../ui/BrandIcons'
-import { Card, Reveal } from '../ui/primitives'
+import { Card, textLink } from '../ui/primitives'
 import { Section } from '../ui/Section'
 
 type Fields = { name: string; email: string; message: string }
@@ -53,7 +52,7 @@ function CopyButton({ value, label, fallbackHref }: { value: string; label: stri
 }
 
 const inputClass =
-  'mt-2 w-full rounded-lg border bg-ink-950/60 px-3.5 py-2.5 text-sm text-fg placeholder:text-fg-subtle/70 transition-colors focus:border-accent/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/25'
+  'mt-2 w-full rounded-md border bg-ink-900 px-3 py-2.5 text-sm text-fg placeholder:text-fg-subtle/70 transition-colors focus:border-fg-subtle'
 
 export function Contact() {
   const [fields, setFields] = useState<Fields>(EMPTY)
@@ -140,33 +139,27 @@ export function Contact() {
   return (
     <Section
       id="contact"
-      index="09"
-      eyebrow="Contact"
-      title={
-"Get in touch"
-      }
+      title="Get in touch"
       description="I’m currently looking for an entry-level role in software or data. You can reach me at any of these."
     >
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
-        <Reveal>
-          <ul className="divide-y divide-line rounded-xl border border-line">
+        <div>
+          <ul className="divide-y divide-line border-y border-line">
             {channels.map((c) => (
-              <li key={c.label} className="flex items-center gap-4 px-5 py-4">
-                <span className="grid size-9 shrink-0 place-items-center rounded-lg border border-line bg-white/[0.03] text-fg-muted">
-                  {c.icon}
-                </span>
+              <li key={c.label} className="flex min-h-16 items-center gap-4 py-3">
+                <span className="shrink-0 text-fg-subtle">{c.icon}</span>
                 <div className="min-w-0 flex-1">
                   <p className="text-xs text-fg-subtle">{c.label}</p>
                   {c.href ? (
                     <a
                       href={c.href}
                       {...(c.href.startsWith('http') && { target: '_blank', rel: 'noreferrer' })}
-                      className="block truncate text-sm text-fg transition-colors hover:text-accent-strong"
+                      className={cn('mt-0.5 inline-block max-w-full truncate text-sm', textLink)}
                     >
                       {c.value}
                     </a>
                   ) : (
-                    <p className="truncate text-sm text-fg">{c.value}</p>
+                    <p className="mt-0.5 truncate text-sm text-fg">{c.value}</p>
                   )}
                 </div>
                 {c.extra}
@@ -176,162 +169,145 @@ export function Contact() {
           <a
             href={withBase(profile.resume.href)}
             download={profile.resume.fileName}
-            className={buttonClasses({ variant: 'secondary', className: 'mt-5 w-full' })}
+            className={buttonClasses({ variant: 'secondary', className: 'mt-6 w-full sm:w-auto' })}
           >
             <Download className="size-4" aria-hidden="true" />
             Download resume (PDF)
           </a>
-        </Reveal>
+        </div>
 
-        <Reveal delay={0.08}>
-          <Card interactive={false} className="p-6 sm:p-8">
-            <AnimatePresence mode="wait" initial={false}>
-              {status === 'sent' || status === 'handoff' ? (
-                <m.div
-                  key="done"
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  className="flex min-h-[22rem] flex-col items-center justify-center text-center"
-                  role="status"
-                >
-                  <span className="grid size-12 place-items-center rounded-full border border-ok/30 bg-ok/10 text-ok">
-                    <Check className="size-6" aria-hidden="true" />
-                  </span>
-                  <p className="mt-5 text-lg font-medium text-fg">
-                    {status === 'sent' ? 'Message sent. Thank you.' : 'Your email app should now be open.'}
-                  </p>
-                  <p className="mt-2 max-w-sm text-sm text-fg-muted">
-                    {status === 'sent' ? (
-                      'I’ll get back to you soon.'
-                    ) : (
-                      <>
-                        The message is pre-filled — just hit send. If nothing opened, write to{' '}
-                        <a href={`mailto:${profile.email}`} className="text-accent-strong underline-offset-4 hover:underline">
-                          {profile.email}
-                        </a>
-                        .
-                      </>
-                    )}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => setStatus('idle')}
-                    className={buttonClasses({ variant: 'ghost', size: 'sm', className: 'mt-6' })}
-                  >
-                    Write another message
-                  </button>
-                </m.div>
-              ) : (
-                <m.form
-                  key="form"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  onSubmit={onSubmit}
-                  noValidate
-                  className="grid grid-cols-1 gap-5"
-                  aria-label="Contact form"
-                >
-                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                    <div>
-                      <label htmlFor="contact-name" className="text-sm text-fg-muted">
-                        Name
-                      </label>
-                      <input
-                        {...field('name')}
-                        type="text"
-                        autoComplete="name"
-                        placeholder="Your name"
-                        onChange={(e) => update('name')(e.target.value)}
-                      />
-                      {errors.name && (
-                        <p id="contact-name-error" className="mt-1.5 text-xs text-danger">
-                          {errors.name}
-                        </p>
-                      )}
-                    </div>
-                    <div>
-                      <label htmlFor="contact-email" className="text-sm text-fg-muted">
-                        Email
-                      </label>
-                      <input
-                        {...field('email')}
-                        type="email"
-                        autoComplete="email"
-                        inputMode="email"
-                        placeholder="you@company.com"
-                        onChange={(e) => update('email')(e.target.value)}
-                      />
-                      {errors.email && (
-                        <p id="contact-email-error" className="mt-1.5 text-xs text-danger">
-                          {errors.email}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <div>
-                    <label htmlFor="contact-message" className="text-sm text-fg-muted">
-                      Message
-                    </label>
-                    <textarea
-                      {...field('message')}
-                      rows={6}
-                      placeholder="What are you working on?"
-                      onChange={(e) => update('message')(e.target.value)}
-                      className={cn(field('message').className, 'resize-y')}
-                    />
-                    {errors.message && (
-                      <p id="contact-message-error" className="mt-1.5 text-xs text-danger">
-                        {errors.message}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Honeypot for bots — hidden from people and assistive tech */}
-                  <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
-                    <label>
-                      Company
-                      <input tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} />
-                    </label>
-                  </div>
-
-                  {status === 'error' && (
-                    <p role="alert" className="flex gap-2.5 rounded-lg border border-danger/30 bg-danger/10 px-3.5 py-3 text-sm text-fg">
-                      <CircleAlert className="mt-0.5 size-4 shrink-0 text-danger" aria-hidden="true" />
-                      <span>
-                        That didn’t go through. Try again, or{' '}
-                        <a href={mailtoHref(fields)} className="text-accent-strong underline underline-offset-4">
-                          send it from your email app
-                        </a>
-                        .
-                      </span>
+        <Card className="self-start p-6 sm:p-8">
+          {status === 'sent' || status === 'handoff' ? (
+            <div className="flex min-h-[22rem] flex-col items-center justify-center text-center" role="status">
+              <Check className="size-6 text-ok" aria-hidden="true" />
+              <p className="mt-4 text-lg font-medium text-fg">
+                {status === 'sent' ? 'Message sent. Thank you.' : 'Your email app should now be open.'}
+              </p>
+              <p className="mt-2 max-w-sm text-sm text-fg-muted">
+                {status === 'sent' ? (
+                  'I’ll get back to you soon.'
+                ) : (
+                  <>
+                    The message is pre-filled — just hit send. If nothing opened, write to{' '}
+                    <a href={`mailto:${profile.email}`} className={textLink}>
+                      {profile.email}
+                    </a>
+                    .
+                  </>
+                )}
+              </p>
+              <button
+                type="button"
+                onClick={() => setStatus('idle')}
+                className={buttonClasses({ variant: 'ghost', size: 'sm', className: 'mt-6' })}
+              >
+                Write another message
+              </button>
+            </div>
+          ) : (
+            <form
+              onSubmit={onSubmit}
+              noValidate
+              className="grid grid-cols-1 gap-5"
+              aria-label="Contact form"
+            >
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="contact-name" className="text-sm text-fg-muted">
+                    Name
+                  </label>
+                  <input
+                    {...field('name')}
+                    type="text"
+                    autoComplete="name"
+                    placeholder="Your name"
+                    onChange={(e) => update('name')(e.target.value)}
+                  />
+                  {errors.name && (
+                    <p id="contact-name-error" className="mt-1.5 text-xs text-danger">
+                      {errors.name}
                     </p>
                   )}
-
-                  <div className="flex flex-col-reverse items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="text-xs text-fg-subtle">
-                      {site.contactEndpoint ? 'Goes straight to my inbox.' : 'Opens your email app with the message ready to send.'}
+                </div>
+                <div>
+                  <label htmlFor="contact-email" className="text-sm text-fg-muted">
+                    Email
+                  </label>
+                  <input
+                    {...field('email')}
+                    type="email"
+                    autoComplete="email"
+                    inputMode="email"
+                    placeholder="you@company.com"
+                    onChange={(e) => update('email')(e.target.value)}
+                  />
+                  {errors.email && (
+                    <p id="contact-email-error" className="mt-1.5 text-xs text-danger">
+                      {errors.email}
                     </p>
-                    <button type="submit" disabled={status === 'sending'} className={buttonClasses({ variant: 'primary' })}>
-                      {status === 'sending' ? (
-                        <>
-                          <LoaderCircle className="size-4 animate-spin" aria-hidden="true" />
-                          Sending…
-                        </>
-                      ) : (
-                        <>
-                          Send message
-                          <Send className="size-4" aria-hidden="true" />
-                        </>
-                      )}
-                    </button>
-                  </div>
-                </m.form>
+                  )}
+                </div>
+              </div>
+              <div>
+                <label htmlFor="contact-message" className="text-sm text-fg-muted">
+                  Message
+                </label>
+                <textarea
+                  {...field('message')}
+                  rows={6}
+                  placeholder="What are you working on?"
+                  onChange={(e) => update('message')(e.target.value)}
+                  className={cn(field('message').className, 'resize-y')}
+                />
+                {errors.message && (
+                  <p id="contact-message-error" className="mt-1.5 text-xs text-danger">
+                    {errors.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Honeypot for bots — hidden from people and assistive tech */}
+              <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                <label>
+                  Company
+                  <input tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} />
+                </label>
+              </div>
+
+              {status === 'error' && (
+                <p role="alert" className="flex gap-2.5 rounded-md border border-danger/30 bg-danger/10 px-3.5 py-3 text-sm text-fg">
+                  <CircleAlert className="mt-0.5 size-4 shrink-0 text-danger" aria-hidden="true" />
+                  <span>
+                    That didn’t go through. Try again, or{' '}
+                    <a href={mailtoHref(fields)} className={textLink}>
+                      send it from your email app
+                    </a>
+                    .
+                  </span>
+                </p>
               )}
-            </AnimatePresence>
-          </Card>
-        </Reveal>
+
+              <div className="flex flex-col-reverse items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-xs text-fg-subtle">
+                  {site.contactEndpoint ? 'Goes straight to my inbox.' : 'Opens your email app with the message ready to send.'}
+                </p>
+                <button type="submit" disabled={status === 'sending'} className={buttonClasses({ variant: 'primary' })}>
+                  {status === 'sending' ? (
+                    <>
+                      <LoaderCircle className="size-4 animate-spin" aria-hidden="true" />
+                      Sending…
+                    </>
+                  ) : (
+                    <>
+                      Send message
+                      <Send className="size-4" aria-hidden="true" />
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          )}
+        </Card>
       </div>
     </Section>
   )
