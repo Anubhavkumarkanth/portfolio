@@ -34,6 +34,21 @@ export const skillCategories: SkillCategory[] = [
     appliedIn: ['Internship', 'SIP Friction Analyzer'],
   },
   {
+    id: 'data',
+    title: 'Data & Analytics',
+    icon: ChartColumn,
+    description: 'Cleaning and exploring datasets, then modelling or reporting on them.',
+    items: [
+      { name: 'Pandas', applied: true },
+      { name: 'NumPy', applied: true },
+      { name: 'scikit-learn', applied: true },
+      { name: 'Streamlit', applied: true },
+      { name: 'Power BI' },
+      { name: 'Excel' },
+    ],
+    appliedIn: ['Dietbot', 'Microsoft & LinkedIn certificate'],
+  },
+  {
     id: 'databases',
     title: 'Databases',
     icon: Database,
@@ -59,21 +74,6 @@ export const skillCategories: SkillCategory[] = [
       { name: 'CSS' },
     ],
     appliedIn: ['SIP Friction Analyzer'],
-  },
-  {
-    id: 'data',
-    title: 'Data & Analytics',
-    icon: ChartColumn,
-    description: 'Cleaning and exploring datasets, then modelling or reporting on them.',
-    items: [
-      { name: 'Pandas', applied: true },
-      { name: 'NumPy', applied: true },
-      { name: 'scikit-learn', applied: true },
-      { name: 'Streamlit', applied: true },
-      { name: 'Power BI' },
-      { name: 'Excel' },
-    ],
-    appliedIn: ['Dietbot'],
   },
   {
     id: 'tools',

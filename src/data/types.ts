@@ -33,7 +33,7 @@ export interface Profile {
     linkedin: SocialLink
   }
   /** Roles being applied for, grouped. Shown unranked. */
-  targetRoles: { group: string; roles: string[] }[]
+  targetRoles: { group: string; roles: string[]; note?: string }[]
   /** Short list shown in the hero "core stack" strip. */
   coreStack: string[]
   about: {
