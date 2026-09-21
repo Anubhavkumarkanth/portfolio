@@ -5,7 +5,6 @@ import { ScrollProgress, SkipLink } from './components/layout/Chrome'
 import { Footer } from './components/layout/Footer'
 import { Navbar } from './components/layout/Navbar'
 import { About } from './components/sections/About'
-import { Capabilities } from './components/sections/Capabilities'
 import { Certifications } from './components/sections/Certifications'
 import { Contact } from './components/sections/Contact'
 import { Education } from './components/sections/Education'
@@ -41,15 +40,13 @@ export default function App() {
             <Divider />
             <Skills />
             <Divider />
-            <Projects />
-            <Divider />
             <ExperienceTimeline />
+            <Divider />
+            <Projects />
             <Divider />
             <Education />
             <Divider />
             <Certifications />
-            <Divider />
-            <Capabilities />
             <Divider />
             <Focus />
             <Divider />

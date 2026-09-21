@@ -50,8 +50,8 @@ export function Certifications() {
       id="certifications"
       index="06"
       eyebrow="Certifications"
-      title="Certified in data analysis, SQL and programming"
-      description="Structured coursework completed alongside the degree."
+      title="Certifications"
+      description="Courses I completed alongside the degree, in Java, SQL and data analysis."
     >
       <ul className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {certifications.map((cert, i) => (

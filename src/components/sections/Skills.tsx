@@ -1,5 +1,4 @@
 import { skillCategories } from '../../data/skills'
-import { cn } from '../../lib/utils'
 import { Card, Reveal, Tag } from '../ui/primitives'
 import { Section } from '../ui/Section'
 
@@ -18,15 +17,15 @@ export function Skills() {
       id="skills"
       index="02"
       eyebrow="Skills"
-      title="The stack I’ve shipped with"
-      description="Grouped by where it sits in a system, and tied back to the work that used it."
+      title="What I work with"
+      description="Grouped by where each thing sits in a system. Highlighted items are ones I’ve used in my internship or in a project, not just read about."
       aside={<Legend />}
     >
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {skillCategories.map((category, i) => {
           const Icon = category.icon
           return (
-            <Reveal key={category.id} delay={(i % 4) * 0.05} className={cn(category.wide && 'sm:col-span-2')}>
+            <Reveal key={category.id} delay={(i % 3) * 0.05}>
               <Card className="flex h-full flex-col p-6">
                 <div className="flex items-center gap-3">
                   <span className="grid size-9 place-items-center rounded-lg border border-accent/20 bg-accent-soft text-accent">

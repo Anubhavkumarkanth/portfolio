@@ -5,7 +5,7 @@ import { Section } from '../ui/Section'
 export function About() {
   const [lead, ...paragraphs] = profile.about.paragraphs
   return (
-    <Section id="about" index="01" eyebrow="About" title="From raw data to working software.">
+    <Section id="about" index="01" eyebrow="About" title="About me">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.45fr_1fr] lg:gap-16">
         <Reveal className="space-y-5 text-[17px] leading-[1.75] text-pretty text-fg-muted">
           <p className="text-fg">{lead}</p>

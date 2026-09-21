@@ -249,10 +249,10 @@ export function GitHubActivity() {
   return (
     <Section
       id="github"
-      index="09"
+      index="08"
       eyebrow="GitHub"
-      title="Code in the open"
-      description="Pulled live from GitHub’s public API — repositories and activity, not hand-typed numbers."
+      title="On GitHub"
+      description="My public repositories and recent activity, pulled live from GitHub."
       aside={
         <a
           href={profile.socials.github.href}

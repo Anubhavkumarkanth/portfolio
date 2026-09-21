@@ -140,14 +140,12 @@ export function Contact() {
   return (
     <Section
       id="contact"
-      index="10"
+      index="09"
       eyebrow="Contact"
       title={
-        <>
-          Let’s build something <span className="text-accent">useful.</span>
-        </>
+"Get in touch"
       }
-      description="I’m looking for entry-level software and data roles: Python and backend development, data analysis, data science and data engineering. If you’re hiring, have a project in mind, or want to talk through something I’ve built, my inbox is open."
+      description="I’m looking for entry-level software, backend, full-stack and data roles. If you’re hiring or want to talk through something I’ve built, my inbox is open."
     >
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
         <Reveal>

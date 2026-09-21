@@ -1,14 +1,19 @@
 import { m } from 'framer-motion'
-import { ArrowRight, Briefcase, MapPin } from 'lucide-react'
+import { Briefcase, MapPin } from 'lucide-react'
 import { experience } from '../../data/experience'
-import { profile } from '../../data/profile'
 import { EASE_OUT, formatDuration, formatMonth } from '../../lib/utils'
 import { Card, Reveal, Tag } from '../ui/primitives'
 import { Section } from '../ui/Section'
 
 export function ExperienceTimeline() {
   return (
-    <Section id="experience" index="04" eyebrow="Experience" title="Where I’ve worked">
+    <Section
+      id="experience"
+      index="03"
+      eyebrow="Experience"
+      title="Internship experience"
+      description="Three months on a backend team, working in Java and Spring Boot."
+    >
       <div className="relative">
         {/* Rail */}
         <m.div
@@ -52,16 +57,6 @@ export function ExperienceTimeline() {
 
                   <p className="mt-5 leading-relaxed text-fg-muted">{job.summary}</p>
 
-                  {job.metrics.length > 0 && (
-                    <dl className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                      {job.metrics.map((metric) => (
-                        <div key={metric.label} className="flex flex-col-reverse rounded-lg border border-line bg-white/[0.02] px-4 py-3.5">
-                          <dt className="mt-1 text-sm text-fg-muted">{metric.label}</dt>
-                          <dd className="font-mono text-2xl font-medium tracking-tight text-accent-strong">{metric.value}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                  )}
 
                   <ul className="mt-6 space-y-3">
                     {job.highlights.map((h) => (
@@ -84,27 +79,6 @@ export function ExperienceTimeline() {
             </li>
           ))}
 
-          {/* What's next */}
-          <li className="relative pl-10 sm:pl-14">
-            <span className="absolute top-0.5 left-0 grid size-6 place-items-center sm:size-8" aria-hidden="true">
-              <span className="absolute size-3 rounded-full bg-accent/60 motion-safe:animate-pulse-ring" />
-              <span className="size-3 rounded-full border-2 border-accent bg-ink-950" />
-            </span>
-            <Reveal>
-              <div className="flex flex-col gap-3 rounded-xl border border-dashed border-line-strong p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
-                <div>
-                  <p className="font-medium text-fg">Next: an entry-level software or data role</p>
-                  <p className="mt-1 text-sm text-fg-muted">
-                    {profile.targetRoles.flatMap((group) => group.roles).join(' · ')}
-                  </p>
-                </div>
-                <a href="#contact" className="group inline-flex shrink-0 items-center gap-1.5 text-sm text-accent-strong hover:text-accent">
-                  Get in touch
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-                </a>
-              </div>
-            </Reveal>
-          </li>
         </ol>
       </div>
     </Section>
