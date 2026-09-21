@@ -118,11 +118,18 @@ retry button and a link to the profile.
 It's a static site: build it and upload `dist/`.
 
 **Live site:** https://anubhav-kumar.vercel.app (Vercel project `anubhav-kumar`, linked in `.vercel/`).
-`VITE_SITE_URL` is set in the Vercel project's production environment. To publish changes:
+`VITE_SITE_URL` is set in the Vercel project's production environment.
+
+The Vercel project is connected to [github.com/Anubhavkumarkanth/portfolio](https://github.com/Anubhavkumarkanth/portfolio),
+so every push to `main` publishes the site; pushes to other branches get a preview URL. To publish changes:
 
 ```bash
-npx vercel deploy --prod
+git add -A
+git commit -m "Describe the change"
+git push
 ```
+
+`npx vercel deploy --prod` still works for a one-off deploy without committing.
 
 **Vercel / Netlify / Cloudflare Pages:** framework "Vite", build command `npm run build`, output
 directory `dist`. Set `VITE_SITE_URL` (and `VITE_CONTACT_ENDPOINT` if you use one) as environment
