@@ -99,6 +99,111 @@ export const projects: Project[] = [
     preview: 'sip',
   },
   {
+    slug: 'dietbot',
+    name: 'Dietbot',
+    kind: 'Python · machine learning',
+    tagline: 'A calorie-intake model trained on public health survey data, kept only because it beat the standard formula.',
+    summary:
+      'I built a training set from raw CDC survey files (three NHANES 2017–2018 tables joined into 4,624 usable adult records), tested four model designs against baselines, and kept the one that won: a Random Forest that predicts daily calorie intake more accurately than the Mifflin-St Jeor formula. It powers a Streamlit app that turns an athlete’s profile into calorie and macro targets and a meal plan. The project started as someone else’s prototype, which I rebuilt into a tested Python package.',
+    problem:
+      'The prototype’s model was trained on 99 rows whose macro labels were fixed multiples of calories, so it could only rediscover a formula — and because trees can’t extrapolate, every athlete above ~2,950 kcal got identical output. The app was also feeding the model a single workout’s calorie burn instead of the daily target.',
+    howItWorks: [
+      'The profile is turned into BMI, BMR (Mifflin-St Jeor), TDEE and session calorie burn.',
+      'The calorie target, adjusted for activity and goal, drives the daily protein, carb, fat and sugar targets.',
+      'A Random Forest trained on NHANES predicts typical intake for similar people. It’s shown beside the target as a reference — it doesn’t drive the plan.',
+      'A meal plan is assembled by nearest-neighbour matching over a 145-item food table.',
+      'Profiles and generated plans can be persisted to PostgreSQL and read back later.',
+    ],
+    architecture: [
+      { title: 'NHANES pipeline', detail: 'build_dataset.py · 3 CDC files joined on SEQN · filtered' },
+      { title: 'Model training', detail: 'train_models.py · 60/20/20 split · baselines · metrics JSON' },
+      { title: 'Streamlit app', detail: 'Profile → calorie & macro targets → meal plan' },
+      { title: 'PostgreSQL', detail: 'profiles → plans → plan_items · transactional saves' },
+    ],
+    features: [
+      'Calorie target from Mifflin-St Jeor, adjusted for activity level and goal',
+      'Reference calorie-intake prediction from a Random Forest trained on NHANES 2017–2018',
+      'Daily protein, carbohydrate, fat and sugar targets',
+      'Meal plans built by nearest-neighbour matching over a 145-item food table',
+      'Optional plan history stored in PostgreSQL',
+      'Optional plain-language plan summary, with a templated fallback',
+    ],
+    engineering: [
+      {
+        title: 'A reproducible data pipeline',
+        detail:
+          'build_dataset.py downloads three NHANES 2017–2018 files (demographics, body measures, day-1 dietary recall), joins them on the respondent id, keeps adults 18–80 with complete records and plausible intake (800–5,000 kcal), and writes the dataset the model trains on.',
+      },
+      {
+        title: 'Diagnosed a model that could only memorise a formula',
+        detail:
+          'The original labels had a standard deviation in the fourth decimal place per calorie — they came from a formula. Above the training ceiling the trees flat-lined, which covered most of the athletes the app is for.',
+      },
+      {
+        title: 'Four designs tested; three rejected with evidence',
+        detail:
+          'Macro grams from body + calories, from body alone, and macro composition all failed to beat their baselines. Only calorie intake from body measurements did. A --rejected flag reproduces the failures.',
+      },
+      {
+        title: 'Evaluation that can’t leak',
+        detail:
+          '4,624 NHANES adults, a 60/20/20 split, and min_samples_leaf chosen on the validation set only. Test-set metrics are written to model_metrics.json at training time.',
+      },
+      {
+        title: 'Transactional persistence',
+        detail:
+          'profiles → plans → plan_items in PostgreSQL. Tests confirm cascade deletes and that a constraint violation rolls the whole save back.',
+      },
+      {
+        title: 'Regression tests for the old failure',
+        detail:
+          '24 tests, including one that guards against the old model’s flat-line behaviour and one that checks the recorded metrics still beat the formula baseline.',
+      },
+      {
+        title: 'Provenance kept honest',
+        detail:
+          'The repository history is intact: the original upload and the start of the rewrite are separate commits, and the README credits the prototype’s author.',
+      },
+    ],
+    contribution: [
+      'Rebuilt an existing prototype into a modular, tested Python application and fixed two correctness issues.',
+      'Replaced a formula-derived macro prediction model with a calorie-intake prediction pipeline trained on NHANES 2017–2018 data.',
+      'Evaluated multiple approaches against baseline methods; the final Random Forest achieved MAE 633 kcal and R² 0.13 on held-out data.',
+      'Added PostgreSQL persistence for profiles and generated plans, with reproducible model evaluation and documented limitations and provenance.',
+    ],
+    contributionNote:
+      'The project started from notebooks written by someone else. The rewrite, bug fixes, NHANES pipeline, evaluation, persistence layer and tests are my work.',
+    limitations: [
+      'R² of 0.13 is low. A single 24-hour dietary recall is a noisy measure (test-set SD ≈ 855 kcal), so the honest claim is narrow: modestly better than the standard formula.',
+      'It predicts typical intake, not requirement, and self-reported intake tends to be under-reported. Not medical advice.',
+      'The food table has 145 items, mostly South Asian dishes, and the greedy matcher approaches the macro targets rather than hitting them exactly.',
+    ],
+    stack: [
+      { group: 'App', items: ['Python', 'Streamlit'] },
+      { group: 'ML & data', items: ['Scikit-learn', 'Pandas', 'NumPy', 'NHANES 2017–2018'] },
+      { group: 'Storage', items: ['PostgreSQL', 'psycopg2'] },
+      { group: 'Quality', items: ['pytest'] },
+    ],
+    tags: ['Python', 'Pandas', 'scikit-learn', 'NumPy', 'PostgreSQL', 'Streamlit'],
+    highlights: [
+      'Dataset built from raw CDC NHANES files: three tables joined down to 4,624 adults',
+      'Random Forest tested against the standard formula on held-out data (MAE 633 vs 651 kcal)',
+      'Rebuilt an inherited prototype as a tested Python package with PostgreSQL storage',
+    ],
+    links: {
+      github: 'https://github.com/Anubhavkumarkanth/Dietbot_For_Athletes',
+    },
+    preview: 'dietbot',
+    evaluation: {
+      caption: 'Held-out test set · 925 rows · NHANES 2017–2018',
+      rows: [
+        { model: 'Mean baseline', mae: 684.4, r2: -0.0008 },
+        { model: 'Mifflin-St Jeor', mae: 650.6, r2: 0.0714 },
+        { model: 'Random Forest', mae: 632.9, r2: 0.1298, best: true },
+      ],
+    },
+  },
+  {
     slug: 'order-management-system',
     name: 'Order Management System',
     kind: 'Java · SQL',
@@ -215,111 +320,6 @@ ORDER BY category, rank_in_category;`,
       github: 'https://github.com/Anubhavkumarkanth/order-management-system',
     },
     preview: 'oms',
-  },
-  {
-    slug: 'dietbot',
-    name: 'Dietbot',
-    kind: 'Python · machine learning',
-    tagline: 'A calorie-intake model trained on public health survey data, kept only because it beat the standard formula.',
-    summary:
-      'I built a training set from raw CDC survey files (three NHANES 2017–2018 tables joined into 4,624 usable adult records), tested four model designs against baselines, and kept the one that won: a Random Forest that predicts daily calorie intake more accurately than the Mifflin-St Jeor formula. It powers a Streamlit app that turns an athlete’s profile into calorie and macro targets and a meal plan. The project started as someone else’s prototype, which I rebuilt into a tested Python package.',
-    problem:
-      'The prototype’s model was trained on 99 rows whose macro labels were fixed multiples of calories, so it could only rediscover a formula — and because trees can’t extrapolate, every athlete above ~2,950 kcal got identical output. The app was also feeding the model a single workout’s calorie burn instead of the daily target.',
-    howItWorks: [
-      'The profile is turned into BMI, BMR (Mifflin-St Jeor), TDEE and session calorie burn.',
-      'The calorie target, adjusted for activity and goal, drives the daily protein, carb, fat and sugar targets.',
-      'A Random Forest trained on NHANES predicts typical intake for similar people. It’s shown beside the target as a reference — it doesn’t drive the plan.',
-      'A meal plan is assembled by nearest-neighbour matching over a 145-item food table.',
-      'Profiles and generated plans can be persisted to PostgreSQL and read back later.',
-    ],
-    architecture: [
-      { title: 'NHANES pipeline', detail: 'build_dataset.py · 3 CDC files joined on SEQN · filtered' },
-      { title: 'Model training', detail: 'train_models.py · 60/20/20 split · baselines · metrics JSON' },
-      { title: 'Streamlit app', detail: 'Profile → calorie & macro targets → meal plan' },
-      { title: 'PostgreSQL', detail: 'profiles → plans → plan_items · transactional saves' },
-    ],
-    features: [
-      'Calorie target from Mifflin-St Jeor, adjusted for activity level and goal',
-      'Reference calorie-intake prediction from a Random Forest trained on NHANES 2017–2018',
-      'Daily protein, carbohydrate, fat and sugar targets',
-      'Meal plans built by nearest-neighbour matching over a 145-item food table',
-      'Optional plan history stored in PostgreSQL',
-      'Optional plain-language plan summary, with a templated fallback',
-    ],
-    engineering: [
-      {
-        title: 'A reproducible data pipeline',
-        detail:
-          'build_dataset.py downloads three NHANES 2017–2018 files (demographics, body measures, day-1 dietary recall), joins them on the respondent id, keeps adults 18–80 with complete records and plausible intake (800–5,000 kcal), and writes the dataset the model trains on.',
-      },
-      {
-        title: 'Diagnosed a model that could only memorise a formula',
-        detail:
-          'The original labels had a standard deviation in the fourth decimal place per calorie — they came from a formula. Above the training ceiling the trees flat-lined, which covered most of the athletes the app is for.',
-      },
-      {
-        title: 'Four designs tested; three rejected with evidence',
-        detail:
-          'Macro grams from body + calories, from body alone, and macro composition all failed to beat their baselines. Only calorie intake from body measurements did. A --rejected flag reproduces the failures.',
-      },
-      {
-        title: 'Evaluation that can’t leak',
-        detail:
-          '4,624 NHANES adults, a 60/20/20 split, and min_samples_leaf chosen on the validation set only. Test-set metrics are written to model_metrics.json at training time.',
-      },
-      {
-        title: 'Transactional persistence',
-        detail:
-          'profiles → plans → plan_items in PostgreSQL. Tests confirm cascade deletes and that a constraint violation rolls the whole save back.',
-      },
-      {
-        title: 'Regression tests for the old failure',
-        detail:
-          '24 tests, including one that guards against the old model’s flat-line behaviour and one that checks the recorded metrics still beat the formula baseline.',
-      },
-      {
-        title: 'Provenance kept honest',
-        detail:
-          'The repository history is intact: the original upload and the start of the rewrite are separate commits, and the README credits the prototype’s author.',
-      },
-    ],
-    contribution: [
-      'Rebuilt an existing prototype into a modular, tested Python application and fixed two correctness issues.',
-      'Replaced a formula-derived macro prediction model with a calorie-intake prediction pipeline trained on NHANES 2017–2018 data.',
-      'Evaluated multiple approaches against baseline methods; the final Random Forest achieved MAE 633 kcal and R² 0.13 on held-out data.',
-      'Added PostgreSQL persistence for profiles and generated plans, with reproducible model evaluation and documented limitations and provenance.',
-    ],
-    contributionNote:
-      'The project started from notebooks written by someone else. The rewrite, bug fixes, NHANES pipeline, evaluation, persistence layer and tests are my work.',
-    limitations: [
-      'R² of 0.13 is low. A single 24-hour dietary recall is a noisy measure (test-set SD ≈ 855 kcal), so the honest claim is narrow: modestly better than the standard formula.',
-      'It predicts typical intake, not requirement, and self-reported intake tends to be under-reported. Not medical advice.',
-      'The food table has 145 items, mostly South Asian dishes, and the greedy matcher approaches the macro targets rather than hitting them exactly.',
-    ],
-    stack: [
-      { group: 'App', items: ['Python', 'Streamlit'] },
-      { group: 'ML & data', items: ['Scikit-learn', 'Pandas', 'NumPy', 'NHANES 2017–2018'] },
-      { group: 'Storage', items: ['PostgreSQL', 'psycopg2'] },
-      { group: 'Quality', items: ['pytest'] },
-    ],
-    tags: ['Python', 'Pandas', 'scikit-learn', 'NumPy', 'PostgreSQL', 'Streamlit'],
-    highlights: [
-      'Dataset built from raw CDC NHANES files: three tables joined down to 4,624 adults',
-      'Random Forest tested against the standard formula on held-out data (MAE 633 vs 651 kcal)',
-      'Rebuilt an inherited prototype as a tested Python package with PostgreSQL storage',
-    ],
-    links: {
-      github: 'https://github.com/Anubhavkumarkanth/Dietbot_For_Athletes',
-    },
-    preview: 'dietbot',
-    evaluation: {
-      caption: 'Held-out test set · 925 rows · NHANES 2017–2018',
-      rows: [
-        { model: 'Mean baseline', mae: 684.4, r2: -0.0008 },
-        { model: 'Mifflin-St Jeor', mae: 650.6, r2: 0.0714 },
-        { model: 'Random Forest', mae: 632.9, r2: 0.1298, best: true },
-      ],
-    },
   },
 ]
 
