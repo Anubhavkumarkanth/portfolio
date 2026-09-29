@@ -4,6 +4,14 @@ import type { Profile } from './types.ts'
 // This file is also read by vite.config.ts to fill the SEO tags in index.html,
 // so keep it free of browser-only code and icon imports.
 
+// Second resume, tailored for Data Analyst / Data Scientist roles.
+// Shown next to the main resume (profile.resume below), which is unchanged.
+export const dataResume = {
+  label: 'Data Analyst Resume',
+  href: 'resume/Anubhav-Kumar-Data-Analyst-Data-Scientist-Resume.pdf',
+  fileName: 'Anubhav-Kumar-Data-Analyst-Data-Scientist-Resume.pdf',
+}
+
 export const profile: Profile = {
   name: 'Anubhav Kumar',
   initials: 'AK',
