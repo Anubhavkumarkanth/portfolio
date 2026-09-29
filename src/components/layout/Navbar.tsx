@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Download, Mail, Menu, X } from 'lucide-react'
 import { navItems, sectionIds } from '../../config/site'
-import { profile } from '../../data/profile'
+import { dataResume, profile } from '../../data/profile'
 import { useActiveSection } from '../../hooks/useActiveSection'
 import { useScrollLock } from '../../hooks/useScrollLock'
 import { buttonClasses } from '../../lib/button'
@@ -83,6 +83,15 @@ export function Navbar() {
               >
                 Resume
               </a>
+              <a
+                href={withBase(dataResume.href)}
+                target="_blank"
+                rel="noopener"
+                title={dataResume.label}
+                className={buttonClasses({ variant: 'secondary', size: 'sm', className: 'hidden sm:inline-flex' })}
+              >
+                Data Resume
+              </a>
               <button
                 type="button"
                 onClick={() => setOpen((o) => !o)}
@@ -135,6 +144,14 @@ function MobileMenu({ active, onNavigate }: { active: string; onNavigate: () => 
           >
             <Download className="size-4" aria-hidden="true" />
             Download resume
+          </a>
+          <a
+            href={withBase(dataResume.href)}
+            download={dataResume.fileName}
+            className={buttonClasses({ variant: 'secondary', className: 'mt-2 w-full' })}
+          >
+            <Download className="size-4" aria-hidden="true" />
+            Download Data Analyst resume
           </a>
           <div className="mt-3 grid grid-cols-3 gap-2">
             <a href={profile.socials.github.href} target="_blank" rel="noreferrer" className={buttonClasses({ variant: 'secondary', size: 'sm' })}>
