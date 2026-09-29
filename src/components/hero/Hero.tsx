@@ -1,7 +1,7 @@
 import { ArrowRight, Download } from 'lucide-react'
 import { education } from '../../data/education'
 import { experience } from '../../data/experience'
-import { profile } from '../../data/profile'
+import { dataResume, profile } from '../../data/profile'
 import { buttonClasses } from '../../lib/button'
 import { formatMonth, withBase } from '../../lib/utils'
 import { GitHubIcon, LinkedInIcon } from '../ui/BrandIcons'
@@ -64,6 +64,14 @@ export function Hero() {
               >
                 <Download className="size-4" aria-hidden="true" />
                 Resume
+              </a>
+              <a
+                href={withBase(dataResume.href)}
+                download={dataResume.fileName}
+                className={buttonClasses({ variant: 'secondary' })}
+              >
+                <Download className="size-4" aria-hidden="true" />
+                {dataResume.label}
               </a>
             </div>
             <div className="flex gap-6">
