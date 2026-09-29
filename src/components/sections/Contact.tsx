@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Check, CircleAlert, Copy, Download, LoaderCircle, Mail, MapPin, Phone, Send } from 'lucide-react'
 import { site } from '../../config/site'
-import { profile } from '../../data/profile'
+import { dataResume, profile } from '../../data/profile'
 import { buttonClasses } from '../../lib/button'
 import { cn, withBase } from '../../lib/utils'
 import { GitHubIcon, LinkedInIcon } from '../ui/BrandIcons'
@@ -166,14 +166,24 @@ export function Contact() {
               </li>
             ))}
           </ul>
-          <a
-            href={withBase(profile.resume.href)}
-            download={profile.resume.fileName}
-            className={buttonClasses({ variant: 'secondary', className: 'mt-6 w-full sm:w-auto' })}
-          >
-            <Download className="size-4" aria-hidden="true" />
-            Download resume (PDF)
-          </a>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a
+              href={withBase(profile.resume.href)}
+              download={profile.resume.fileName}
+              className={buttonClasses({ variant: 'secondary', className: 'w-full sm:w-auto' })}
+            >
+              <Download className="size-4" aria-hidden="true" />
+              Download resume (PDF)
+            </a>
+            <a
+              href={withBase(dataResume.href)}
+              download={dataResume.fileName}
+              className={buttonClasses({ variant: 'secondary', className: 'w-full sm:w-auto' })}
+            >
+              <Download className="size-4" aria-hidden="true" />
+              {dataResume.label} (PDF)
+            </a>
+          </div>
         </div>
 
         <Card className="self-start p-6 sm:p-8">
