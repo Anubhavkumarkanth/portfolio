@@ -6,6 +6,18 @@ export interface SocialLink {
   handle: string
 }
 
+/** A downloadable resume. */
+export interface ResumeLink {
+  /** Path inside /public, without a leading slash. */
+  href: string
+  /** Name the browser saves the file under. */
+  fileName: string
+  /** Full name, used on the larger buttons ("Python Software Developer Resume"). */
+  label: string
+  /** Short name for the compact navigation bar. */
+  shortLabel: string
+}
+
 export interface Profile {
   name: string
   initials: string
@@ -23,11 +35,8 @@ export interface Profile {
   phone: string
   /** Same number in tel: form, digits and a leading + only. */
   phoneHref: string
-  resume: {
-    /** Path inside /public, without a leading slash. */
-    href: string
-    fileName: string
-  }
+  /** The main resume: Python Software Developer. */
+  resume: ResumeLink
   socials: {
     github: SocialLink
     linkedin: SocialLink

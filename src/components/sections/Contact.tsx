@@ -173,7 +173,7 @@ export function Contact() {
               className={buttonClasses({ variant: 'secondary', className: 'w-full sm:w-auto' })}
             >
               <Download className="size-4" aria-hidden="true" />
-              Download resume (PDF)
+              {profile.resume.label} (PDF)
             </a>
             <a
               href={withBase(dataResume.href)}

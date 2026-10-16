@@ -79,9 +79,10 @@ export function Navbar() {
                 href={withBase(profile.resume.href)}
                 target="_blank"
                 rel="noopener"
+                title={profile.resume.label}
                 className={buttonClasses({ variant: 'secondary', size: 'sm' })}
               >
-                Resume
+                {profile.resume.shortLabel}
               </a>
               <a
                 href={withBase(dataResume.href)}
@@ -90,7 +91,7 @@ export function Navbar() {
                 title={dataResume.label}
                 className={buttonClasses({ variant: 'secondary', size: 'sm', className: 'hidden sm:inline-flex' })}
               >
-                Data Resume
+                {dataResume.shortLabel}
               </a>
               <button
                 type="button"
@@ -143,7 +144,7 @@ function MobileMenu({ active, onNavigate }: { active: string; onNavigate: () => 
             className={buttonClasses({ variant: 'primary', className: 'w-full' })}
           >
             <Download className="size-4" aria-hidden="true" />
-            Download resume
+            Download {profile.resume.label}
           </a>
           <a
             href={withBase(dataResume.href)}
@@ -151,7 +152,7 @@ function MobileMenu({ active, onNavigate }: { active: string; onNavigate: () => 
             className={buttonClasses({ variant: 'secondary', className: 'mt-2 w-full' })}
           >
             <Download className="size-4" aria-hidden="true" />
-            Download Data Analyst resume
+            Download {dataResume.label}
           </a>
           <div className="mt-3 grid grid-cols-3 gap-2">
             <a href={profile.socials.github.href} target="_blank" rel="noreferrer" className={buttonClasses({ variant: 'secondary', size: 'sm' })}>

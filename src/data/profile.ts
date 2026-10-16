@@ -1,15 +1,17 @@
-import type { Profile } from './types.ts'
+import type { Profile, ResumeLink } from './types.ts'
 
 // Personal information, social links and the About copy.
 // This file is also read by vite.config.ts to fill the SEO tags in index.html,
 // so keep it free of browser-only code and icon imports.
 
-// Second resume, tailored for Data Analyst / Data Scientist roles.
-// Shown next to the main resume (profile.resume below), which is unchanged.
-export const dataResume = {
-  label: 'Data Analyst Resume',
-  href: 'resume/Anubhav-Kumar-Data-Analyst-Data-Scientist-Resume.pdf',
-  fileName: 'Anubhav-Kumar-Data-Analyst-Data-Scientist-Resume.pdf',
+// Second resume, for Python + data analysis roles. Shown next to the main resume (profile.resume below).
+// The PDFs live in public/resume/. The older file names (Anubhav-Kumar-Resume.pdf and
+// Anubhav-Kumar-Data-Analyst-Data-Scientist-Resume.pdf) are redirected to these in vercel.json.
+export const dataResume: ResumeLink = {
+  label: 'Python + Data Analysis Resume',
+  shortLabel: 'Data Resume',
+  href: 'resume/Anubhav-Kumar-Python-Data-Analysis-Resume.pdf',
+  fileName: 'Anubhav_Kumar_Resume_Python_Data_Analysis.pdf',
 }
 
 export const profile: Profile = {
@@ -26,8 +28,10 @@ export const profile: Profile = {
   phone: '+91 72238 27840',
   phoneHref: '+917223827840',
   resume: {
-    href: 'resume/Anubhav-Kumar-Resume.pdf',
-    fileName: 'Anubhav-Kumar-Resume.pdf',
+    label: 'Python Software Developer Resume',
+    shortLabel: 'Python Resume',
+    href: 'resume/Anubhav-Kumar-Python-Software-Developer-Resume.pdf',
+    fileName: 'Anubhav_Kumar_Resume_Python_Software_Developer.pdf',
   },
   socials: {
     github: {

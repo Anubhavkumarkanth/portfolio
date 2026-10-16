@@ -38,7 +38,7 @@ a component to update the site.
 | Name, role, intro, email, location, About text       | `src/data/profile.ts`                                   |
 | GitHub / LinkedIn links                              | `src/data/profile.ts` → `socials`                       |
 | Page title, meta description, keywords               | `src/data/profile.ts` → `seo`                           |
-| Resume PDF                                           | Replace `public/resume/Anubhav-Kumar-Resume.pdf`        |
+| Resume PDFs (two)                                    | Replace the files in `public/resume/` (see below)       |
 | Projects, GitHub links, live demo links              | `src/data/projects.ts`                                  |
 | Skills and their groupings                           | `src/data/skills.ts`                                    |
 | Internship / jobs                                    | `src/data/experience.ts`                                |
@@ -51,8 +51,11 @@ a component to update the site.
 
 ### Common tasks
 
-**Update the resume.** Drop the new PDF at `public/resume/Anubhav-Kumar-Resume.pdf`. To use a different
-file name, change `profile.resume.href` and `profile.resume.fileName`.
+**Update the resumes.** There are two, in `public/resume/`: `Anubhav-Kumar-Python-Software-Developer-Resume.pdf`
+(the main one, `profile.resume`) and `Anubhav-Kumar-Python-Data-Analysis-Resume.pdf` (`dataResume`). Replace the PDF,
+or change `href`, `fileName` and the button labels in `src/data/profile.ts`. `vercel.json` redirects the two older file
+names (`Anubhav-Kumar-Resume.pdf` and `Anubhav-Kumar-Data-Analyst-Data-Scientist-Resume.pdf`) to the new ones, so links
+made before the change still work.
 
 **Change the email, GitHub or LinkedIn.** Edit `profile.email` and `profile.socials` in
 `src/data/profile.ts`. The GitHub section reads its username from `socials.github.handle`, and the page
@@ -149,7 +152,7 @@ portfolio/
 ├── index.html                  # SEO/OG tags filled from src/data/profile.ts at build time
 ├── vite.config.ts              # Vite + Tailwind + the small SEO/robots/sitemap plugin
 ├── public/
-│   ├── resume/                 # Resume PDF served for download
+│   ├── resume/                 # The two resume PDFs served for download
 │   ├── certificates/           # Certificate images
 │   ├── favicon.svg, apple-touch-icon.png, og-image.png
 └── src/

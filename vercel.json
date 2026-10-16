@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/resume/Anubhav-Kumar-Resume.pdf",
+      "destination": "/resume/Anubhav-Kumar-Python-Software-Developer-Resume.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/resume/Anubhav-Kumar-Data-Analyst-Data-Scientist-Resume.pdf",
+      "destination": "/resume/Anubhav-Kumar-Python-Data-Analysis-Resume.pdf",
+      "permanent": false
+    }
+  ]
+}
