@@ -60,7 +60,7 @@ export const profile: Profile = {
   coreStack: ['Java', 'Python', 'SQL', 'Spring Boot', 'FastAPI', 'PostgreSQL', 'React', 'Power BI'],
   about: {
     paragraphs: [
-      'I’m in my final year of B.E. Electronics and Communication Engineering at Nitte Meenakshi Institute of Technology, Bangalore. I graduate in 2026.',
+      'I graduated in 2026 with a B.E. in Electronics and Communication Engineering from Nitte Meenakshi Institute of Technology, Bangalore.',
       'My internship was at Redevelopers Automate Solution. I spent three months on the backend of a Java and Spring Boot application, writing REST APIs, working with the SQL and NoSQL layer, and fixing bugs with tests to cover them.',
       'Most of my own projects are in Python and SQL. One is a FastAPI and PostgreSQL app, another is an order system in Core Java, and a third is a calorie prediction model trained on public health data. The data side interests me too: cleaning the files, writing the queries and putting together simple reports.',
     ],

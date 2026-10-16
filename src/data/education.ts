@@ -8,6 +8,6 @@ export const education: Education[] = [
     university: 'Visvesvaraya Technological University (VTU)',
     location: 'Bangalore, Karnataka',
     graduation: '2026',
-    status: 'Final year',
+    status: 'Graduated',
   },
 ]
