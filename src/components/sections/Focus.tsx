@@ -26,7 +26,7 @@ export function Focus() {
       </div>
 
       <p className="mt-10 text-fg-muted">
-        I graduate in 2026 and can start full time after that.{' '}
+        I graduated in 2026 and am open to full-time roles.{' '}
         <a href="#contact" className={textLink}>
           Get in touch
         </a>

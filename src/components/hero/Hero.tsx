@@ -63,7 +63,7 @@ export function Hero() {
                 className={buttonClasses({ variant: 'secondary' })}
               >
                 <Download className="size-4" aria-hidden="true" />
-                Resume
+                {profile.resume.label}
               </a>
               <a
                 href={withBase(dataResume.href)}
