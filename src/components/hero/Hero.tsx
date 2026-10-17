@@ -25,7 +25,7 @@ function Phrases({ parts, separator }: { parts: string[]; separator: string }) {
 export function Hero() {
   const school = education[0]
   const job = experience[0]
-  const specialties = 'Java · Python · SQL · Data Analytics'
+  const specialties = 'Python · SQL · APIs · Data Analytics'
 
   const meta = [
     ['B.E. ECE', 'NMIT Bangalore', `Class of ${school.graduation}`],

@@ -1,7 +1,7 @@
 # Anubhav Kumar — Portfolio
 
-Personal portfolio for Anubhav Kumar, an entry-level software engineer and data analyst working across
-Java, Python, SQL and data analytics. It's a single-page React app with a plain, mostly static dark
+Personal portfolio for Anubhav Kumar, a Python developer and data analyst working across
+Python, SQL, APIs and data analytics. It's a single-page React app with a plain, mostly static dark
 design: case-study modals (a live SIP simulator, a model-evaluation table, featured SQL and a transaction
 walkthrough) and a GitHub section that loads live data.
 

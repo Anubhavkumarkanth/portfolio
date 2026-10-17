@@ -3,7 +3,7 @@ import type { Experience } from './types'
 export const experience: Experience[] = [
   {
     company: 'Redevelopers Automate Solution Pvt. Ltd.',
-    role: 'Java Full Stack Development Intern',
+    role: 'Full Stack Development Intern',
     type: 'Internship',
     start: '2026-02',
     end: '2026-04',

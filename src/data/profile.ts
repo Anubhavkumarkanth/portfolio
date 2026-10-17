@@ -17,11 +17,11 @@ export const dataResume: ResumeLink = {
 export const profile: Profile = {
   name: 'Anubhav Kumar',
   initials: 'AK',
-  role: 'Entry-Level Software Engineer | Data Analyst',
+  role: 'Python Developer | Data Analyst',
   specialties: ['Java', 'Python', 'SQL'],
   intro:
     'A 2026 engineering graduate from NMIT Bangalore, with Java and Spring Boot internship experience and hands-on work in Python, SQL and data analysis.',
-  tagline: 'Java · Python · SQL · Data Analytics',
+  tagline: 'Python · SQL · APIs · Data Analytics',
   location: 'Bengaluru, India',
   availability: 'Open to full-time roles',
   email: 'anubhavkumarkanth123@gmail.com',
@@ -48,8 +48,8 @@ export const profile: Profile = {
   targetRoles: [
     {
       group: 'Software',
-      roles: ['Software Engineer', 'Java Developer', 'Python Developer', 'Backend Developer', 'Full-Stack Developer'],
-      note: 'Java, Python, backend and full-stack development.',
+      roles: ['Software Engineer', 'Python Developer', 'Backend Developer', 'Full-Stack Developer'],
+      note: 'Python, backend and full-stack development.',
     },
     {
       group: 'Data',
@@ -67,13 +67,13 @@ export const profile: Profile = {
     facts: [
       { label: 'Education', value: 'B.E. ECE · NMIT Bangalore · 2026' },
       { label: 'Based in', value: 'Bengaluru, India' },
-      { label: 'Internship', value: 'Java Full Stack Dev · Feb–Apr 2026' },
-      { label: 'Core skills', value: 'Java · Python · SQL · Data Analytics' },
+      { label: 'Internship', value: 'Full Stack Dev · Feb–Apr 2026' },
+      { label: 'Core skills', value: 'Python · SQL · APIs · Data Analytics' },
       { label: 'Looking for', value: 'Software engineering or data analysis' },
     ],
   },
   seo: {
-    title: 'Anubhav Kumar — Entry-Level Software Engineer | Data Analyst',
+    title: 'Anubhav Kumar — Python Developer | Data Analyst',
     description:
       'Anubhav Kumar, B.E. ECE at NMIT Bangalore, Class of 2026. Java and Spring Boot from an internship, Python and SQL from personal projects, and practical data analytics with Pandas and Power BI. Open to entry-level software and data analyst roles.',
     keywords: [
@@ -82,7 +82,6 @@ export const profile: Profile = {
       'fresher software engineer',
       'entry level data analyst',
       'fresher data analyst',
-      'Java developer',
       'Spring Boot',
       'Python developer',
       'backend developer',
