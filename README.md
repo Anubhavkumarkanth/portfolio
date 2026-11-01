@@ -1,11 +1,16 @@
 # Anubhav Kumar — Portfolio
 
-Personal portfolio for Anubhav Kumar, a data analyst working in SQL, Python and Power BI. It's a
-single-page React app with a plain, mostly static dark design: case-study modals with screenshots and
-live-demo links (UPI Pulse, retail cancellations, Dietbot and a SIP simulator) and a GitHub section that
-loads live data.
+Personal portfolio for Anubhav Kumar, a data analyst working in SQL, Python and Power BI.
 
-**Stack:** React 19 · TypeScript · Vite 8 · Tailwind CSS 4 · Lucide icons
+- **`/`** is the main page, for data analyst roles: four projects (UPI Pulse, retail cancellations,
+  Dietbot and a SIP simulator), each with a one-line hook, three headline numbers, why each tool was
+  chosen, a real screenshot and a short case study.
+- **`/qa`** is a separate page for QA roles: the Orderdesk QA suite, the eight bugs it catches, testing
+  skills and the QA resume. The main page links to it only from the footer and the mobile menu.
+
+Calm, light editorial design with an automatic dark mode.
+
+**Stack:** React 19 · TypeScript · Vite 8 (two pages) · Tailwind CSS 4 · Newsreader + Geist fonts
 
 ---
 
@@ -15,132 +20,68 @@ Requires Node.js 20 or newer.
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173
+npm run dev        # http://localhost:5173 and http://localhost:5173/qa.html
 ```
 
 | Command              | What it does                                 |
 | -------------------- | -------------------------------------------- |
 | `npm run dev`        | Dev server with hot reload                   |
-| `npm run build`      | Type-check, then build to `dist/`            |
+| `npm run build`      | Type-check, then build both pages to `dist/` |
 | `npm run preview`    | Serve the production build locally           |
 | `npm run lint`       | ESLint (TypeScript + React hooks rules)      |
 | `npm run type-check` | TypeScript only                              |
 
 ---
 
-## Editing your information
+## Editing the content
 
-All content lives in `src/data/` and `src/config/`, separate from the UI. You shouldn't need to touch
-a component to update the site.
+All content lives in `src/data/`, separate from the UI.
 
-| To change…                                           | Edit                                                    |
-| ---------------------------------------------------- | ------------------------------------------------------- |
-| Name, role, intro, email, location, About text       | `src/data/profile.ts`                                   |
-| GitHub / LinkedIn links                              | `src/data/profile.ts` → `socials`                       |
-| Page title, meta description, keywords               | `src/data/profile.ts` → `seo`                           |
-| Resume PDF                                           | Replace the file in `public/resume/` (see below)        |
-| Projects, GitHub links, live demo links              | `src/data/projects.ts`                                  |
-| Skills and their groupings                           | `src/data/skills.ts`                                    |
-| Internship / jobs                                    | `src/data/experience.ts`                                |
-| Degree, college, university                          | `src/data/education.ts`                                 |
-| Certifications and certificate links                 | `src/data/certifications.ts`                            |
-| Roles I'm applying for (Career focus)                | `src/data/profile.ts` → `targetRoles`                   |
-| Nav items, GitHub section settings                   | `src/config/site.ts`                                    |
-| Site URL, contact form endpoint, base path           | `.env` (copy from `.env.example`)                       |
-| Colours and fonts                                    | `src/index.css` → `@theme`                              |
+| To change…                                              | Edit                                         |
+| ------------------------------------------------------- | -------------------------------------------- |
+| Name, contact details, About text                       | `src/data/profile.ts`                        |
+| Hero line, intro, stats, resume and SEO for each page   | `src/data/profile.ts` → `data` / `qa`        |
+| Data projects (hook, summary, numbers, tool choices…)   | `src/data/projects.ts`                       |
+| QA project, bug table, QA skills, other testing work    | `src/data/qa.ts`                             |
+| Skills on the main page                                 | `src/data/skills.ts`                         |
+| Internship, degree, certificates                        | `src/data/experience.ts`, `education.ts`, `certifications.ts` |
+| Navigation links                                        | `src/config/site.ts`                         |
+| Colours (light and dark) and fonts                      | `src/index.css`                              |
+| Site URL, contact form endpoint, base path              | `.env` (copy from `.env.example`)            |
 
-### Common tasks
+**Writing style.** Plain English first, about a third technical, and every technical word explained where
+it appears. Each project opens with a one-line hook, then two short sentences. Tool choices are written as
+"X instead of Y: because…".
 
-**Update the resume.** There is one, in `public/resume/`: `Anubhav-Kumar-Data-Analyst-Resume.pdf`
-(`profile.resume`). Replace the PDF, or change `href`, `fileName` and the button label in
-`src/data/profile.ts`. `vercel.json` redirects older resume file names to it, so links made before the
-change still work.
+**Resumes.** `public/resume/Anubhav-Kumar-Data-Analyst-Resume.pdf` (main page) and
+`public/resume/Anubhav-Kumar-QA-Resume.pdf` (QA page). Replace a PDF to update it. `vercel.json`
+redirects older resume file names to the data analyst resume.
 
-**Change the email, GitHub or LinkedIn.** Edit `profile.email` and `profile.socials` in
-`src/data/profile.ts`. The GitHub section reads its username from `socials.github.handle`, and the page
-`<title>`, meta tags and structured data are generated from the same file at build time.
+**Screenshots.** Real screenshots of each live project, saved as WebP in `public/projects/`. List them in a
+project's `shots` with their pixel `width` and `height`. The first one appears on the page; the rest appear
+in the case study. Tall (portrait) images are shown no wider than 520 px.
 
-**Add a live demo link.** In `src/data/projects.ts`, set `links.demo` on the project. Until it's set, the
-case study shows no demo button.
-
-**Add a project.** Add an object to the `projects` array in `src/data/projects.ts`. Every field is typed
-(see `src/data/types.ts`), so the editor will tell you what's missing. Put screenshots in
-`public/projects/` and list them in `screenshots`. The interactive previews are chosen by `preview` (`sip` or
-`dietbot`); optional `sql` and `queries` fields show a featured SQL snippet and a query list.
-
-**Add a certificate link.** Put a file in `public/certificates/` (or use a full URL) and add it to that
-certification's `links` array. Cards without links just don't show a button.
-
-**Fill in details the resume doesn't list.** `src/data/education.ts` has `field` (your major) and
-`university`, both `null` for now because the resume doesn't state them. They stay hidden until you
-fill them in.
-
-**Change the accent colour.** Edit `--color-accent`, `--color-accent-strong` and `--color-accent-soft` in
-`src/index.css`. A few inline SVG colours use the same hex (`#f2b25c`): search for it and update those
-too, along with `public/favicon.svg`.
+**Social preview images.** `public/og-image.png` and `public/og-image-qa.png` (1200 × 630).
 
 ---
 
 ## Contact form
 
-The form works without any backend:
-
-- **No endpoint configured (default):** submitting opens the visitor's email app with the message
-  pre-filled and addressed to you.
-- **With an endpoint:** set `VITE_CONTACT_ENDPOINT` in `.env` to any service that accepts a JSON POST of
-  `{ name, email, message }` (Formspree, Web3Forms, Getform, …). Free tiers are enough. The form shows
-  loading, success and error states, and falls back to email if the request fails.
-
-```bash
-cp .env.example .env
-# VITE_CONTACT_ENDPOINT=https://formspree.io/f/your-form-id
-```
-
----
-
-## GitHub section
-
-Loads live, public data when the section scrolls near the viewport, never on page load:
-
-- Profile and repositories from the GitHub REST API. Unauthenticated, so it's limited to 60 requests per
-  hour per visitor IP. Results are cached in `sessionStorage` for an hour.
-- Contribution heatmap from `github-contributions-api.jogruber.de` (public data, no key). If it's
-  unreachable, the rest of the section still renders and the heatmap card links to GitHub instead.
-- Featured repos (listed first) and the repo count are set in `src/config/site.ts`. To turn off the
-  heatmap, set `showContributions: false`.
-
-Nothing in this section is hard-coded. If GitHub can't be reached, visitors see an error state with a
-retry button and a link to the profile.
+Works without a backend. With no endpoint set, submitting opens the visitor's email app with the message
+pre-filled. Set `VITE_CONTACT_ENDPOINT` to any service that accepts a JSON POST of
+`{ name, email, message }` (Formspree, Web3Forms…) to send directly.
 
 ---
 
 ## Deployment
 
-It's a static site: build it and upload `dist/`.
+**Live site:** https://anubhav-kumar.vercel.app (Vercel project `anubhav-kumar`). The project is connected
+to [github.com/Anubhavkumarkanth/portfolio](https://github.com/Anubhavkumarkanth/portfolio), so every push
+to `main` publishes the site and other branches get a preview URL.
 
-**Live site:** https://anubhav-kumar.vercel.app (Vercel project `anubhav-kumar`, linked in `.vercel/`).
-`VITE_SITE_URL` is set in the Vercel project's production environment.
-
-The Vercel project is connected to [github.com/Anubhavkumarkanth/portfolio](https://github.com/Anubhavkumarkanth/portfolio),
-so every push to `main` publishes the site; pushes to other branches get a preview URL. To publish changes:
-
-```bash
-git add -A
-git commit -m "Describe the change"
-git push
-```
-
-`npx vercel deploy --prod` still works for a one-off deploy without committing.
-
-**Vercel / Netlify / Cloudflare Pages:** framework "Vite", build command `npm run build`, output
-directory `dist`. Set `VITE_SITE_URL` (and `VITE_CONTACT_ENDPOINT` if you use one) as environment
-variables.
-
-**GitHub Pages (project site):** set `VITE_BASE_PATH=/<repo-name>/` and
-`VITE_SITE_URL=https://<user>.github.io/<repo-name>`, build, and publish `dist/`.
-
-Once `VITE_SITE_URL` is set, the build also adds canonical/`og:url` tags, absolute Open Graph image
-URLs, and a `sitemap.xml`. `robots.txt` is always generated.
+`vercel.json` turns on clean URLs (so `qa.html` is served at `/qa`), caches the hashed files in
+`/assets` for a year, and keeps the resume redirects. The build writes `robots.txt` and a `sitemap.xml`
+listing both pages. `VITE_SITE_URL` defaults to the live address so link previews always get absolute URLs.
 
 ---
 
@@ -148,52 +89,30 @@ URLs, and a `sitemap.xml`. `robots.txt` is always generated.
 
 ```text
 portfolio/
-├── index.html                  # SEO/OG tags filled from src/data/profile.ts at build time
-├── vite.config.ts              # Vite + Tailwind + the small SEO/robots/sitemap plugin
-├── public/
-│   ├── resume/                 # The two resume PDFs served for download
-│   ├── certificates/           # Certificate images
-│   ├── favicon.svg, apple-touch-icon.png, og-image.png
+├── index.html, qa.html          # The two pages; SEO tags filled from src/data/profile.ts at build time
+├── vite.config.ts               # Two-page build + the small SEO/robots/sitemap plugin
+├── public/                      # resume/, projects/ (screenshots), certificates/, icons, og images
 └── src/
-    ├── main.tsx, App.tsx, index.css
-    ├── config/site.ts          # Nav, section order, GitHub settings, env values
-    ├── data/                   # ← all personal content (typed)
-    │   ├── profile.ts  skills.ts  projects.ts  experience.ts
-    │   ├── education.ts  certifications.ts  types.ts
-    ├── context/                # Case-study modal state (synced to ?project=<slug>)
-    ├── hooks/                  # Scroll spy, GitHub fetch, focus trap, scroll lock
-    ├── lib/                    # Helpers, button styles, TypeScript port of the SIP engine
+    ├── main.tsx → App.tsx       # Data analyst page
+    ├── qa.tsx → QaPage.tsx      # QA page
+    ├── mount.tsx, index.css     # Shared bootstrap, fonts and theme
+    ├── config/site.ts           # Nav links, env values
+    ├── data/                    # All content (typed in types.ts)
+    ├── context/                 # Case-study modal state (synced to ?project=<slug>)
+    ├── hooks/                   # Scroll spy, focus trap, scroll lock, hash jump
+    ├── lib/                     # Helpers, button styles, TypeScript port of the SIP engine
     └── components/
-        ├── layout/             # Navbar (+ mobile menu), Footer, skip link
-        ├── hero/               # Hero
-        ├── projects/           # ProjectCard, ProjectModal (lazy-loaded), previews/
-        ├── sections/           # About, Skills, Projects, ExperienceTimeline, Education,
-        │                       # Certifications, Focus, GitHubActivity, Contact
-        └── ui/                 # Section, Card, Tag, brand icons
+        ├── layout/              # Navbar, Footer, skip link
+        ├── hero/                # The small data visuals beside each hero
+        ├── projects/            # ProjectBlock, ProjectModal (lazy-loaded), previews/
+        ├── sections/            # Hero, Work, About, Toolbox, Background, Contact
+        └── ui/                  # Section, Card, Tag, brand icons
 ```
 
 ---
 
-## Details worth knowing
-
-- **Deep links.** Sections are addressable (`/#projects`), and each case study has its own URL
-  (`/?project=sip-friction-analyzer`). The browser Back button closes the modal.
-- **SIP playground.** The case study includes an interactive simulator. It's a TypeScript port of the
-  project's `engine/simulation.py` and `engine/friction.py`, using the same compounding loop and formulas.
-  Its output was checked against the Python engine for the default scenario, and both give identical
-  results.
-- **Accessibility.** Semantic landmarks, skip link, visible focus rings, focus-trapped modal with Escape
-  to close, labelled form errors. The site has almost no motion; with `prefers-reduced-motion` set,
-  smooth scrolling and the remaining colour transitions switch off too.
-- **Performance.** Self-hosted variable fonts (only the subsets a page uses are downloaded), the
-  case-study modal is code-split and prefetched on hover, and GitHub data loads lazily. Local Lighthouse
-  runs on the production build scored Performance 100 (desktop) / ~94 (mobile, simulated slow 4G), and
-  100 for Accessibility, Best Practices and SEO.
-
 ## Content sources
 
-The resume is the source of truth. Project details that go beyond the resume, such as endpoint names,
-test counts, the `EXPLAIN ANALYZE` timings and the Dietbot evaluation table, come from each project's own
-README so they can be checked against the code. UPI Pulse and the retail analysis are newer than the
-resume; their write-ups come entirely from their repositories. Nothing on the site is invented. If you change a
-project, update `src/data/projects.ts` to match.
+The resumes are the source of truth. Extra detail (test counts, evaluation tables, findings) comes from
+each project's own README so it can be checked against the code. Nothing on the site is invented. If you
+change a project, update its data file to match.

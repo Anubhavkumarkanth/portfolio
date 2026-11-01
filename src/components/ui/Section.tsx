@@ -14,7 +14,7 @@ interface SectionProps {
 export function Section({ id, eyebrow, title, description, children, className }: SectionProps) {
   const headingId = `${id}-heading`
   return (
-    <section id={id} aria-labelledby={headingId} className={cn('py-20 sm:py-24', className)}>
+    <section id={id} aria-labelledby={headingId} className={cn('py-16 sm:py-20', className)}>
       <Container>
         <div className="max-w-2xl">
           {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}

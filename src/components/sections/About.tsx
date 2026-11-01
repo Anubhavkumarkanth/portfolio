@@ -3,7 +3,7 @@ import { Container, Eyebrow } from '../ui/primitives'
 
 export function About() {
   return (
-    <section id="about" aria-labelledby="about-heading" className="border-y border-line bg-surface py-20 sm:py-24">
+    <section id="about" aria-labelledby="about-heading" className="border-y border-line bg-surface py-16 sm:py-20">
       <Container className="grid grid-cols-1 gap-8 lg:grid-cols-[13rem_1fr] lg:gap-12">
         <div>
           <Eyebrow>About</Eyebrow>

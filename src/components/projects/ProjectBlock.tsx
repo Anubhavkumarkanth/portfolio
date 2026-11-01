@@ -6,8 +6,10 @@ import { GitHubIcon } from '../ui/BrandIcons'
 import { Tag } from '../ui/primitives'
 
 export function Shot({ shot, priority = false }: { shot: Project['shots'][number]; priority?: boolean }) {
+  // Tall screenshots are capped so they aren't blown up past their real size.
+  const portrait = shot.height > shot.width
   return (
-    <figure>
+    <figure style={portrait ? { maxWidth: Math.min(shot.width, 520) } : undefined}>
       <div className="overflow-hidden rounded-xl border border-line bg-surface shadow-soft">
         <img
           src={withBase(shot.src)}

@@ -12,7 +12,7 @@ const iconLink = 'inline-flex items-center gap-2 text-sm text-fg-muted transitio
 /** Name, role, one big line, the resume, and a small visual on the right. */
 export function Hero({ persona, aside, workLabel }: { persona: Persona; aside: ReactNode; workLabel: string }) {
   return (
-    <section id="home" aria-labelledby="home-heading" className="pt-32 pb-16 sm:pt-40 sm:pb-24">
+    <section id="home" aria-labelledby="home-heading" className="pt-28 pb-6 sm:pt-36 sm:pb-8">
       <Container className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.25fr_1fr] lg:gap-16">
         <div className="animate-rise">
           <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-fg-muted">

@@ -84,7 +84,7 @@ export function Navbar({ links, resume, crossLink }: NavbarProps) {
                 href={withBase(resume.href)}
                 target="_blank"
                 rel="noopener"
-                className={buttonClasses({ variant: 'primary', size: 'sm', className: 'hidden sm:inline-flex' })}
+                className={buttonClasses({ variant: 'primary', size: 'sm' })}
               >
                 <Download className="size-3.5" aria-hidden="true" />
                 Resume

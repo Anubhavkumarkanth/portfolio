@@ -41,14 +41,14 @@ export const projects: Project[] = [
         alt: 'Line chart of UPI technical declines across the top 50 banks from 2022 to 2026, falling from above 1% to about 0.26%, with a dashed 1% line',
         caption: 'Bank-side failures, weighted by each bank’s payments. The dashed line is the 1% target.',
         width: 1600,
-        height: 794,
+        height: 842,
       },
       {
         src: 'projects/upi-pulse-scoreboard.webp',
         alt: 'Bank scoreboard table listing State Bank of India, Bank of Baroda, HDFC Bank and others with technical and business decline rates and 12-month sparklines',
         caption: 'The scoreboard: every top-50 bank, its rates this month and a 12-month mini-chart.',
         width: 1600,
-        height: 952,
+        height: 991,
       },
     ],
     links: {
@@ -257,10 +257,10 @@ export const projects: Project[] = [
     shots: [
       {
         src: 'projects/sip-dashboard.webp',
-        alt: 'SIP Friction dashboard for ₹10,000 a month over 20 years with a pause from month 12 to 24: ideal wealth ₹99.91L, actual ₹87.95L, compounding loss ₹11.96L, discipline score 90.65, and a chart of ideal and actual growth',
+        alt: 'SIP Friction results for ₹10,000 a month over 20 years with a pause from month 12 to 24: ideal wealth ₹99.91L, actual ₹87.95L, compounding loss ₹11.96L, total invested ₹22.70L, discipline score 90.65, compliance 94.6%, and a chart of ideal and actual growth',
         caption: 'A 20-year plan with a 13-month pause: ₹11.96 lakh lost to compounding, and a discipline score of 90.65 out of 100.',
-        width: 1600,
-        height: 1271,
+        width: 1184,
+        height: 1594,
       },
     ],
     links: {
