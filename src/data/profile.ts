@@ -17,11 +17,11 @@ export const profile: Profile = {
   email: 'anubhavkumarkanth123@gmail.com',
   phone: '+91 72238 27840',
   phoneHref: '+917223827840',
-  // The PDF keeps its original file name so links already shared keep working.
+  // Older resume file names redirect to this one in vercel.json.
   resume: {
     label: 'Data Analyst Resume',
     shortLabel: 'Resume',
-    href: 'resume/Anubhav-Kumar-Python-Data-Analysis-Resume.pdf',
+    href: 'resume/Anubhav-Kumar-Data-Analyst-Resume.pdf',
     fileName: 'Anubhav_Kumar_Data_Analyst_Resume.pdf',
   },
   socials: {
