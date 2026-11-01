@@ -5,11 +5,10 @@ import type { Project } from '../../data/types'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
 import { useScrollLock } from '../../hooks/useScrollLock'
 import { buttonClasses } from '../../lib/button'
-import { cn } from '../../lib/utils'
+import { cn, withBase } from '../../lib/utils'
 import { GitHubIcon } from '../ui/BrandIcons'
 import { Tag } from '../ui/primitives'
 import { EvaluationTable } from './previews/Previews'
-import { OmsWalkthrough } from './previews/OmsWalkthrough'
 import { SqlBlock } from './previews/SqlBlock'
 import { SipPlayground } from './previews/SipPlayground'
 
@@ -91,9 +90,7 @@ export default function ProjectModal({ project, onClose, onSwitch }: ProjectModa
                     Live demo
                     <ArrowUpRight className="size-3.5" aria-hidden="true" />
                   </a>
-                ) : (
-                  <Tag tone="muted">Live demo · not deployed yet</Tag>
-                )}
+                ) : null}
               </div>
             </div>
 
@@ -165,9 +162,21 @@ export default function ProjectModal({ project, onClose, onSwitch }: ProjectModa
                 </div>
               </Block>
             )}
-            {project.preview === 'oms' && (
-              <Block title="Walk through the transaction">
-                <OmsWalkthrough />
+            {project.screenshots && (
+              <Block title="What it looks like">
+                <div className="grid grid-cols-1 gap-4">
+                  {project.screenshots.map((shot) => (
+                    <figure key={shot.src}>
+                      <img
+                        src={withBase(shot.src)}
+                        alt={shot.alt}
+                        loading="lazy"
+                        className="w-full rounded-md border border-line"
+                      />
+                      <figcaption className="mt-2 text-xs text-fg-subtle">{shot.caption}</figcaption>
+                    </figure>
+                  ))}
+                </div>
               </Block>
             )}
             {project.evaluation && (

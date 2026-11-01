@@ -1,9 +1,9 @@
 # Anubhav Kumar — Portfolio
 
-Personal portfolio for Anubhav Kumar, a Python developer and data analyst working across
-Python, SQL, APIs and data analytics. It's a single-page React app with a plain, mostly static dark
-design: case-study modals (a live SIP simulator, a model-evaluation table, featured SQL and a transaction
-walkthrough) and a GitHub section that loads live data.
+Personal portfolio for Anubhav Kumar, a data analyst working in SQL, Python and Power BI. It's a
+single-page React app with a plain, mostly static dark design: case-study modals with screenshots and
+live-demo links (UPI Pulse, retail cancellations, Dietbot and a SIP simulator) and a GitHub section that
+loads live data.
 
 **Stack:** React 19 · TypeScript · Vite 8 · Tailwind CSS 4 · Lucide icons
 
@@ -38,7 +38,7 @@ a component to update the site.
 | Name, role, intro, email, location, About text       | `src/data/profile.ts`                                   |
 | GitHub / LinkedIn links                              | `src/data/profile.ts` → `socials`                       |
 | Page title, meta description, keywords               | `src/data/profile.ts` → `seo`                           |
-| Resume PDFs (two)                                    | Replace the files in `public/resume/` (see below)       |
+| Resume PDF                                           | Replace the file in `public/resume/` (see below)        |
 | Projects, GitHub links, live demo links              | `src/data/projects.ts`                                  |
 | Skills and their groupings                           | `src/data/skills.ts`                                    |
 | Internship / jobs                                    | `src/data/experience.ts`                                |
@@ -51,23 +51,22 @@ a component to update the site.
 
 ### Common tasks
 
-**Update the resumes.** There are two, in `public/resume/`: `Anubhav-Kumar-Python-Software-Developer-Resume.pdf`
-(the main one, `profile.resume`) and `Anubhav-Kumar-Python-Data-Analysis-Resume.pdf` (`dataResume`). Replace the PDF,
-or change `href`, `fileName` and the button labels in `src/data/profile.ts`. `vercel.json` redirects the two older file
-names (`Anubhav-Kumar-Resume.pdf` and `Anubhav-Kumar-Data-Analyst-Data-Scientist-Resume.pdf`) to the new ones, so links
-made before the change still work.
+**Update the resume.** There is one, in `public/resume/`: `Anubhav-Kumar-Python-Data-Analysis-Resume.pdf`
+(`profile.resume`). Replace the PDF, or change `href`, `fileName` and the button label in
+`src/data/profile.ts`. `vercel.json` redirects older resume file names to it, so links made before the
+change still work.
 
 **Change the email, GitHub or LinkedIn.** Edit `profile.email` and `profile.socials` in
 `src/data/profile.ts`. The GitHub section reads its username from `socials.github.handle`, and the page
 `<title>`, meta tags and structured data are generated from the same file at build time.
 
 **Add a live demo link.** In `src/data/projects.ts`, set `links.demo` on the project. Until it's set, the
-UI shows "Live demo · not deployed yet".
+case study shows no demo button.
 
 **Add a project.** Add an object to the `projects` array in `src/data/projects.ts`. Every field is typed
-(see `src/data/types.ts`), so the editor will tell you what's missing. The card preview is chosen by
-`preview` (`sip`, `dietbot` or `oms`). Optional `sql` and `queries` fields show a featured SQL snippet
-and a query list. Add a new preview component in `src/components/projects/previews/` for anything else.
+(see `src/data/types.ts`), so the editor will tell you what's missing. Put screenshots in
+`public/projects/` and list them in `screenshots`. The interactive previews are chosen by `preview` (`sip` or
+`dietbot`); optional `sql` and `queries` fields show a featured SQL snippet and a query list.
 
 **Add a certificate link.** Put a file in `public/certificates/` (or use a full URL) and add it to that
 certification's `links` array. Cards without links just don't show a button.
@@ -195,6 +194,6 @@ portfolio/
 
 The resume is the source of truth. Project details that go beyond the resume, such as endpoint names,
 test counts, the `EXPLAIN ANALYZE` timings and the Dietbot evaluation table, come from each project's own
-README so they can be checked against the code. The Order Management System is not on the resume; its
-write-up comes entirely from its repository. Nothing on the site is invented. If you change a
+README so they can be checked against the code. UPI Pulse and the retail analysis are newer than the
+resume; their write-ups come entirely from their repositories. Nothing on the site is invented. If you change a
 project, update `src/data/projects.ts` to match.

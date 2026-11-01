@@ -7,7 +7,7 @@ export function Projects() {
     <Section
       id="projects"
       title="Projects"
-      description="A few things I built while learning. Open any one to read more about how it works. None of them are deployed, but the code is on GitHub."
+      description="Data analysis projects on real public data. Each one has a live demo and its code on GitHub; open a card to read how it was done."
     >
       {projects.length === 0 ? (
         <p className="rounded-md border border-dashed border-line p-10 text-center text-fg-muted">

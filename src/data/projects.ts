@@ -1,11 +1,212 @@
 import type { Project } from './types'
 
-// Resume bullets are the primary source. Extra technical detail (endpoints,
-// test counts, index timings, evaluation tables) comes from each repository's
-// README so it can be checked against the code. The Order Management System
-// isn't on the resume; everything about it comes from its repository.
+// Resume bullets are the primary source. Extra technical detail (test counts,
+// evaluation tables, findings) comes from each repository's README so it can
+// be checked against the code. UPI Pulse and the retail analysis are newer than
+// the resume; everything about them comes from their repositories.
 
 export const projects: Project[] = [
+  {
+    slug: 'upi-pulse',
+    name: 'UPI Pulse',
+    kind: 'SQL · Python · DuckDB · pytest',
+    tagline: 'How often UPI payments fail at India’s 50 busiest banks, month by month, from NPCI’s own data.',
+    summary:
+      'I turned NPCI’s monthly “Top 50 Member Performance” tables (January 2022 to September 2026) into one clean bank-by-month table, tested it before publishing anything, and built a static site on top: trend charts, a scoreboard of every bank against the 1% technical-decline line, and alerts for unusual months. Technical declines fell every year, from about 1.45% of payments in 2022 to 0.26% so far in 2026, while business declines doubled.',
+    problem:
+      'A failed UPI payment is one of two kinds. A technical decline means the bank’s or the network’s systems failed. A business decline is a normal “no”, such as a wrong PIN or a daily limit. A single failure rate hides which is which, and RBI has reportedly asked NPCI to keep technical declines under 1% at each bank, yet there was no single view of who meets that line over time.',
+    howItWorks: [
+      'NPCI’s monthly API responses are saved unchanged in the repository.',
+      'A parser gives each bank one name (NPCI’s files use 78 names for 62 banks) and builds one bank-by-month table in DuckDB and CSV.',
+      'Data checks run first: percentages stay between 0 and 100, approved + business + technical add up to 100%, every month has exactly 50 banks, and spot checks match NPCI’s published values.',
+      'The analysis weights rates by each bank’s payments and flags unusual months against each bank’s own history.',
+      'The static site is built and published to GitHub Pages only if every check passes.',
+    ],
+    architecture: [
+      { title: 'NPCI files', detail: 'Monthly Top 50 tables · Jan 2022 – Sep 2026 · saved unchanged' },
+      { title: 'Parse & clean', detail: '78 bank names → 62 banks · one bank × month table' },
+      { title: 'Data checks', detail: 'pytest · totals, coverage, spot checks · run before the build' },
+      { title: 'Static site', detail: 'Charts, scoreboard, alerts · GitHub Pages' },
+    ],
+    features: [
+      'Headline numbers for the latest month',
+      'Trend charts of technical and business declines, with the 1% line',
+      'A sortable scoreboard of all 50 banks with a 12-month mini-chart',
+      'Compare up to three banks side by side',
+      'Unusual-month alerts for banks whose technical declines jump above their own usual level',
+      'A shop calculator that estimates failed payments from your volume and banks',
+      'A question box that turns a question into a SQL query and shows the query next to the answer',
+      'A table view for every chart; works on phones and in dark mode',
+    ],
+    engineering: [
+      {
+        title: 'Found a real error in NPCI’s data',
+        detail:
+          'In August 2022 NPCI published every bank’s debit reversal success rate without the decimal point (“9123.00%” for 91.23%). The data checks caught it; the pipeline corrects that month and keeps the raw file unchanged.',
+      },
+      {
+        title: 'One name per bank',
+        detail:
+          'NPCI names the same bank differently over time. Even after ignoring capitals and “Ltd”, 78 names belong to 62 banks. Two pairs that look alike stay separate because both names appear in the same month.',
+      },
+      {
+        title: 'Alerts built on plain statistics',
+        detail:
+          'A month is flagged when a bank’s technical declines are at least 1 point above its own 12-month median and at least 5 robust standard deviations above it. About 3% of bank-months are flagged; on simulated stable banks the false-alarm rate is 1.15%.',
+      },
+      {
+        title: 'Rates weighted by payments',
+        detail: 'Rates across banks are weighted by each bank’s number of payments, so they show what a typical payer experiences.',
+      },
+      {
+        title: 'Checks before the build',
+        detail:
+          'A bad or changed NPCI file never reaches the site, because the data tests run before it is built and run again on every push.',
+      },
+      {
+        title: 'AI kept on a short leash',
+        detail:
+          'A model writes a short monthly summary, but code first checks that every number in it appears in the computed figures. On 30 test questions the question box scored 30 of 30; a red-team set of 16 questions it must refuse scored 14 of 16, and that result is published too.',
+      },
+    ],
+    contribution: [
+      'Collected and parsed NPCI’s monthly tables into a single, tested bank-by-month dataset.',
+      'Wrote the data checks and found and corrected an error in NPCI’s August 2022 file.',
+      'Built the analysis: payment-weighted rates, the 1% line, each bank’s share of the rise in business declines, and the unusual-month alerts.',
+      'Built and published the site, with the tests as a gate on every deploy.',
+    ],
+    limitations: [
+      'The data is monthly totals per bank, so the shop calculator is an estimate from averages.',
+      'The 1% line comes from press reports of RBI’s request to NPCI. It is not a published rule.',
+      'For one month of receiving-bank data, NPCI’s own file lost its decimal detail, so a matching copy from Time Series of India is used and approval and reversal figures are not available for that month.',
+      'The AI summary restates the month’s figures and does not explain causes. The question box can misread a question, which is why the query is always shown.',
+    ],
+    stack: [
+      { group: 'Data', items: ['Python', 'SQL', 'DuckDB', 'CSV'] },
+      { group: 'Quality', items: ['pytest', 'GitHub Actions'] },
+      { group: 'Publishing', items: ['GitHub Pages', 'FastAPI', 'Render'] },
+    ],
+    tags: ['SQL', 'Python', 'DuckDB', 'Data validation', 'pytest'],
+    highlights: [
+      'Technical declines fell from about 1.45% of payments (2022) to 0.26% (2026)',
+      '45 of the top 50 banks were under the 1% line in September 2026, up from 24',
+      'Data checks caught a decimal-point error in NPCI’s own August 2022 file',
+    ],
+    links: {
+      github: 'https://github.com/Anubhavkumarkanth/upi-pulse',
+      demo: 'https://anubhavkumarkanth.github.io/upi-pulse/',
+    },
+    screenshots: [
+      {
+        src: 'projects/upi-pulse.png',
+        alt: 'The UPI Pulse site: headline numbers and trend charts of technical and business declines',
+        caption: 'The live site: latest-month numbers and the decline trends.',
+      },
+    ],
+  },
+  {
+    slug: 'retail-cancellation-leakage',
+    name: 'Retail Cancellation Leakage',
+    kind: 'SQL · Python · Power BI · Excel',
+    tagline: 'Separating quick reversals from real cancellations in 1.07 million retail sales rows.',
+    summary:
+      'An SQL and Python analysis of two years of real sales from a UK online gift retailer (UCI Online Retail II). The headline cancellation rate is 3.65% of sales, but 49.5% of the cancelled value is orders reversed within 24 hours (same customer, same product, same quantity). Counted separately, the rate falls to 1.88%, and two single orders explain the two biggest monthly spikes. The result is published as a live dashboard, an Excel summary and a four-page Power BI report.',
+    problem:
+      'How much sales value is lost to cancellations, where does it come from, and how much of it can the business actually do something about? One combined number makes the problem look about twice as big as it is and sends the business after the wrong thing.',
+    howItWorks: [
+      'The original UCI workbook is downloaded and checked against a fixed SHA-256 fingerprint, then copied unchanged into SQLite.',
+      'SQL cleaning rules remove the sheet overlap, zero-price adjustments and non-product rows such as postage and bank charges. Every rule comes from first examining the raw table.',
+      'A second SQL step labels each cancellation as a same-day reversal or “other”.',
+      'Metrics queries (CTEs and window functions) break the results down by month, country, product and customer.',
+      'Python adds bootstrap confidence ranges, then builds the dashboard, the Excel summary and the CSV outputs.',
+    ],
+    architecture: [
+      { title: 'Raw data', detail: 'UCI Online Retail II · 1.07 million rows · SHA-256 checked' },
+      { title: 'SQL', detail: 'Clean → classify reversals → metrics' },
+      { title: 'Python', detail: 'Bootstrap ranges · concentration · outputs' },
+      { title: 'Reports', detail: 'Plotly dashboard · Excel · Power BI · GitHub Pages' },
+    ],
+    features: [
+      'Headline and adjusted cancellation rates, month by month',
+      'Cancelled value by product, with the few products that drive most of it',
+      'Country and customer breakdowns, with confidence ranges',
+      'Interactive HTML dashboard published on GitHub Pages',
+      'Excel summary workbook and CSV results for every query',
+      'Four-page Power BI report on a star schema, with DAX measures',
+    ],
+    engineering: [
+      {
+        title: 'A definition that is tested at its boundary',
+        detail:
+          'A same-day reversal is the same customer, product and opposite quantity within 24 hours. Tests cover 23 h 59 min and exactly 24 h (counted) and 24 h 1 min (not counted), plus a quantity mismatch and a cancellation before the sale.',
+      },
+      {
+        title: 'Every cleaning rule is accounted for',
+        detail:
+          'Of the 1.07 million raw rows, 22,523 duplicates, 6,029 zero-price rows and 5,901 non-product rows are dropped, each for a stated reason, and a test confirms every raw row is accounted for.',
+      },
+      {
+        title: 'Spikes traced to single orders',
+        detail:
+          'Two orders (80,995 and 74,215 units of one product each, placed and cancelled within 16 minutes) make up 34% of all cancelled value. Without reversals, December 2011 drops from 28.3% to 1.15%.',
+      },
+      {
+        title: 'Resampling customers, not rows',
+        detail:
+          'Confidence ranges come from a bootstrap that resamples whole customers 2,000 times, because one customer’s lines are not independent of each other. The seed is fixed, so every run gives the same numbers.',
+      },
+      {
+        title: 'Country gaps that do not hold up',
+        detail:
+          'Spain’s 12.0% and France’s 5.3% each come down to one customer (94.5% and 78.2% of that country’s cancelled value). Without that customer they are 0.8% and 1.2%, so the write-up recommends no country-wide action.',
+      },
+      {
+        title: 'The Power BI report reconciles to the pipeline',
+        detail:
+          'With no filters, the report’s cards match the pipeline exactly: £19,699,785 gross sales, £719,656 cancelled, 3.65% headline rate and 1.88% adjusted rate. 22 automated tests run before every deploy.',
+      },
+    ],
+    contribution: [
+      'Defined the reversal rule and wrote the SQL for cleaning, classification and metrics.',
+      'Wrote the Python analysis: bootstrap ranges, concentration shares and leave-one-customer-out checks.',
+      'Built the Plotly dashboard, the Excel summary and the Power BI star schema and DAX measures.',
+      'Wrote the findings and the five recommendations, each tied to the evidence behind it.',
+    ],
+    limitations: [
+      'The data has no cancellation reasons and no link back to the original invoice, so the reversal rule is a rule of thumb.',
+      '22% of sale lines have no customer ID, so customer-level figures cover identified customers only.',
+      'One retailer from December 2009 to December 2011, in pounds not adjusted for inflation. Cancelled value is the invoice price, not profit.',
+      'The Power BI file is attached to a GitHub release because it is 17 MB.',
+    ],
+    stack: [
+      { group: 'SQL', items: ['SQLite', 'CTEs', 'Window functions'] },
+      { group: 'Python', items: ['Pandas', 'Plotly', 'Bootstrap statistics'] },
+      { group: 'BI & reporting', items: ['Power BI', 'DAX', 'Star schema', 'Excel'] },
+      { group: 'Quality', items: ['pytest', 'GitHub Actions'] },
+    ],
+    tags: ['SQL', 'Python', 'Power BI', 'Excel', 'Plotly'],
+    highlights: [
+      'Cancellation rate falls from 3.65% to 1.88% once quick reversals are counted separately',
+      'Two single orders explain the two biggest monthly spikes',
+      '22 automated tests; the live dashboard is only published if they pass',
+    ],
+    links: {
+      github: 'https://github.com/Anubhavkumarkanth/retail-cancellation-leakage',
+      demo: 'https://anubhavkumarkanth.github.io/retail-cancellation-leakage/',
+    },
+    screenshots: [
+      {
+        src: 'projects/retail-dashboard.png',
+        alt: 'The retail cancellation dashboard with headline and adjusted cancellation rates by month',
+        caption: 'The published dashboard.',
+      },
+      {
+        src: 'projects/retail-powerbi.png',
+        alt: 'The Power BI overview page showing gross sales, cancelled value and the headline and adjusted rates',
+        caption: 'The Power BI overview page, which matches the pipeline’s figures exactly.',
+      },
+    ],
+  },
   {
     slug: 'sip-friction-analyzer',
     name: 'SIP Friction Analyzer',
@@ -95,6 +296,7 @@ export const projects: Project[] = [
     ],
     links: {
       github: 'https://github.com/Anubhavkumarkanth/sip-friction-analyzer',
+      demo: 'https://sip-friction-analyzer.onrender.com',
     },
     preview: 'sip',
   },
@@ -202,124 +404,6 @@ export const projects: Project[] = [
         { model: 'Random Forest', mae: 632.9, r2: 0.1298, best: true },
       ],
     },
-  },
-  {
-    slug: 'order-management-system',
-    name: 'Order Management System',
-    kind: 'Java · SQL · PostgreSQL',
-    tagline: 'A console order system in Core Java, running on PostgreSQL over plain JDBC.',
-    summary:
-      'A seven-table PostgreSQL database in 3NF with six analytical reporting queries (CTEs, window functions, correlated subqueries) and an index evaluated with EXPLAIN ANALYZE. A small Core Java console app drives it over plain JDBC with no ORM, so every query is visible SQL. Placing an order locks the product rows and writes the order, line items, stock change, inventory log and payment in one transaction: all of it commits, or none of it does.',
-    problem:
-      'An order touches several tables at once. If the app crashes after deducting stock but before recording the payment, the data is quietly wrong. And two customers buying the last unit at the same moment can both read “stock = 1” and both succeed. This project solves both explicitly in SQL, with no framework in between.',
-    howItWorks: [
-      'A console menu drives customers, products, orders and reports. An OrderService validates input and orchestrates each operation.',
-      'Placing an order turns off auto-commit, sorts the cart’s product ids, and locks each product row with SELECT … FOR UPDATE, checking stock before anything is written.',
-      'If any line is short, an InsufficientStockException is thrown and the whole transaction rolls back.',
-      'Otherwise it inserts the order (reading back the generated key), batches the line items, stock decrements and inventory-log rows, records the payment, and commits.',
-      'Cancelling an order locks the order row, restores stock and logs the movement, also in one transaction.',
-    ],
-    architecture: [
-      { title: 'Console UI', detail: 'Main.java menu · customers, products, orders, reports' },
-      { title: 'Service layer', detail: 'OrderService · validation and orchestration' },
-      { title: 'DAO layer', detail: 'Dao<T> · CustomerDao · ProductDao · OrderDao · ReportDao' },
-      { title: 'PostgreSQL', detail: '7 tables in 3NF · CHECK / UNIQUE / FK constraints' },
-    ],
-    features: [
-      'Add, list and search customers and products',
-      'Low-stock report for inventory',
-      'Place an order: order, line items, stock, inventory log and payment in one transaction',
-      'Cancel an order: stock restored and the movement logged, transactionally',
-      'Six reporting queries, from revenue by category to top products per category',
-      'Composite index on customer orders, evaluated with EXPLAIN (ANALYZE, BUFFERS)',
-    ],
-    engineering: [
-      {
-        title: 'Reports that answer real questions',
-        detail:
-          'Top 3 products per category needs RANK() in its own CTE, because WHERE runs before window functions are computed. Revenue by category uses COUNT(DISTINCT order_id) so an order with three line items isn’t counted three times.',
-      },
-      {
-        title: 'Row locks that prevent overselling',
-        detail:
-          'SELECT … FOR UPDATE on each product row stops two buyers of the last unit from both reading stock = 1 and both succeeding. Locks are taken in ascending product-id order, so two orders sharing products acquire them in the same sequence.',
-      },
-      {
-        title: 'All-or-nothing writes',
-        detail:
-          'Auto-commit is off for the whole order. Any exception (SQL, runtime or insufficient stock) triggers rollback(), so an order can never survive with stock deducted and no payment.',
-      },
-      {
-        title: 'Price snapshot, not duplication',
-        detail:
-          'order_items.unit_price records what the customer was actually charged; products.price is the current catalogue price. Reprinting an old invoice must not change its total.',
-      },
-      {
-        title: 'Cascade only where it belongs',
-        detail:
-          'ON DELETE CASCADE is used on order_items and nowhere else. A line item means nothing without its order, but a customer must never be deletable out from under their orders.',
-      },
-      {
-        title: 'Constraints in the database',
-        detail:
-          'price > 0, stock_quantity >= 0, quantity > 0, status IN (PLACED, CANCELLED), UNIQUE (order_id, product_id). The rules hold even if application code gets them wrong.',
-      },
-    ],
-    contribution: [
-      'Designed the seven-table PostgreSQL schema in 3NF, with constraints enforced in the database.',
-      'Wrote six reporting queries (JOIN, GROUP BY / HAVING, correlated subquery, CTEs, window functions) and evaluated a composite index with EXPLAIN ANALYZE.',
-      'Wrote the order placement and cancellation transactions in plain JDBC, with row-level locking and full rollback on failure.',
-      'Structured the application into model, DAO, service and exception layers, and added tests for the commit and rollback paths.',
-    ],
-    limitations: [
-      'Console interface only: no REST API or web front end.',
-      'No connection pool; a new connection is opened per operation.',
-      'Seed data is generated for the reports and index exercise, not real order activity.',
-    ],
-    stack: [
-      { group: 'Database', items: ['PostgreSQL', 'SQL', 'CTEs', 'Window functions', 'EXPLAIN ANALYZE'] },
-      { group: 'Data access', items: ['JDBC', 'PreparedStatement', 'Batch updates'] },
-      { group: 'Application', items: ['Java 21', 'Maven', 'JUnit 5'] },
-    ],
-    sql: {
-      caption: 'Query 5 of 6 from sql/03_reports.sql, condensed. The first CTE sums revenue per product.',
-      code: `WITH product_revenue AS (
-  -- … revenue per product:
-  --   4-table JOIN, GROUP BY, SUM
-),
-ranked AS (
-  SELECT category, sku,
-         product, revenue,
-    RANK() OVER (
-      PARTITION BY category
-      ORDER BY revenue DESC
-    ) AS rank_in_category
-  FROM product_revenue
-)
-SELECT category, rank_in_category,
-       sku, product, revenue
-FROM ranked
-WHERE rank_in_category <= 3
-ORDER BY category, rank_in_category;`,
-    },
-    queries: [
-      { title: 'Revenue by category', concepts: 'Multi-table JOIN, GROUP BY, SUM, COUNT(DISTINCT)' },
-      { title: 'Customers with more than 3 orders', concepts: 'GROUP BY + HAVING' },
-      { title: 'Customers who have never ordered', concepts: 'LEFT JOIN … IS NULL' },
-      { title: 'Products above their category average', concepts: 'Correlated subquery' },
-      { title: 'Top 3 products per category', concepts: 'CTE + RANK() OVER (PARTITION BY …)' },
-      { title: 'Monthly revenue by order size', concepts: 'CTE + CASE' },
-    ],
-    tags: ['Java', 'JDBC', 'PostgreSQL', 'SQL', 'Transactions'],
-    highlights: [
-      'Seven tables in 3NF, with the constraints kept in the database',
-      'Orders written in a single transaction, with row locks and rollback',
-      'Six reporting queries using CTEs, window functions and subqueries',
-    ],
-    links: {
-      github: 'https://github.com/Anubhavkumarkanth/order-management-system',
-    },
-    preview: 'oms',
   },
 ]
 

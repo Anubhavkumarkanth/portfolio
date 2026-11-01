@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Check, CircleAlert, Copy, Download, LoaderCircle, Mail, MapPin, Phone, Send } from 'lucide-react'
 import { site } from '../../config/site'
-import { dataResume, profile } from '../../data/profile'
+import { profile } from '../../data/profile'
 import { buttonClasses } from '../../lib/button'
 import { cn, withBase } from '../../lib/utils'
 import { GitHubIcon, LinkedInIcon } from '../ui/BrandIcons'
@@ -174,14 +174,6 @@ export function Contact() {
             >
               <Download className="size-4" aria-hidden="true" />
               {profile.resume.label} (PDF)
-            </a>
-            <a
-              href={withBase(dataResume.href)}
-              download={dataResume.fileName}
-              className={buttonClasses({ variant: 'secondary', className: 'w-full sm:w-auto' })}
-            >
-              <Download className="size-4" aria-hidden="true" />
-              {dataResume.label} (PDF)
             </a>
           </div>
         </div>
