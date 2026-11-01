@@ -51,7 +51,7 @@ a component to update the site.
 
 ### Common tasks
 
-**Update the resume.** There is one, in `public/resume/`: `Anubhav-Kumar-Python-Data-Analysis-Resume.pdf`
+**Update the resume.** There is one, in `public/resume/`: `Anubhav-Kumar-Data-Analyst-Resume.pdf`
 (`profile.resume`). Replace the PDF, or change `href`, `fileName` and the button label in
 `src/data/profile.ts`. `vercel.json` redirects older resume file names to it, so links made before the
 change still work.
