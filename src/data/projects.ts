@@ -394,6 +394,7 @@ export const projects: Project[] = [
     ],
     links: {
       github: 'https://github.com/Anubhavkumarkanth/Dietbot_For_Athletes',
+      demo: 'https://dietbot-for-athletes.onrender.com',
     },
     preview: 'dietbot',
     evaluation: {
