@@ -3,47 +3,48 @@ import { cn } from '../../../lib/utils'
 
 const formatR2 = (r2: number) => r2.toFixed(3).replace('-', '−')
 
-export function EvaluationTable({ evaluation, size = 'sm' }: { evaluation: NonNullable<Project['evaluation']>; size?: 'sm' | 'lg' }) {
-  const maxR2 = Math.max(...evaluation.rows.map((r) => r.r2), 0.01)
+/** Average error per model, as bars: shorter is better. */
+export function EvaluationTable({ evaluation }: { evaluation: NonNullable<Project['evaluation']> }) {
+  const maxMae = Math.max(...evaluation.rows.map((r) => r.mae))
   return (
     <div>
-      <table className={cn('w-full border-separate border-spacing-0 text-left', size === 'lg' ? 'text-sm' : 'text-[12.5px]')}>
+      <table className="w-full border-separate border-spacing-0 text-left text-sm">
         <caption className="sr-only">{evaluation.caption}</caption>
         <thead>
           <tr className="text-xs text-fg-subtle">
             <th scope="col" className="pb-2 font-normal">Model</th>
-            <th scope="col" className="pb-2 text-right font-normal">MAE (kcal)</th>
-            <th scope="col" className="w-[42%] pb-2 pl-4 font-normal">R²</th>
+            <th scope="col" className="w-[45%] pb-2 font-normal">Average error (kcal)</th>
+            <th scope="col" className="pb-2 text-right font-normal">R²</th>
           </tr>
         </thead>
         <tbody>
           {evaluation.rows.map((row) => (
             <tr key={row.model}>
-              <th scope="row" className={cn('border-t border-line py-2.5 pr-2 font-normal', row.best ? 'text-fg' : 'text-fg-muted')}>
+              <th scope="row" className={cn('border-t border-line py-3 pr-3 font-normal', row.best ? 'text-fg' : 'text-fg-muted')}>
                 {row.model}
-                {row.best && <span className="ml-2 text-xs text-fg-subtle">(kept)</span>}
+                {row.best && <span className="ml-1.5 text-xs text-accent">kept</span>}
               </th>
-              <td className={cn('border-t border-line py-2.5 text-right font-mono tabular-nums', row.best ? 'text-fg' : 'text-fg-muted')}>
-                {row.mae.toFixed(1)}
-              </td>
-              <td className="border-t border-line py-2.5 pl-4">
+              <td className="border-t border-line py-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/[0.06]">
+                  <div className="h-2 flex-1 overflow-hidden rounded-full bg-sunken">
                     <div
-                      className={cn('h-full rounded-full', row.best ? 'bg-accent' : 'bg-white/30')}
-                      style={{ width: `${(Math.max(0, row.r2) / maxR2) * 100}%` }}
+                      className={cn('h-full rounded-full', row.best ? 'bg-accent' : 'bg-fg-subtle/40')}
+                      style={{ width: `${(row.mae / maxMae) * 100}%` }}
                     />
                   </div>
-                  <span className={cn('w-12 text-right font-mono tabular-nums', row.best ? 'text-fg' : 'text-fg-muted')}>
-                    {formatR2(row.r2)}
-                  </span>
+                  <span className={cn('w-12 text-right tabular-nums', row.best ? 'text-fg' : 'text-fg-muted')}>{row.mae.toFixed(1)}</span>
                 </div>
+              </td>
+              <td className={cn('border-t border-line py-3 pl-3 text-right tabular-nums', row.best ? 'text-fg' : 'text-fg-muted')}>
+                {formatR2(row.r2)}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <p className="mt-3 text-[11px] leading-relaxed text-fg-subtle">{evaluation.caption}. Lower MAE and higher R² are better.</p>
+      <p className="mt-4 text-xs leading-relaxed text-fg-subtle">
+        {evaluation.caption}. Lower error is better. R² is the share of the variation the model explains (1 would be perfect).
+      </p>
     </div>
   )
 }

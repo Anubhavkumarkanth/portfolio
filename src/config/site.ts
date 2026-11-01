@@ -1,5 +1,3 @@
-import { profile } from '../data/profile'
-
 // Site-level settings. Values that differ per deployment come from .env
 // (see .env.example); everything else is edited here.
 
@@ -7,37 +5,19 @@ export const site = {
   url: (import.meta.env.VITE_SITE_URL ?? '').replace(/\/+$/, ''),
   /** Contact form endpoint. Empty → the form falls back to the visitor's email app. */
   contactEndpoint: import.meta.env.VITE_CONTACT_ENDPOINT ?? '',
-  github: {
-    username: profile.socials.github.handle,
-    /** Repos listed first, in this order. The rest are the most recently pushed. */
-    featuredRepos: ['upi-pulse', 'retail-cancellation-leakage', 'Dietbot_For_Athletes', 'sip-friction-analyzer'],
-    repoLimit: 6,
-    /** Contribution heatmap via github-contributions-api.jogruber.de (public data, no key). */
-    showContributions: true,
-  },
 }
 
-export const navItems = [
-  { id: 'home', label: 'Home' },
+export const dataNav = [
+  { id: 'work', label: 'Work' },
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'education', label: 'Education' },
-  { id: 'certifications', label: 'Certifications' },
+  { id: 'background', label: 'Background' },
   { id: 'contact', label: 'Contact' },
 ] as const
 
-/** Every section in page order — used by the scroll spy and the hero terminal. */
-export const sectionIds = [
-  'home',
-  'about',
-  'skills',
-  'experience',
-  'projects',
-  'education',
-  'certifications',
-  'focus',
-  'github',
-  'contact',
-]
+export const qaNav = [
+  { id: 'work', label: 'Project' },
+  { id: 'bugs', label: 'Bugs caught' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'contact', label: 'Contact' },
+] as const

@@ -1,4 +1,5 @@
 {
+  "cleanUrls": true,
   "redirects": [
     {
       "source": "/resume/Anubhav-Kumar-Resume.pdf",
@@ -19,6 +20,19 @@
       "source": "/resume/Anubhav-Kumar-Python-Data-Analysis-Resume.pdf",
       "destination": "/resume/Anubhav-Kumar-Data-Analyst-Resume.pdf",
       "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
     }
   ]
 }

@@ -1,11 +1,8 @@
 import { ArrowUp } from 'lucide-react'
 import { profile } from '../../data/profile'
-import { Container } from '../ui/primitives'
+import { Container, textLink } from '../ui/primitives'
 
-const footerLink = 'text-fg-muted underline decoration-fg/20 underline-offset-4 transition-colors hover:text-fg hover:decoration-fg'
-
-export function Footer() {
-  const year = new Date().getFullYear()
+export function Footer({ tagline, crossLink }: { tagline: string; crossLink?: { href: string; label: string } }) {
   const links = [
     { href: profile.socials.github.href, label: 'GitHub', external: true },
     { href: profile.socials.linkedin.href, label: 'LinkedIn', external: true },
@@ -14,31 +11,32 @@ export function Footer() {
 
   return (
     <footer className="border-t border-line">
-      <Container className="py-10">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <p className="font-medium text-fg">{profile.name}</p>
-            <p className="mt-1 text-sm text-fg-muted">{profile.tagline}</p>
-          </div>
-          <ul className="flex gap-5 text-sm">
+      <Container className="flex flex-col gap-6 py-10 text-sm sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="font-serif text-base text-fg">{profile.name}</p>
+          <p className="mt-1 text-fg-subtle">{tagline}</p>
+        </div>
+        <div className="flex flex-col gap-3 sm:items-end">
+          <ul className="flex flex-wrap gap-x-5 gap-y-2">
             {links.map((link) => (
               <li key={link.label}>
-                <a href={link.href} {...(link.external && { target: '_blank', rel: 'noreferrer' })} className={footerLink}>
+                <a href={link.href} {...(link.external && { target: '_blank', rel: 'noreferrer' })} className={textLink}>
                   {link.label}
                 </a>
               </li>
             ))}
+            <li>
+              <a href="#home" className="inline-flex items-center gap-1 text-fg-subtle transition-colors hover:text-fg">
+                Top
+                <ArrowUp className="size-3.5" aria-hidden="true" />
+              </a>
+            </li>
           </ul>
-        </div>
-
-        <div className="mt-8 flex flex-col-reverse gap-3 text-xs text-fg-subtle sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {year} {profile.name}. Built with React and Tailwind CSS.
-          </p>
-          <a href="#home" className="inline-flex items-center gap-1.5 transition-colors hover:text-fg">
-            Back to top
-            <ArrowUp className="size-3.5" aria-hidden="true" />
-          </a>
+          {crossLink && (
+            <a href={crossLink.href} className="text-fg-subtle transition-colors hover:text-accent">
+              {crossLink.label} →
+            </a>
+          )}
         </div>
       </Container>
     </footer>

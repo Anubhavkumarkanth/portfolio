@@ -1,5 +1,3 @@
-import type { LucideIcon } from 'lucide-react'
-
 export interface SocialLink {
   label: string
   href: string
@@ -12,43 +10,20 @@ export interface ResumeLink {
   href: string
   /** Name the browser saves the file under. */
   fileName: string
-  /** Full name, used on the larger buttons ("Data Analyst Resume"). */
+  /** Full name, used on the larger buttons ("Data Analyst resume"). */
   label: string
-  /** Short name for the compact navigation bar. */
-  shortLabel: string
 }
 
-export interface Profile {
-  name: string
-  initials: string
+/** Page-level copy and SEO for one audience (the main data page, or the QA page). */
+export interface Persona {
   role: string
-  /** Rendered after the role in the hero: "Software Engineer — backend, full-stack & data." */
-  specialties: string[]
-  /** 1–2 sentence introduction shown in the hero. */
+  /** The big hero line. */
+  headline: string
+  /** One or two sentences under the headline. */
   intro: string
-  /** One line used in the footer and social previews. */
-  tagline: string
-  location: string
-  availability: string
-  email: string
-  /** Display form of the phone number, e.g. "+91 72238 27840". */
-  phone: string
-  /** Same number in tel: form, digits and a leading + only. */
-  phoneHref: string
-  /** The resume (Data Analyst). */
   resume: ResumeLink
-  socials: {
-    github: SocialLink
-    linkedin: SocialLink
-  }
-  /** Roles being applied for, grouped. Shown unranked. */
-  targetRoles: { group: string; roles: string[]; note?: string }[]
-  /** Short list shown in the hero "core stack" strip. */
-  coreStack: string[]
-  about: {
-    paragraphs: string[]
-    facts: { label: string; value: string }[]
-  }
+  /** Small proof numbers under the hero. */
+  stats: Stat[]
   seo: {
     title: string
     description: string
@@ -56,123 +31,113 @@ export interface Profile {
   }
 }
 
-export interface SkillItem {
+export interface Profile {
   name: string
-  /** True when the skill appears in the internship or project work, not only in the skills list. */
-  applied?: boolean
+  location: string
+  availability: string
+  email: string
+  /** Display form of the phone number, e.g. "+91 72238 27840". */
+  phone: string
+  /** Same number in tel: form, digits and a leading + only. */
+  phoneHref: string
+  socials: {
+    github: SocialLink
+    linkedin: SocialLink
+  }
+  /** Short About paragraphs, in plain English. */
+  about: string[]
+  data: Persona
+  qa: Persona
 }
 
-export interface SkillCategory {
-  id: string
-  title: string
-  description: string
-  items: SkillItem[]
-  extra?: { label: string; items: string[] }
-  appliedIn: string[]
-  wide?: boolean
-  /** 'support' renders smaller, below the four main pillars. */
-  tier?: 'pillar' | 'support'
+export interface Stat {
+  value: string
+  label: string
 }
 
-export interface ProjectEvaluationRow {
-  model: string
-  mae: number
-  r2: number
-  best?: boolean
+export interface ToolChoice {
+  /** The tool used. */
+  pick: string
+  /** The more common option it was picked over. */
+  over: string
+  /** Why, in one plain sentence. */
+  because: string
+}
+
+export interface Shot {
+  /** Path inside /public, without a leading slash. */
+  src: string
+  alt: string
+  caption: string
+  width: number
+  height: number
 }
 
 export interface Project {
   slug: string
   name: string
-  /** One-line problem statement. */
-  tagline: string
-  kind: string
-  /** The 20-second version for recruiters. */
+  /** One catchy line that makes a recruiter read on. */
+  hook: string
+  /** Two short sentences: what it is and what it found. */
   summary: string
-  problem: string
-  howItWorks: string[]
-  architecture: { title: string; detail: string }[]
-  features: string[]
-  engineering: { title: string; detail: string }[]
-  contribution: string[]
-  contributionNote?: string
-  limitations: string[]
-  stack: { group: string; items: string[] }[]
-  /** Badges on the project card. */
-  tags: string[]
-  /** Three short bullets on the project card. */
-  highlights: string[]
-  links: {
-    github?: string
-    /** Leave undefined until the project is deployed. The UI shows "not deployed yet". */
-    demo?: string
-  }
-  /** Interactive widget for the case study. Projects without one use `screenshots`. */
-  preview?: 'sip' | 'dietbot'
-  /** Images in /public (no leading slash) shown in the case study. */
-  screenshots?: { src: string; alt: string; caption: string }[]
-  /** Optional featured SQL, shown on the card and in the case study. */
-  sql?: { caption: string; code: string }
-  /** Optional list of SQL queries shown in the case study. */
-  queries?: { title: string; concepts: string }[]
+  /** Three headline numbers. */
+  results: Stat[]
+  /** "Used X instead of Y, because…" */
+  choices: ToolChoice[]
+  tools: string[]
+  /** First one is shown on the page; the rest in the case study. */
+  shots: Shot[]
+  links: { github: string; demo?: string }
+  /** Case study: the question, in plain English. */
+  question: string
+  /** Case study: what I did, step by step. */
+  steps: string[]
+  /** Case study: what the data showed. */
+  findings: string[]
+  /** Case study: what it can't do. */
+  limits: string[]
+  /** Optional note on who did what. */
+  credit?: string
+  /** Interactive extra shown in the case study. */
+  extra?: 'sip-playground'
   evaluation?: {
     caption: string
-    rows: ProjectEvaluationRow[]
+    rows: { model: string; mae: number; r2: number; best?: boolean }[]
   }
+}
+
+export interface SkillGroup {
+  title: string
+  /** What I use it for, in plain words. */
+  plain: string
+  items: string[]
 }
 
 export interface Experience {
   company: string
   role: string
-  type: string
   /** YYYY-MM */
   start: string
   /** YYYY-MM, or "present" */
   end: string
   location: string
-  summary: string
   highlights: string[]
-  metrics: { value: string; label: string }[]
-  tech: string[]
 }
 
 export interface Education {
   degree: string
-  /** Major / branch. Hidden while null. */
-  field: string | null
-  minor?: string
+  field: string
   institution: string
-  /** Affiliating university. Hidden while null. */
-  university: string | null
+  university: string
   location: string
   graduation: string
-  status?: string
 }
 
 export interface Certification {
   name: string
   issuer: string
   date: string
-  description: string
-  skills: string[]
-  /** Paths inside /public (no leading slash) or full URLs. */
-  links: { label: string; href: string }[]
-}
-
-export type ProofTarget =
-  | { label: string; project: string }
-  | { label: string; section: string }
-
-export interface Capability {
-  title: string
-  description: string
-  icon: LucideIcon
-  proof: ProofTarget[]
-}
-
-export interface FocusArea {
-  title: string
-  description: string
-  icon: LucideIcon
-  evidence: ProofTarget[]
+  note: string
+  /** Path inside /public (no leading slash) or a full URL. */
+  href?: string
 }

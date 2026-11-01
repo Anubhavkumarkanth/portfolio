@@ -3,12 +3,11 @@ import { cn } from './utils'
 type ButtonVariant = 'primary' | 'secondary' | 'ghost'
 type ButtonSize = 'sm' | 'md' | 'icon' | 'icon-sm'
 
-// Primary and secondary are deliberately close: both are bordered, neutral
-// buttons. Primary only gets a slightly lighter fill and brighter text.
+// One filled button per view (primary), the rest outlined or bare.
 const buttonVariants: Record<ButtonVariant, string> = {
-  primary: 'border border-line-strong bg-white/[0.08] text-fg hover:bg-white/[0.12]',
-  secondary: 'border border-line-strong text-fg-muted hover:bg-white/[0.04] hover:text-fg',
-  ghost: 'text-fg-muted hover:bg-white/[0.06] hover:text-fg',
+  primary: 'bg-fg text-paper hover:bg-fg/85',
+  secondary: 'border border-line-strong bg-surface text-fg hover:border-fg-subtle',
+  ghost: 'text-fg-muted hover:bg-sunken hover:text-fg',
 }
 
 const buttonSizes: Record<ButtonSize, string> = {
@@ -24,7 +23,7 @@ export function buttonClasses({
   className,
 }: { variant?: ButtonVariant; size?: ButtonSize; className?: string } = {}) {
   return cn(
-    'inline-flex shrink-0 items-center justify-center gap-2 rounded-md font-medium whitespace-nowrap',
+    'inline-flex shrink-0 items-center justify-center gap-2 rounded-full font-medium whitespace-nowrap',
     'transition-colors duration-150',
     'disabled:pointer-events-none disabled:opacity-50',
     buttonVariants[variant],

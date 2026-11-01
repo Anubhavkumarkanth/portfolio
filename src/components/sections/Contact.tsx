@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { Check, CircleAlert, Copy, Download, LoaderCircle, Mail, MapPin, Phone, Send } from 'lucide-react'
 import { site } from '../../config/site'
 import { profile } from '../../data/profile'
+import type { ResumeLink } from '../../data/types'
 import { buttonClasses } from '../../lib/button'
 import { cn, withBase } from '../../lib/utils'
 import { GitHubIcon, LinkedInIcon } from '../ui/BrandIcons'
@@ -46,15 +47,15 @@ function CopyButton({ value, label, fallbackHref }: { value: string; label: stri
       className={buttonClasses({ variant: 'ghost', size: 'icon-sm' })}
       aria-label={copied ? `${label} copied` : `Copy ${label.toLowerCase()}`}
     >
-      {copied ? <Check className="size-4 text-ok" /> : <Copy className="size-4" />}
+      {copied ? <Check className="size-4 text-good" /> : <Copy className="size-4" />}
     </button>
   )
 }
 
 const inputClass =
-  'mt-2 w-full rounded-md border bg-ink-900 px-3 py-2.5 text-sm text-fg placeholder:text-fg-subtle/70 transition-colors focus:border-fg-subtle'
+  'mt-2 w-full rounded-lg border bg-paper px-3 py-2.5 text-sm text-fg placeholder:text-fg-subtle/80 transition-colors focus:border-accent'
 
-export function Contact() {
+export function Contact({ resume, description }: { resume: ResumeLink; description: string }) {
   const [fields, setFields] = useState<Fields>(EMPTY)
   const [errors, setErrors] = useState<Errors>({})
   const [status, setStatus] = useState<Status>('idle')
@@ -133,14 +134,15 @@ export function Contact() {
     value: fields[key],
     'aria-invalid': Boolean(errors[key]) || undefined,
     'aria-describedby': errors[key] ? `contact-${key}-error` : undefined,
-    className: cn(inputClass, errors[key] ? 'border-danger/60' : 'border-line-strong'),
+    className: cn(inputClass, errors[key] ? 'border-bad/60' : 'border-line-strong'),
   })
 
   return (
     <Section
       id="contact"
-      title="Get in touch"
-      description="I’m currently looking for an entry-level role in software or data. You can reach me at any of these."
+      eyebrow="Contact"
+      title="Hiring? I’d love to hear from you."
+      description={description}
     >
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
         <div>
@@ -168,12 +170,12 @@ export function Contact() {
           </ul>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a
-              href={withBase(profile.resume.href)}
-              download={profile.resume.fileName}
+              href={withBase(resume.href)}
+              download={resume.fileName}
               className={buttonClasses({ variant: 'secondary', className: 'w-full sm:w-auto' })}
             >
               <Download className="size-4" aria-hidden="true" />
-              {profile.resume.label} (PDF)
+              Download {resume.label} (PDF)
             </a>
           </div>
         </div>
@@ -181,7 +183,7 @@ export function Contact() {
         <Card className="self-start p-6 sm:p-8">
           {status === 'sent' || status === 'handoff' ? (
             <div className="flex min-h-[22rem] flex-col items-center justify-center text-center" role="status">
-              <Check className="size-6 text-ok" aria-hidden="true" />
+              <Check className="size-6 text-good" aria-hidden="true" />
               <p className="mt-4 text-lg font-medium text-fg">
                 {status === 'sent' ? 'Message sent. Thank you.' : 'Your email app should now be open.'}
               </p>
@@ -226,7 +228,7 @@ export function Contact() {
                     onChange={(e) => update('name')(e.target.value)}
                   />
                   {errors.name && (
-                    <p id="contact-name-error" className="mt-1.5 text-xs text-danger">
+                    <p id="contact-name-error" className="mt-1.5 text-xs text-bad">
                       {errors.name}
                     </p>
                   )}
@@ -244,7 +246,7 @@ export function Contact() {
                     onChange={(e) => update('email')(e.target.value)}
                   />
                   {errors.email && (
-                    <p id="contact-email-error" className="mt-1.5 text-xs text-danger">
+                    <p id="contact-email-error" className="mt-1.5 text-xs text-bad">
                       {errors.email}
                     </p>
                   )}
@@ -262,7 +264,7 @@ export function Contact() {
                   className={cn(field('message').className, 'resize-y')}
                 />
                 {errors.message && (
-                  <p id="contact-message-error" className="mt-1.5 text-xs text-danger">
+                  <p id="contact-message-error" className="mt-1.5 text-xs text-bad">
                     {errors.message}
                   </p>
                 )}
@@ -277,8 +279,8 @@ export function Contact() {
               </div>
 
               {status === 'error' && (
-                <p role="alert" className="flex gap-2.5 rounded-md border border-danger/30 bg-danger/10 px-3.5 py-3 text-sm text-fg">
-                  <CircleAlert className="mt-0.5 size-4 shrink-0 text-danger" aria-hidden="true" />
+                <p role="alert" className="flex gap-2.5 rounded-md border border-bad/30 bg-bad/10 px-3.5 py-3 text-sm text-fg">
+                  <CircleAlert className="mt-0.5 size-4 shrink-0 text-bad" aria-hidden="true" />
                   <span>
                     That didn’t go through. Try again, or{' '}
                     <a href={mailtoHref(fields)} className={textLink}>

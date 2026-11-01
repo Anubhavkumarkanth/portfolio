@@ -61,14 +61,14 @@ export function SipPlayground() {
   )
 
   const metrics = [
-    { label: 'Ideal corpus', value: formatINRCompact(result.ideal) },
-    { label: 'Actual corpus', value: formatINRCompact(result.actual) },
-    { label: 'Compounding loss', value: formatINRCompact(result.cld) },
-    { label: 'Compliance rate', value: `${(result.ccr * 100).toFixed(1)}%` },
+    { label: 'If you never missed a month', value: formatINRCompact(result.ideal) },
+    { label: 'What you actually end with', value: formatINRCompact(result.actual) },
+    { label: 'Lost to the gaps', value: formatINRCompact(result.cld) },
+    { label: 'Share of planned money invested', value: `${(result.ccr * 100).toFixed(1)}%` },
   ]
 
   return (
-    <div className="grid grid-cols-1 gap-6 rounded-md border border-line p-5 sm:p-6 lg:grid-cols-[0.8fr_1.2fr]">
+    <div className="grid grid-cols-1 gap-6 rounded-xl border border-line bg-surface p-5 sm:p-6 lg:grid-cols-[0.8fr_1.2fr]">
       <div className="flex flex-col gap-6">
         <Slider
           label="Pause contributions"
@@ -83,7 +83,7 @@ export function SipPlayground() {
           onChange={setReduceMonths}
         />
 
-        <div className="rounded-md border border-line p-4">
+        <div className="rounded-lg border border-line p-4">
           <div className="flex items-baseline justify-between">
             <p className="text-sm text-fg-muted">Discipline score</p>
             <p className="text-2xl text-fg tabular-nums" aria-live="polite">
@@ -91,17 +91,17 @@ export function SipPlayground() {
               <span className="text-sm text-fg-subtle">/100</span>
             </p>
           </div>
-          <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/[0.07]">
+          <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-sunken">
             <div
               className={cn(
                 'h-full rounded-full',
-                result.disciplineScore >= 90 ? 'bg-ok' : 'bg-accent',
+                result.disciplineScore >= 90 ? 'bg-good' : 'bg-accent',
               )}
               style={{ width: `${result.disciplineScore}%` }}
             />
           </div>
-          <p className="mt-3 font-mono text-[11px] leading-relaxed text-fg-subtle">
-            100 − (40 × (1 − CCR) + 60 × loss ratio)
+          <p className="mt-3 text-xs leading-relaxed text-fg-subtle">
+            Starts at 100. Missed money takes off up to 40 points, lost growth up to 60.
           </p>
         </div>
       </div>
@@ -114,15 +114,15 @@ export function SipPlayground() {
         </div>
         <dl className="mt-5 grid grid-cols-2 gap-2">
           {metrics.map((m) => (
-            <div key={m.label} className="rounded-md border border-line px-3 py-2.5">
+            <div key={m.label} className="rounded-lg border border-line px-3 py-2.5">
               <dt className="text-[11px] text-fg-subtle">{m.label}</dt>
               <dd className="mt-1 text-sm text-fg tabular-nums">{m.value}</dd>
             </div>
           ))}
         </dl>
         <p className="mt-3 text-[11px] leading-relaxed text-fg-subtle">
-          ₹10,000/month at 12% expected annual return for 20 years. Same compounding loop and metric formulas as the
-          project’s Python engine, ported to TypeScript for this page.
+          ₹10,000 a month at an expected 12% a year, for 20 years. The same maths as the project’s Python engine,
+          rewritten in TypeScript so it runs right here in your browser.
         </p>
       </div>
     </div>
