@@ -1,45 +1,81 @@
 @import "tailwindcss";
 
-@theme {
+/* Colours live in plain CSS variables so dark mode can swap them; Tailwind
+   reads them through `@theme inline`. Calm neutrals, one deep-blue accent. */
+:root {
+  --paper: #f7f7f5;
+  --surface: #ffffff;
+  --sunken: #efefec;
+  --ink: #17191c;
+  --ink-muted: #4b525b;
+  --ink-subtle: #6f7680;
+  --rule: #e2e3df;
+  --rule-strong: #cdd0cb;
+  --accent: #1f5f8b;
+  --accent-strong: #174a6d;
+  --accent-soft: #e6eef5;
+  --good: #2c7a4d;
+  --bad: #b42318;
+  --shadow: 0 1px 2px rgb(23 25 28 / 0.04), 0 8px 24px -12px rgb(23 25 28 / 0.12);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #121416;
+    --surface: #191c1f;
+    --sunken: #0e1012;
+    --ink: #e9eaec;
+    --ink-muted: #b0b5bc;
+    --ink-subtle: #868d96;
+    --rule: #2a2e33;
+    --rule-strong: #3b4047;
+    --accent: #8cbbe0;
+    --accent-strong: #b3d3ec;
+    --accent-soft: rgb(140 187 224 / 0.1);
+    --good: #7cc39a;
+    --bad: #f0928a;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.5);
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
   --font-sans: "Geist Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Newsreader Variable", ui-serif, Georgia, "Times New Roman", serif;
   --font-mono: "Geist Mono Variable", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
-  /* Surfaces: neutral charcoal */
-  --color-ink-950: #141414;
-  --color-ink-900: #181818;
-  --color-ink-850: #1c1c1c;
-  --color-ink-800: #202020;
-  --color-ink-700: #292929;
-  --color-ink-600: #333333;
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-fg: var(--ink);
+  --color-fg-muted: var(--ink-muted);
+  --color-fg-subtle: var(--ink-subtle);
+  --color-line: var(--rule);
+  --color-line-strong: var(--rule-strong);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-good: var(--good);
+  --color-bad: var(--bad);
 
-  /* Text */
-  --color-fg: #eaeae8;
-  --color-fg-muted: #a8a8a4;
-  --color-fg-subtle: #8c8c88;
+  --shadow-soft: var(--shadow);
 
-  /* Hairlines */
-  --color-line: rgb(255 255 255 / 0.09);
-  --color-line-strong: rgb(255 255 255 / 0.16);
-
-  /* Used sparingly: links in running text, focus rings, charts in the case studies */
-  --color-accent: #93b4d8;
-  --color-accent-strong: #b4cbe5;
-  --color-accent-soft: rgb(147 180 216 / 0.08);
-  --color-ok: #86bf98;
-  --color-danger: #e38b7b;
-
-  --animate-fade-in: fade-in 0.15s ease-out;
+  --animate-fade-in: fade-in 0.2s ease-out;
+  --animate-rise: rise 0.25s ease-out;
 
   @keyframes fade-in {
     from { opacity: 0; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(8px); }
   }
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 4.5rem;
-    color-scheme: dark;
+    scroll-padding-top: 5rem;
     -webkit-text-size-adjust: 100%;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -50,14 +86,15 @@
     }
   }
   body {
-    @apply bg-ink-950 font-sans text-fg antialiased;
+    @apply bg-paper font-sans text-fg antialiased;
+    font-feature-settings: "ss01", "cv11";
   }
   ::selection {
-    background: rgb(147 180 216 / 0.3);
-    color: #fff;
+    background: var(--accent-soft);
+    color: var(--ink);
   }
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
   input:focus-visible,
@@ -69,7 +106,7 @@
 @layer components {
   .scrollbar-thin {
     scrollbar-width: thin;
-    scrollbar-color: rgb(255 255 255 / 0.14) transparent;
+    scrollbar-color: var(--rule-strong) transparent;
   }
 
   /* Range input used in the SIP playground */
@@ -83,12 +120,12 @@
   .range::-webkit-slider-runnable-track {
     height: 4px;
     border-radius: 2px;
-    background: linear-gradient(to right, var(--color-fg-muted) var(--fill, 0%), rgb(255 255 255 / 0.1) var(--fill, 0%));
+    background: linear-gradient(to right, var(--accent) var(--fill, 0%), var(--rule) var(--fill, 0%));
   }
   .range::-moz-range-track {
     height: 4px;
     border-radius: 2px;
-    background: linear-gradient(to right, var(--color-fg-muted) var(--fill, 0%), rgb(255 255 255 / 0.1) var(--fill, 0%));
+    background: linear-gradient(to right, var(--accent) var(--fill, 0%), var(--rule) var(--fill, 0%));
   }
   .range::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -96,14 +133,14 @@
     width: 16px;
     height: 16px;
     border-radius: 999px;
-    background: var(--color-fg);
-    border: 2px solid var(--color-ink-950);
+    background: var(--surface);
+    border: 2px solid var(--accent);
   }
   .range::-moz-range-thumb {
     width: 12px;
     height: 12px;
     border-radius: 999px;
-    background: var(--color-fg);
-    border: 2px solid var(--color-ink-950);
+    background: var(--surface);
+    border: 2px solid var(--accent);
   }
 }

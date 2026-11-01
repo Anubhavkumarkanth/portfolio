@@ -37,21 +37,21 @@ export function SipChart({ points, className }: SipChartProps) {
     >
       <defs>
         <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#93b4d8" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#93b4d8" stopOpacity="0.03" />
+          <stop offset="0%" style={{ stopColor: 'var(--accent)', stopOpacity: 0.22 }} />
+          <stop offset="100%" style={{ stopColor: 'var(--accent)', stopOpacity: 0.02 }} />
         </linearGradient>
       </defs>
 
       {[0.25, 0.5, 0.75, 1].map((f) => {
         const gy = PAD.top + f * (H - PAD.top - PAD.bottom)
-        return <line key={f} x1={PAD.left} x2={W - PAD.right} y1={gy} y2={gy} stroke="rgb(255 255 255 / 0.06)" strokeDasharray="3 6" />
+        return <line key={f} x1={PAD.left} x2={W - PAD.right} y1={gy} y2={gy} className="stroke-line" strokeDasharray="3 6" />
       })}
 
       <path d={gapPath} fill={`url(#${gradientId})`} />
       <path
         d={idealPath}
         fill="none"
-        stroke="rgb(234 234 232 / 0.55)"
+        className="stroke-fg-subtle"
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -59,13 +59,13 @@ export function SipChart({ points, className }: SipChartProps) {
       <path
         d={actualPath}
         fill="none"
-        stroke="#93b4d8"
+        className="stroke-accent"
         strokeWidth={2.5}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx={x(last.year)} cy={y(last.ideal)} r={3.5} fill="#eaeae8" />
-      <circle cx={x(last.year)} cy={y(last.actual)} r={4} fill="#93b4d8" />
+      <circle cx={x(last.year)} cy={y(last.ideal)} r={3.5} className="fill-fg-subtle" />
+      <circle cx={x(last.year)} cy={y(last.actual)} r={4} className="fill-accent" />
     </svg>
   )
 }
@@ -74,16 +74,16 @@ export function SipLegend({ className }: { className?: string }) {
   return (
     <div className={cn('flex items-center gap-4 text-xs text-fg-subtle', className)}>
       <span className="flex items-center gap-1.5">
-        <span className="h-0.5 w-4 rounded bg-fg/55" aria-hidden="true" />
-        Ideal
+        <span className="h-0.5 w-4 rounded bg-fg-subtle" aria-hidden="true" />
+        If you never missed a month
       </span>
       <span className="flex items-center gap-1.5">
         <span className="h-0.5 w-4 rounded bg-accent" aria-hidden="true" />
-        Actual
+        With the pause and the cut
       </span>
       <span className="flex items-center gap-1.5">
-        <span className="size-2.5 rounded-sm bg-accent/25" aria-hidden="true" />
-        Friction gap
+        <span className="size-2.5 rounded-sm bg-accent/20" aria-hidden="true" />
+        What it cost
       </span>
     </div>
   )
