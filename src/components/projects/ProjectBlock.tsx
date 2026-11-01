@@ -1,11 +1,14 @@
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { useId, useState, type ReactNode } from 'react'
+import { ArrowUpRight, ChevronDown } from 'lucide-react'
 import type { Project } from '../../data/types'
 import { buttonClasses } from '../../lib/button'
-import { withBase } from '../../lib/utils'
+import { cn, withBase } from '../../lib/utils'
 import { GitHubIcon } from '../ui/BrandIcons'
 import { Tag } from '../ui/primitives'
+import { EvaluationTable } from './previews/Previews'
+import { SipPlayground } from './previews/SipPlayground'
 
-export function Shot({ shot, priority = false }: { shot: Project['shots'][number]; priority?: boolean }) {
+export function Shot({ shot }: { shot: Project['shots'][number] }) {
   // Tall screenshots are capped so they aren't blown up past their real size.
   const portrait = shot.height > shot.width
   return (
@@ -16,7 +19,7 @@ export function Shot({ shot, priority = false }: { shot: Project['shots'][number
           alt={shot.alt}
           width={shot.width}
           height={shot.height}
-          loading={priority ? 'eager' : 'lazy'}
+          loading="lazy"
           decoding="async"
           className="block h-auto w-full"
         />
@@ -26,33 +29,58 @@ export function Shot({ shot, priority = false }: { shot: Project['shots'][number
   )
 }
 
-export function Choices({ choices }: { choices: Project['choices'] }) {
+function Block({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <ul className="space-y-3">
-      {choices.map((c) => (
-        <li key={c.pick} className="text-[15px] leading-relaxed text-fg-muted">
-          <span className="font-medium text-fg">{c.pick}</span>
-          <span className="text-fg-subtle"> instead of {c.over}: </span>
-          {c.because}
-        </li>
-      ))}
-    </ul>
+    <section>
+      <h4 className="font-serif text-xl font-medium text-fg">{title}</h4>
+      <div className="mt-3">{children}</div>
+    </section>
   )
 }
+
+function List({ items, numbered = false }: { items: string[]; numbered?: boolean }) {
+  return (
+    <ol className="space-y-3">
+      {items.map((item, i) => (
+        <li key={item} className="flex gap-3 text-[15px] leading-relaxed text-fg-muted">
+          <span className="w-5 shrink-0 text-center text-fg-subtle tabular-nums" aria-hidden="true">
+            {numbered ? `${i + 1}.` : '–'}
+          </span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ol>
+  )
+}
+
+/** Opens when the page is reached through an old `?project=<slug>` link. */
+const linkedSlug = () => new URLSearchParams(window.location.search).get('project')
 
 interface ProjectBlockProps {
   project: Project
   index: number
-  /** Opens the case study. Omitted on pages without one. */
-  onOpen?: () => void
-  onPrefetch?: () => void
+  /** Extra button next to the live and code links (the QA resume). */
+  action?: ReactNode
+  /** Extra case-study content (the QA bug table). */
+  children?: ReactNode
 }
 
-/** One project on the page: hook, short story, three numbers, why the tools, then the picture. */
-export function ProjectBlock({ project, index, onOpen, onPrefetch }: ProjectBlockProps) {
+/**
+ * One project: hook, short story, three numbers, why the tools and a screenshot.
+ * The full case study opens in place, underneath.
+ */
+export function ProjectBlock({ project, index, action, children }: ProjectBlockProps) {
   const headingId = `${project.slug}-title`
+  const panelId = useId()
+  const [open, setOpen] = useState(() => linkedSlug() === project.slug)
+  const findingsTitle = project.slug === 'orderdesk-qa-suite' ? 'What the tests showed' : 'What the data showed'
+
   return (
-    <article aria-labelledby={headingId} className="grid grid-cols-1 gap-8 border-t border-line pt-12 lg:grid-cols-[13rem_1fr] lg:gap-12">
+    <article
+      id={project.slug}
+      aria-labelledby={headingId}
+      className="scroll-mt-24 grid grid-cols-1 gap-8 border-t border-line pt-12 lg:grid-cols-[13rem_1fr] lg:gap-12"
+    >
       <div className="lg:sticky lg:top-24 lg:self-start">
         <p className="font-mono text-sm text-fg-subtle">{String(index + 1).padStart(2, '0')}</p>
         <h3 id={headingId} className="mt-2 text-lg font-semibold tracking-tight text-fg">
@@ -85,9 +113,15 @@ export function ProjectBlock({ project, index, onOpen, onPrefetch }: ProjectBloc
 
         <div className="mt-8">
           <h4 className="text-sm font-medium text-fg">Why these tools</h4>
-          <div className="mt-3">
-            <Choices choices={project.choices} />
-          </div>
+          <ul className="mt-3 space-y-3">
+            {project.choices.map((c) => (
+              <li key={c.pick} className="text-[15px] leading-relaxed text-fg-muted">
+                <span className="font-medium text-fg">{c.pick}</span>
+                <span className="text-fg-subtle"> instead of {c.over}: </span>
+                {c.because}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="mt-9">
@@ -95,28 +129,81 @@ export function ProjectBlock({ project, index, onOpen, onPrefetch }: ProjectBloc
         </div>
 
         <div className="mt-7 flex flex-wrap items-center gap-3">
-          {onOpen && (
-            <button
-              type="button"
-              onClick={onOpen}
-              onPointerEnter={onPrefetch}
-              onFocus={onPrefetch}
-              className={buttonClasses({ variant: 'primary', size: 'sm' })}
-            >
-              Read the case study
-              <ArrowRight className="size-3.5" aria-hidden="true" />
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+            aria-controls={panelId}
+            className={buttonClasses({ variant: 'primary', size: 'sm' })}
+          >
+            {open ? 'Hide the case study' : 'Read the case study'}
+            <ChevronDown className={cn('size-3.5 transition-transform', open && 'rotate-180')} aria-hidden="true" />
+          </button>
           {project.links.demo && (
             <a href={project.links.demo} target="_blank" rel="noreferrer" className={buttonClasses({ variant: 'secondary', size: 'sm' })}>
               Open it live
               <ArrowUpRight className="size-3.5" aria-hidden="true" />
             </a>
           )}
+          {action}
           <a href={project.links.github} target="_blank" rel="noreferrer" className={buttonClasses({ variant: 'ghost', size: 'sm' })}>
             <GitHubIcon className="size-4" />
             Code
           </a>
+        </div>
+
+        <div id={panelId} hidden={!open} className="mt-10 animate-fade-in space-y-11 rounded-2xl border border-line bg-surface p-5 sm:p-8">
+          <Block title="The question">
+            <p className="text-[17px] leading-relaxed text-pretty text-fg-muted">{project.question}</p>
+          </Block>
+
+          <Block title="What I did">
+            <List items={project.steps} numbered />
+          </Block>
+
+          <Block title={findingsTitle}>
+            <List items={project.findings} />
+          </Block>
+
+          {project.evaluation && (
+            <Block title="How the models compared">
+              <div className="rounded-xl border border-line p-5 sm:p-6">
+                <EvaluationTable evaluation={project.evaluation} />
+              </div>
+            </Block>
+          )}
+
+          {open && project.extra === 'sip-playground' && (
+            <Block title="Try it yourself">
+              <SipPlayground />
+            </Block>
+          )}
+
+          {children}
+
+          {project.shots.slice(1).map((shot) => (
+            <Shot key={shot.src} shot={shot} />
+          ))}
+
+          <Block title="What it can’t do">
+            <List items={project.limits} />
+            {project.credit && (
+              <p className="mt-5 border-l-2 border-line-strong pl-4 text-sm leading-relaxed text-fg-subtle">{project.credit}</p>
+            )}
+          </Block>
+
+          <button
+            type="button"
+            onClick={() => {
+              setOpen(false)
+              document.getElementById(project.slug)?.scrollIntoView({ block: 'start' })
+            }}
+            aria-controls={panelId}
+            className={buttonClasses({ variant: 'ghost', size: 'sm', className: '-ml-3' })}
+          >
+            Hide the case study
+            <ChevronDown className="size-3.5 rotate-180" aria-hidden="true" />
+          </button>
         </div>
       </div>
     </article>

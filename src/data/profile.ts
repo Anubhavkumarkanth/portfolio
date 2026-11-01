@@ -1,7 +1,7 @@
 import type { Profile } from './types.ts'
 
 // Personal details and page copy. This file is also read by vite.config.ts to
-// fill the SEO tags in index.html and qa.html, so keep it free of browser-only
+// fill the SEO tags in index.html, so keep it free of browser-only
 // code and icon imports.
 //
 // House style: plain English first, about a third technical, and every
@@ -68,38 +68,9 @@ export const profile: Profile = {
       ],
     },
   },
-  qa: {
-    role: 'QA Engineer',
-    headline: 'I break software on purpose, so your customers don’t.',
-    intro:
-      'I design test cases, automate API, database and browser checks with pytest and Playwright, and write bug reports anyone can reproduce in two minutes.',
-    resume: {
-      label: 'QA resume',
-      href: 'resume/Anubhav-Kumar-QA-Resume.pdf',
-      fileName: 'Anubhav_Kumar_QA_Resume.pdf',
-    },
-    stats: [
-      { value: '144', label: 'automated tests across API, database and browser' },
-      { value: '8 of 8', label: 'planted bugs caught by the suite' },
-      { value: '50', label: 'data checks guarding a live public site' },
-    ],
-    seo: {
-      title: 'Anubhav Kumar · QA Engineer',
-      description:
-        'Anubhav Kumar, entry-level QA / software test engineer in Bengaluru. Test design, pytest, Playwright and API testing, with a 144-test suite for a live order and UPI payment app that catches all 8 bugs planted in it.',
-      keywords: [
-        'Anubhav Kumar',
-        'QA engineer',
-        'software test engineer',
-        'fresher QA',
-        'entry level QA',
-        'manual testing',
-        'automation testing',
-        'pytest',
-        'Playwright',
-        'API testing',
-        'Bengaluru',
-      ],
-    },
+  qaResume: {
+    label: 'QA resume',
+    href: 'resume/Anubhav-Kumar-QA-Resume.pdf',
+    fileName: 'Anubhav_Kumar_QA_Resume.pdf',
   },
 }

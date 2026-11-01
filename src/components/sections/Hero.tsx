@@ -10,7 +10,7 @@ import { Container } from '../ui/primitives'
 const iconLink = 'inline-flex items-center gap-2 text-sm text-fg-muted transition-colors hover:text-fg'
 
 /** Name, role, one big line, the resume, and a small visual on the right. */
-export function Hero({ persona, aside, workLabel }: { persona: Persona; aside: ReactNode; workLabel: string }) {
+export function Hero({ persona, aside }: { persona: Persona; aside: ReactNode }) {
   return (
     <section id="home" aria-labelledby="home-heading" className="pt-28 pb-6 sm:pt-36 sm:pb-8">
       <Container className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.25fr_1fr] lg:gap-16">
@@ -41,7 +41,7 @@ export function Hero({ persona, aside, workLabel }: { persona: Persona; aside: R
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <a href="#work" className={buttonClasses({ variant: 'primary' })}>
-              {workLabel}
+              See my work
               <ArrowDown className="size-4" aria-hidden="true" />
             </a>
             <a

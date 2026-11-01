@@ -1,10 +1,8 @@
 import { projects } from '../../data/projects'
-import { useProjectModal } from '../../context/projectModal'
 import { ProjectBlock } from '../projects/ProjectBlock'
 import { Section } from '../ui/Section'
 
 export function Work() {
-  const { openProject, prefetch } = useProjectModal()
   return (
     <Section
       id="work"
@@ -14,13 +12,7 @@ export function Work() {
     >
       <div className="space-y-20">
         {projects.map((project, i) => (
-          <ProjectBlock
-            key={project.slug}
-            project={project}
-            index={i}
-            onOpen={() => openProject(project.slug)}
-            onPrefetch={prefetch}
-          />
+          <ProjectBlock key={project.slug} project={project} index={i} />
         ))}
       </div>
     </Section>

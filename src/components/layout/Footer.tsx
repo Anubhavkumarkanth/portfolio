@@ -2,7 +2,7 @@ import { ArrowUp } from 'lucide-react'
 import { profile } from '../../data/profile'
 import { Container, textLink } from '../ui/primitives'
 
-export function Footer({ tagline, crossLink }: { tagline: string; crossLink?: { href: string; label: string } }) {
+export function Footer({ tagline }: { tagline: string }) {
   const links = [
     { href: profile.socials.github.href, label: 'GitHub', external: true },
     { href: profile.socials.linkedin.href, label: 'LinkedIn', external: true },
@@ -32,11 +32,6 @@ export function Footer({ tagline, crossLink }: { tagline: string; crossLink?: { 
               </a>
             </li>
           </ul>
-          {crossLink && (
-            <a href={crossLink.href} className="text-fg-subtle transition-colors hover:text-accent">
-              {crossLink.label} →
-            </a>
-          )}
         </div>
       </Container>
     </footer>

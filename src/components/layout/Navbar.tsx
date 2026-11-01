@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { ArrowUpRight, Download, Menu, X } from 'lucide-react'
+import { Download, Menu, X } from 'lucide-react'
 import type { ResumeLink } from '../../data/types'
 import { profile } from '../../data/profile'
 import { useActiveSection } from '../../hooks/useActiveSection'
@@ -11,11 +11,9 @@ import { Container } from '../ui/primitives'
 interface NavbarProps {
   links: readonly { id: string; label: string }[]
   resume: ResumeLink
-  /** Quiet link to the other page (QA ↔ data). */
-  crossLink?: { href: string; label: string }
 }
 
-export function Navbar({ links, resume, crossLink }: NavbarProps) {
+export function Navbar({ links, resume }: NavbarProps) {
   const ids = useMemo(() => links.map((l) => l.id), [links])
   const active = useActiveSection(ids)
   const [scrolled, setScrolled] = useState(() => window.scrollY > 8)
@@ -131,12 +129,6 @@ export function Navbar({ links, resume, crossLink }: NavbarProps) {
                 <Download className="size-4" aria-hidden="true" />
                 Download {resume.label}
               </a>
-              {crossLink && (
-                <a href={crossLink.href} className={buttonClasses({ variant: 'ghost', className: 'w-full' })}>
-                  {crossLink.label}
-                  <ArrowUpRight className="size-4" aria-hidden="true" />
-                </a>
-              )}
             </div>
           </Container>
         </div>

@@ -1,6 +1,6 @@
 import type { Project, SkillGroup } from './types'
 
-// Content for the QA page (/qa). Facts come from the orderdesk-qa-suite
+// Content for the QA section at the end of the page. Facts come from the orderdesk-qa-suite
 // README and the QA resume.
 
 export const orderdesk: Project = {

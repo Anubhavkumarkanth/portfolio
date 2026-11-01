@@ -1,8 +1,7 @@
-import { Check } from 'lucide-react'
 import { Card } from '../ui/primitives'
 
-// Small hero visuals drawn from real project numbers (UPI Pulse README,
-// retail findings, Orderdesk results). Plain HTML bars, so they read in both themes.
+// Small hero visual drawn from real project numbers (UPI Pulse README and the
+// retail findings). Plain HTML bars, so it reads in both themes.
 
 const upiByYear = [
   { year: '2022', rate: 1.45 },
@@ -72,48 +71,6 @@ export function DataAside() {
             </div>
           ))}
         </dl>
-      </figure>
-    </Card>
-  )
-}
-
-const layers = [
-  { name: 'API', count: 113 },
-  { name: 'Browser', count: 21 },
-  { name: 'Database', count: 8 },
-  { name: 'Simulator', count: 2 },
-]
-
-export function QaAside() {
-  return (
-    <Card className="p-6 sm:p-7">
-      <p className="text-[13px] font-medium text-fg-subtle">Orderdesk QA Suite, in numbers</p>
-
-      <figure className="mt-5">
-        <figcaption className="text-[15px] leading-snug text-fg">144 automated tests, at every layer a bug can hide in.</figcaption>
-        <dl className="mt-4 space-y-2.5 text-sm">
-          {layers.map((l) => (
-            <div key={l.name} className="grid grid-cols-[5rem_1fr_2.5rem] items-center gap-3">
-              <dt className="text-fg-muted">{l.name}</dt>
-              <dd className="h-2.5 overflow-hidden rounded-full bg-sunken">
-                <div className="h-full rounded-full bg-accent" style={{ width: `${Math.max(3, (l.count / 113) * 100)}%` }} />
-              </dd>
-              <dd className="text-right text-fg tabular-nums">{l.count}</dd>
-            </div>
-          ))}
-        </dl>
-      </figure>
-
-      <figure className="mt-8 border-t border-line pt-6">
-        <figcaption className="text-[15px] leading-snug text-fg">8 bugs planted on purpose. 8 caught.</figcaption>
-        <ul className="mt-4 grid grid-cols-8 gap-2" aria-label="All 8 planted bugs were caught">
-          {Array.from({ length: 8 }, (_, i) => (
-            <li key={i} className="grid aspect-square place-items-center rounded-md bg-good/12 text-good">
-              <Check className="size-4" aria-hidden="true" />
-              <span className="sr-only">Bug {i + 1} caught</span>
-            </li>
-          ))}
-        </ul>
       </figure>
     </Card>
   )

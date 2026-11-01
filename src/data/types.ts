@@ -14,7 +14,7 @@ export interface ResumeLink {
   label: string
 }
 
-/** Page-level copy and SEO for one audience (the main data page, or the QA page). */
+/** Hero copy, resume and SEO for the page. */
 export interface Persona {
   role: string
   /** The big hero line. */
@@ -47,7 +47,8 @@ export interface Profile {
   /** Short About paragraphs, in plain English. */
   about: string[]
   data: Persona
-  qa: Persona
+  /** Offered only in the QA section. */
+  qaResume: ResumeLink
 }
 
 export interface Stat {

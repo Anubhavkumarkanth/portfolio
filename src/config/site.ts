@@ -7,17 +7,11 @@ export const site = {
   contactEndpoint: import.meta.env.VITE_CONTACT_ENDPOINT ?? '',
 }
 
-export const dataNav = [
+export const navLinks = [
   { id: 'work', label: 'Work' },
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'background', label: 'Background' },
-  { id: 'contact', label: 'Contact' },
-] as const
-
-export const qaNav = [
-  { id: 'work', label: 'Project' },
-  { id: 'bugs', label: 'Bugs caught' },
-  { id: 'skills', label: 'Skills' },
+  { id: 'qa', label: 'QA' },
   { id: 'contact', label: 'Contact' },
 ] as const

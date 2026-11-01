@@ -5,7 +5,7 @@ import '@fontsource-variable/geist-mono'
 import '@fontsource-variable/newsreader'
 import './index.css'
 
-/** Shared bootstrap for index.html and qa.html. */
+/** Loads the fonts and styles, then renders the page. */
 export function mount(Page: ComponentType) {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
