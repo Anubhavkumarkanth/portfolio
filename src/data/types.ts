@@ -12,7 +12,7 @@ export interface ResumeLink {
   href: string
   /** Name the browser saves the file under. */
   fileName: string
-  /** Full name, used on the larger buttons ("Python Software Developer Resume"). */
+  /** Full name, used on the larger buttons ("Data Analyst Resume"). */
   label: string
   /** Short name for the compact navigation bar. */
   shortLabel: string
@@ -35,7 +35,7 @@ export interface Profile {
   phone: string
   /** Same number in tel: form, digits and a leading + only. */
   phoneHref: string
-  /** The main resume: Python Software Developer. */
+  /** The resume (Data Analyst). */
   resume: ResumeLink
   socials: {
     github: SocialLink
@@ -107,7 +107,10 @@ export interface Project {
     /** Leave undefined until the project is deployed. The UI shows "not deployed yet". */
     demo?: string
   }
-  preview: 'sip' | 'dietbot' | 'oms'
+  /** Interactive widget for the case study. Projects without one use `screenshots`. */
+  preview?: 'sip' | 'dietbot'
+  /** Images in /public (no leading slash) shown in the case study. */
+  screenshots?: { src: string; alt: string; caption: string }[]
   /** Optional featured SQL, shown on the card and in the case study. */
   sql?: { caption: string; code: string }
   /** Optional list of SQL queries shown in the case study. */

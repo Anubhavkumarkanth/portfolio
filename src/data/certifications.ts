@@ -1,6 +1,6 @@
 import type { Certification } from './types'
 
-// Mirrors the CERTIFICATIONS section of the resume, in the same order.
+// Data analysis certifications only; the Java course is left off this site.
 // Add credential URLs to `links` as you collect them — cards without links
 // simply don't show a button.
 
@@ -13,15 +13,6 @@ export const certifications: Certification[] = [
       'Certified in Introduction to SQL, building practical skills in working with and analysing data using SQL, and in Advanced SQL, developing the ability to solve complex data problems and extract meaningful insights with SQL.',
     skills: ['SQL', 'Data analysis'],
     links: [{ label: 'Intro to SQL certificate', href: 'certificates/kaggle-intro-to-sql.jpg' }],
-  },
-  {
-    name: 'Java Programming Masterclass',
-    issuer: 'Udemy',
-    date: '2025–26',
-    description:
-      'Certified in Java programming, covering Java syntax, object-oriented programming and core programming concepts, with practical skills in collections, exception handling, inheritance, interfaces and structured Java programs.',
-    skills: ['Java', 'OOP'],
-    links: [],
   },
   {
     name: 'Career Essentials in Data Analysis',

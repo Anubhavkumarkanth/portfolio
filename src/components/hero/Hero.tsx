@@ -1,7 +1,7 @@
 import { ArrowRight, Download } from 'lucide-react'
 import { education } from '../../data/education'
 import { experience } from '../../data/experience'
-import { dataResume, profile } from '../../data/profile'
+import { profile } from '../../data/profile'
 import { buttonClasses } from '../../lib/button'
 import { formatMonth, withBase } from '../../lib/utils'
 import { GitHubIcon, LinkedInIcon } from '../ui/BrandIcons'
@@ -25,7 +25,7 @@ function Phrases({ parts, separator }: { parts: string[]; separator: string }) {
 export function Hero() {
   const school = education[0]
   const job = experience[0]
-  const specialties = 'Python · SQL · APIs · Data Analytics'
+  const specialties = profile.specialties.join(' · ')
 
   const meta = [
     ['B.E. ECE', 'NMIT Bangalore', `Class of ${school.graduation}`],
@@ -64,14 +64,6 @@ export function Hero() {
               >
                 <Download className="size-4" aria-hidden="true" />
                 {profile.resume.label}
-              </a>
-              <a
-                href={withBase(dataResume.href)}
-                download={dataResume.fileName}
-                className={buttonClasses({ variant: 'secondary' })}
-              >
-                <Download className="size-4" aria-hidden="true" />
-                {dataResume.label}
               </a>
             </div>
             <div className="flex gap-6">

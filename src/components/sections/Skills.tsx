@@ -23,7 +23,7 @@ export function Skills() {
     <Section
       id="skills"
       title="Skills and tools"
-      description="Four areas I work in, and the tools underneath them. The highlighted ones are what I’ve used in my internship or in a project."
+      description="Four areas I work in, and the tools underneath them. The highlighted ones are what I’ve used in a project."
     >
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {pillars.map((category) => (

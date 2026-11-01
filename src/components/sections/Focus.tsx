@@ -7,7 +7,7 @@ export function Focus() {
     <Section
       id="focus"
       title="Roles I’m applying for"
-      description="I’m open to both of these."
+      description="Entry-level analyst roles where I can work with SQL, Python and Power BI."
     >
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
         {profile.targetRoles.map((group) => (

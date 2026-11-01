@@ -10,7 +10,7 @@ export const site = {
   github: {
     username: profile.socials.github.handle,
     /** Repos listed first, in this order. The rest are the most recently pushed. */
-    featuredRepos: ['sip-friction-analyzer', 'Dietbot_For_Athletes', 'order-management-system'],
+    featuredRepos: ['upi-pulse', 'retail-cancellation-leakage', 'Dietbot_For_Athletes', 'sip-friction-analyzer'],
     repoLimit: 6,
     /** Contribution heatmap via github-contributions-api.jogruber.de (public data, no key). */
     showContributions: true,
