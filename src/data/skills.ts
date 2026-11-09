@@ -6,7 +6,7 @@ export const skills: SkillGroup[] = [
   {
     title: 'SQL',
     plain: 'Asking questions of big tables',
-    items: ['Joins', 'CTEs', 'Window functions', 'CASE', 'Indexes', 'PostgreSQL', 'SQLite', 'DuckDB'],
+    items: ['Joins', 'CTEs', 'Window functions', 'CASE', 'Indexes', 'MySQL', 'PostgreSQL', 'DuckDB'],
   },
   {
     title: 'Python',
