@@ -90,10 +90,10 @@ export const projects: Project[] = [
     ],
     choices: [
       {
-        pick: 'SQLite',
-        over: 'PostgreSQL',
+        pick: 'MySQL 8',
+        over: 'SQLite',
         because:
-          'the whole database is one file the script rebuilds from scratch, so anyone can rerun the analysis without installing a server.',
+          'it runs as a real database server, like the ones analysts query at work, and one Docker command sets it up, so anyone can still rerun the analysis.',
       },
       {
         pick: 'A customer-level bootstrap',
@@ -108,7 +108,7 @@ export const projects: Project[] = [
           'Power BI is what most teams already use, so the report is there, built on a star schema (one sales table linked to product, customer and date tables). The web version opens in any browser.',
       },
     ],
-    tools: ['SQL', 'SQLite', 'Python', 'pandas', 'Power BI', 'DAX', 'Excel', 'Plotly'],
+    tools: ['SQL', 'MySQL', 'Python', 'pandas', 'Power BI', 'DAX', 'Excel', 'Plotly'],
     shots: [
       {
         src: 'projects/retail-dashboard.webp',
