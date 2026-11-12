@@ -14,7 +14,7 @@ import { profile } from './data/profile'
 import { skills, tooling } from './data/skills'
 import { useJumpToHash } from './hooks/useJumpToHash'
 
-/** The whole portfolio: data analyst first, QA as the last project. */
+/** The whole portfolio: data analyst first, the testing project last. */
 export default function App() {
   useJumpToHash()
   const { data } = profile

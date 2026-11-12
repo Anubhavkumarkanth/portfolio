@@ -1,35 +1,25 @@
-import { ArrowUpRight, Download } from 'lucide-react'
-import { profile } from '../../data/profile'
+import { ArrowUpRight } from 'lucide-react'
 import { projects } from '../../data/projects'
 import { defects, orderdesk, otherTesting, qaSkills } from '../../data/qa'
-import { buttonClasses } from '../../lib/button'
-import { withBase } from '../../lib/utils'
 import { ProjectBlock } from '../projects/ProjectBlock'
 import { Tag, textLink } from '../ui/primitives'
 import { Section } from '../ui/Section'
 
 const subhead = 'font-serif text-xl font-medium text-fg'
 
-/** QA comes last: one project, told the same way as the data projects, with the QA resume. */
+/** Testing comes last: one project, told the same way as the data projects. */
 export function QaSection() {
-  const resume = profile.qaResume
   return (
     <Section
       id="qa"
-      eyebrow="Also open to QA roles"
+      eyebrow="One more project"
       title="I test what I build, too."
-      description="Alongside data work, I’m applying for entry-level QA and software testing roles. This is the project that shows it best, and the QA resume is right below it."
+      description="Alongside data work, I build software and test it properly. This is the project that shows it best."
       className="border-t border-line"
     >
       <ProjectBlock
         project={orderdesk}
         index={projects.length}
-        action={
-          <a href={withBase(resume.href)} download={resume.fileName} className={buttonClasses({ variant: 'secondary', size: 'sm' })}>
-            <Download className="size-3.5" aria-hidden="true" />
-            {resume.label}
-          </a>
-        }
       >
         <section>
           <h4 className={subhead}>The 8 planted bugs, and what caught each one</h4>

@@ -5,9 +5,8 @@ Personal portfolio for Anubhav Kumar, a data analyst working in SQL, Python and 
 - **Data analyst first.** Four projects (UPI Pulse, retail cancellations, Dietbot and a SIP simulator), each
   with a one-line hook, three headline numbers, why each tool was chosen and a real screenshot. The full
   case study opens in place under each project.
-- **QA last.** The Orderdesk QA suite is the final project, in the same format, with the 8-bug table and
-  testing skills in its case study. The QA resume is offered only there; everywhere else it's the data
-  analyst resume.
+- **Testing last.** The Orderdesk test suite is the final project, in the same format, with the 8-bug table
+  and testing skills in its case study.
 
 Calm, light editorial design with an automatic dark mode.
 
@@ -41,9 +40,9 @@ All content lives in `src/data/`, separate from the UI.
 | To change…                                              | Edit                                         |
 | ------------------------------------------------------- | -------------------------------------------- |
 | Name, contact details, About text                       | `src/data/profile.ts`                        |
-| Hero line, intro, stats, resumes and SEO                | `src/data/profile.ts` → `data`, `qaResume`   |
+| Hero line, intro, stats, resumes and SEO                | `src/data/profile.ts` → `data`               |
 | Data projects (hook, summary, numbers, tool choices…)   | `src/data/projects.ts`                       |
-| QA project, bug table, QA skills, other testing work    | `src/data/qa.ts` (shown in the QA section)   |
+| Testing project, bug table, testing skills              | `src/data/qa.ts` (shown in the last section) |
 | Skills on the main page                                 | `src/data/skills.ts`                         |
 | Internship, degree, certificates                        | `src/data/experience.ts`, `education.ts`, `certifications.ts` |
 | Navigation links                                        | `src/config/site.ts`                         |
@@ -54,9 +53,8 @@ All content lives in `src/data/`, separate from the UI.
 it appears. Each project opens with a one-line hook, then two short sentences. Tool choices are written as
 "X instead of Y: because…".
 
-**Resumes.** `public/resume/Anubhav-Kumar-Data-Analyst-Resume.pdf` (navigation, hero, contact) and
-`public/resume/Anubhav-Kumar-QA-Resume.pdf` (QA section only). Replace a PDF to update it. `vercel.json`
-redirects older resume file names to the data analyst resume.
+**Resume.** `public/resume/Anubhav-Kumar-Data-Analyst-Resume.pdf` (navigation, hero, contact). Replace the
+PDF to update it. `vercel.json` redirects older resume file names, the QA one included, to it.
 
 **Screenshots.** Real screenshots of each live project, saved as WebP in `public/projects/`. List them in a
 project's `shots` with their pixel `width` and `height`. The first one appears with the project; the rest

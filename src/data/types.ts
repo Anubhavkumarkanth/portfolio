@@ -47,8 +47,6 @@ export interface Profile {
   /** Short About paragraphs, in plain English. */
   about: string[]
   data: Persona
-  /** Offered only in the QA section. */
-  qaResume: ResumeLink
 }
 
 export interface Stat {
