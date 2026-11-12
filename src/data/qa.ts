@@ -1,7 +1,7 @@
 import type { Project, SkillGroup } from './types'
 
-// Content for the QA section at the end of the page. Facts come from the orderdesk-qa-suite
-// README and the QA resume.
+// Content for the testing section at the end of the page. Facts come from the orderdesk-qa-suite
+// README.
 
 export const orderdesk: Project = {
   slug: 'orderdesk-qa-suite',

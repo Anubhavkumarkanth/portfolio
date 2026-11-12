@@ -68,9 +68,4 @@ export const profile: Profile = {
       ],
     },
   },
-  qaResume: {
-    label: 'QA resume',
-    href: 'resume/Anubhav-Kumar-QA-Resume.pdf',
-    fileName: 'Anubhav_Kumar_QA_Resume.pdf',
-  },
 }

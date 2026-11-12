@@ -59,7 +59,7 @@ const linkedSlug = () => new URLSearchParams(window.location.search).get('projec
 interface ProjectBlockProps {
   project: Project
   index: number
-  /** Extra button next to the live and code links (the QA resume). */
+  /** Extra button next to the live and code links (none today). */
   action?: ReactNode
   /** Extra case-study content (the QA bug table). */
   children?: ReactNode
