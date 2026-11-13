@@ -36,26 +36,26 @@ export const profile: Profile = {
       short: 'Software Engineer',
       headline: 'I build Python backends, and the tests that keep them honest.',
       intro:
-        'I write REST APIs (the endpoints other software calls) with FastAPI, store the data in PostgreSQL and MySQL, and ship every project with automated tests that run on each change.',
+        'I write REST APIs (the endpoints other software calls) with FastAPI, store the data in PostgreSQL, and ship every project with automated tests that run on each change.',
       resume: {
         label: 'Software Engineer resume',
         href: 'resume/Anubhav-Kumar-Software-Engineer-Python-Resume.pdf',
         fileName: 'Anubhav_Kumar_Software_Engineer_Python_Resume.pdf',
       },
       stats: [
-        { value: '3', label: 'backend services live for you to open' },
-        { value: '144', label: 'automated tests on one checkout service' },
+        { value: '2', label: 'backend services live for you to open' },
+        { value: '55', label: 'backend tests on one service, 34 against a real database' },
         { value: '30 of 30', label: 'test questions an AI question box got right' },
       ],
       about: [
         'I graduated in 2026 with a B.E. in Electronics and Communication from NMIT, Bangalore. I write backend software in Python: the part of an app that takes a request, applies the rules and stores the result.',
-        'I like code that can show it works. Every project here ships with automated tests that run on each change, so a broken change is stopped before it goes live. On one project I broke my own code 34 different ways, just to see the matching test fail each time.',
+        'I like code that can show it works. Every project here ships with automated tests that run on each change, so a broken change is stopped before it goes live. On one of them, 34 tests run against a real PostgreSQL database instead of a stand-in.',
         'Before this I spent three months as a full stack intern, building REST APIs in Java and Spring Boot and fixing defects in a real codebase.',
       ],
       work: {
-        title: 'Three services, each live and each tested.',
+        title: 'Two services, both live and both tested.',
         description:
-          'Every one is running right now for you to open, and every one has automated tests that run on each change. The most backend-heavy comes first.',
+          'Both are running right now for you to open, and both have automated tests that run on each change. The more backend-heavy one comes first.',
       },
       contact: 'I’m looking for an entry-level Python software engineer role. Write to me, call, or message me on LinkedIn.',
       tagline: 'Software Engineer (Python) · FastAPI, PostgreSQL, pytest',
@@ -63,7 +63,7 @@ export const profile: Profile = {
       seo: {
         title: 'Anubhav Kumar · Software Engineer (Python) and Data Analyst',
         description:
-          'Anubhav Kumar, entry-level Python software engineer and data analyst in Bengaluru (B.E. ECE, NMIT, 2026). FastAPI, PostgreSQL, SQL and pandas, with live projects: an investment simulator, a UPI payment-failure tracker for India’s top 50 banks and a tested checkout service.',
+          'Anubhav Kumar, entry-level Python software engineer and data analyst in Bengaluru (B.E. ECE, NMIT, 2026). FastAPI, PostgreSQL, SQL and pandas, with live projects: an investment simulator and a UPI payment-failure tracker for India’s top 50 banks.',
         keywords: [
           'Anubhav Kumar',
           'software engineer',
@@ -99,7 +99,7 @@ export const profile: Profile = {
       stats: [
         { value: '1.07M', label: 'sales rows cleaned and analysed' },
         { value: '50', label: 'banks tracked, month by month' },
-        { value: '4', label: 'projects you can open live' },
+        { value: '3', label: 'projects you can open live' },
       ],
       about: [
         'I graduated in 2026 with a B.E. in Electronics and Communication from NMIT, Bangalore. I got into data the practical way: I kept wanting to know whether a number was actually true.',
@@ -107,7 +107,7 @@ export const profile: Profile = {
         'Before this I spent three months as a backend intern on a Java and Spring Boot app, which is where I learned how data actually lives inside real software.',
       ],
       work: {
-        title: 'Four projects, each starting with a real question.',
+        title: 'Three projects, each starting with a real question.',
         description:
           'Every one uses public data, is tested before anything is published, and is live for you to open. The most relevant to a data analyst role come first.',
       },

@@ -112,10 +112,6 @@ export interface Project {
   credit?: string
   /** Interactive extra shown in the case study. */
   extra?: 'sip-playground'
-  evaluation?: {
-    caption: string
-    rows: { model: string; mae: number; r2: number; best?: boolean }[]
-  }
 }
 
 export interface SkillGroup {

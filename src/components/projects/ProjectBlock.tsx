@@ -5,7 +5,6 @@ import { buttonClasses } from '../../lib/button'
 import { cn, withBase } from '../../lib/utils'
 import { GitHubIcon } from '../ui/BrandIcons'
 import { Tag } from '../ui/primitives'
-import { EvaluationTable } from './previews/Previews'
 import { SipPlayground } from './previews/SipPlayground'
 
 export function Shot({ shot }: { shot: Project['shots'][number] }) {
@@ -61,15 +60,13 @@ interface ProjectBlockProps {
   index: number
   /** Extra button next to the live and code links (none today). */
   action?: ReactNode
-  /** Extra case-study content (the Orderdesk bug table). */
-  children?: ReactNode
 }
 
 /**
  * One project: hook, short story, three numbers, why the tools and a screenshot.
  * The full case study opens in place, underneath.
  */
-export function ProjectBlock({ project, index, action, children }: ProjectBlockProps) {
+export function ProjectBlock({ project, index, action }: ProjectBlockProps) {
   const headingId = `${project.slug}-title`
   const panelId = useId()
   const [open, setOpen] = useState(() => linkedSlug() === project.slug)
@@ -165,21 +162,11 @@ export function ProjectBlock({ project, index, action, children }: ProjectBlockP
             <List items={project.findings} />
           </Block>
 
-          {project.evaluation && (
-            <Block title="How the models compared">
-              <div className="rounded-xl border border-line p-5 sm:p-6">
-                <EvaluationTable evaluation={project.evaluation} />
-              </div>
-            </Block>
-          )}
-
           {open && project.extra === 'sip-playground' && (
             <Block title="Try it yourself">
               <SipPlayground />
             </Block>
           )}
-
-          {children}
 
           {project.shots.slice(1).map((shot) => (
             <Shot key={shot.src} shot={shot} />

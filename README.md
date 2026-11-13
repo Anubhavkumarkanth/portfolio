@@ -3,10 +3,12 @@
 Personal portfolio for Anubhav Kumar, a Python software engineer and data analyst. One page with two
 views, picked with the role switch in the hero and the navigation:
 
-- **Software Engineer (the default).** Three live services (SIP Friction Analyzer, UPI Pulse and Orderdesk),
-  told from the engineering side. Orderdesk's case study holds the 8-bug table and testing skills.
-- **Data Analyst.** Four projects (UPI Pulse, retail cancellations, Dietbot and the SIP simulator), told from
-  the analysis side.
+- **Software Engineer (the default).** Two live services (SIP Friction Analyzer and UPI Pulse), told from
+  the engineering side.
+- **Data Analyst.** Three projects (UPI Pulse, retail cancellations and the SIP simulator), told from the
+  analysis side.
+
+Each view lists the projects on its matching resume.
 
 Each project has a one-line hook, three headline numbers, why each tool was chosen and a real screenshot;
 the full case study opens in place. The hero, About, skills, resume, contact line and footer change with
@@ -49,7 +51,6 @@ All content lives in `src/data/`, separate from the UI.
 | Name, contact details, About text                       | `src/data/profile.ts`                        |
 | Hero, About, section intros, resume and SEO, per view   | `src/data/profile.ts` → `personas`           |
 | Projects of both views (hook, numbers, tool choices…)   | `src/data/projects.ts`                       |
-| Orderdesk, its bug table and testing skills             | `src/data/qa.ts` (software view)             |
 | Skills, per view                                        | `src/data/skills.ts`                         |
 | Internship, degree, certificates                        | `src/data/experience.ts`, `education.ts`, `certifications.ts` |
 | Navigation links                                        | `src/config/site.ts`                         |
