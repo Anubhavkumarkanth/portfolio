@@ -19,7 +19,7 @@ import { useJumpToHash } from './hooks/useJumpToHash'
 
 /**
  * Which view to open on: `?role=data` picks Data Analyst, anything else Software.
- * An old link to a project only the data view has (`#dietbot`) opens the data view too.
+ * An old link to a project only the data view has (`#retail-cancellation-leakage`) opens the data view too.
  */
 function trackFromUrl(): Track {
   const params = new URLSearchParams(window.location.search)

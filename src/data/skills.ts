@@ -17,12 +17,12 @@ export const skills: Record<Track, SkillGroup[]> = {
     {
       title: 'Databases',
       plain: 'Storing data so it stays correct',
-      items: ['PostgreSQL', 'MySQL', 'DuckDB', 'Table design', 'Indexes', 'Query plans'],
+      items: ['PostgreSQL', 'DuckDB', 'Table design', 'Indexes', 'Query plans'],
     },
     {
       title: 'Testing and delivery',
       plain: 'Catching mistakes before users do',
-      items: ['pytest', 'Playwright', 'GitHub Actions CI', 'Deploys on Render'],
+      items: ['pytest', 'GitHub Actions CI', 'Deploys on Render'],
     },
   ],
   data: [
@@ -33,8 +33,8 @@ export const skills: Record<Track, SkillGroup[]> = {
     },
     {
       title: 'Python',
-      plain: 'Cleaning, checking and modelling data',
-      items: ['pandas', 'NumPy', 'scikit-learn', 'matplotlib', 'Plotly', 'pytest'],
+      plain: 'Cleaning, checking and charting data',
+      items: ['pandas', 'NumPy', 'matplotlib', 'Plotly', 'pytest'],
     },
     {
       title: 'Reporting',
@@ -44,7 +44,7 @@ export const skills: Record<Track, SkillGroup[]> = {
     {
       title: 'Statistics',
       plain: 'Knowing when a number can be trusted',
-      items: ['Bootstrap confidence ranges', 'Outlier checks', 'Baselines', 'Train / test splits', 'KPI definitions'],
+      items: ['Bootstrap confidence ranges', 'Outlier checks', 'Baselines', 'KPI definitions'],
     },
   ],
 }
