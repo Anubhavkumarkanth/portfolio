@@ -6,8 +6,8 @@ export const skills: Record<Track, SkillGroup[]> = {
   software: [
     {
       title: 'Python',
-      plain: 'Writing the backend',
-      items: ['FastAPI', 'Pydantic', 'SQLAlchemy', 'pandas', 'pytest'],
+      plain: 'Writing the backend and the models',
+      items: ['FastAPI', 'Pydantic', 'SQLAlchemy', 'pandas', 'scikit-learn', 'Streamlit', 'pytest'],
     },
     {
       title: 'APIs',

@@ -43,7 +43,7 @@ export const profile: Profile = {
         fileName: 'Anubhav_Kumar_Software_Engineer_Python_Resume.pdf',
       },
       stats: [
-        { value: '2', label: 'backend services live for you to open' },
+        { value: '3', label: 'projects live for you to open' },
         { value: '55', label: 'backend tests on one service, 34 against a real database' },
         { value: '30 of 30', label: 'test questions an AI question box got right' },
       ],
@@ -53,9 +53,9 @@ export const profile: Profile = {
         'Before this I spent three months as a full stack intern, building REST APIs in Java and Spring Boot and fixing defects in a real codebase.',
       ],
       work: {
-        title: 'Two services, both live and both tested.',
+        title: 'Three projects, each live and each tested.',
         description:
-          'Both are running right now for you to open, and both have automated tests that run on each change. The more backend-heavy one comes first.',
+          'Every one is running right now for you to open, and every one has automated tests that run on each change. Two are backend services; the third is a machine-learning app.',
       },
       contact: 'I’m looking for an entry-level Python software engineer role. Write to me, call, or message me on LinkedIn.',
       tagline: 'Software Engineer (Python) · FastAPI, PostgreSQL, pytest',
@@ -63,7 +63,7 @@ export const profile: Profile = {
       seo: {
         title: 'Anubhav Kumar · Software Engineer (Python) and Data Analyst',
         description:
-          'Anubhav Kumar, entry-level Python software engineer and data analyst in Bengaluru (B.E. ECE, NMIT, 2026). FastAPI, PostgreSQL, SQL and pandas, with live projects: an investment simulator and a UPI payment-failure tracker for India’s top 50 banks.',
+          'Anubhav Kumar, entry-level Python software engineer and data analyst in Bengaluru (B.E. ECE, NMIT, 2026). FastAPI, PostgreSQL, SQL and pandas, with live projects: an investment simulator, a UPI payment-failure tracker for India’s top 50 banks and a machine-learning diet app.',
         keywords: [
           'Anubhav Kumar',
           'software engineer',
@@ -79,6 +79,8 @@ export const profile: Profile = {
           'pytest',
           'REST APIs',
           'pandas',
+          'scikit-learn',
+          'machine learning',
           'Power BI',
           'NMIT Bangalore',
         ],

@@ -3,12 +3,12 @@
 Personal portfolio for Anubhav Kumar, a Python software engineer and data analyst. One page with two
 views, picked with the role switch in the hero and the navigation:
 
-- **Software Engineer (the default).** Two live services (SIP Friction Analyzer and UPI Pulse), told from
-  the engineering side.
+- **Software Engineer (the default).** SIP Friction Analyzer and UPI Pulse, told from the engineering
+  side, plus Dietbot, the machine-learning project.
 - **Data Analyst.** Three projects (UPI Pulse, retail cancellations and the SIP simulator), told from the
   analysis side.
 
-Each view lists the projects on its matching resume.
+Each view lists the projects on its matching resume; Dietbot is the one addition.
 
 Each project has a one-line hook, three headline numbers, why each tool was chosen and a real screenshot;
 the full case study opens in place. The hero, About, skills, resume, contact line and footer change with

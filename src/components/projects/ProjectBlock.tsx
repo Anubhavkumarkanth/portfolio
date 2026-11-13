@@ -5,6 +5,7 @@ import { buttonClasses } from '../../lib/button'
 import { cn, withBase } from '../../lib/utils'
 import { GitHubIcon } from '../ui/BrandIcons'
 import { Tag } from '../ui/primitives'
+import { EvaluationTable } from './previews/Previews'
 import { SipPlayground } from './previews/SipPlayground'
 
 export function Shot({ shot }: { shot: Project['shots'][number] }) {
@@ -161,6 +162,14 @@ export function ProjectBlock({ project, index, action }: ProjectBlockProps) {
           <Block title={findingsTitle}>
             <List items={project.findings} />
           </Block>
+
+          {project.evaluation && (
+            <Block title="How the models compared">
+              <div className="rounded-xl border border-line p-5 sm:p-6">
+                <EvaluationTable evaluation={project.evaluation} />
+              </div>
+            </Block>
+          )}
 
           {open && project.extra === 'sip-playground' && (
             <Block title="Try it yourself">

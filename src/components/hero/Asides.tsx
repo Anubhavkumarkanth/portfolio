@@ -99,7 +99,7 @@ function Bars({ rows, max, cols }: { rows: BarRow[]; max: number; cols: string }
   )
 }
 
-/** Software view: numbers from the SIP and UPI Pulse READMEs. */
+/** Software view: numbers from the SIP, UPI Pulse and Dietbot READMEs. */
 export function SoftwareAside() {
   return (
     <Card className="p-6 sm:p-7">
@@ -107,7 +107,7 @@ export function SoftwareAside() {
 
       <figure className="mt-5">
         <figcaption className="text-[15px] leading-snug text-fg">
-          Both projects ship with checks that run by themselves on each change.
+          Every project ships with checks that run by themselves on each change.
         </figcaption>
         <Bars
           max={55}
@@ -115,6 +115,7 @@ export function SoftwareAside() {
           rows={[
             { label: 'SIP', value: 55, text: '55 tests', strong: true },
             { label: 'UPI Pulse', value: 50, text: '50 checks' },
+            { label: 'Dietbot', value: 24, text: '24 tests' },
           ]}
         />
       </figure>
