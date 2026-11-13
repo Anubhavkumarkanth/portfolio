@@ -1,5 +1,7 @@
 {
   "redirects": [
+    { "source": "/data", "destination": "/?role=data", "permanent": false },
+    { "source": "/software", "destination": "/", "permanent": false },
     {
       "source": "/resume/Anubhav-Kumar-QA-Resume.pdf",
       "destination": "/resume/Anubhav-Kumar-Data-Analyst-Resume.pdf",
@@ -17,7 +19,7 @@
     },
     {
       "source": "/resume/Anubhav-Kumar-Python-Software-Developer-Resume.pdf",
-      "destination": "/resume/Anubhav-Kumar-Data-Analyst-Resume.pdf",
+      "destination": "/resume/Anubhav-Kumar-Software-Engineer-Python-Resume.pdf",
       "permanent": false
     },
     {

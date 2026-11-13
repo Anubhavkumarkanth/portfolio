@@ -1,7 +1,6 @@
-import { profile } from '../../data/profile'
 import { Container, Eyebrow } from '../ui/primitives'
 
-export function About() {
+export function About({ paragraphs }: { paragraphs: string[] }) {
   return (
     <section id="about" aria-labelledby="about-heading" className="border-y border-line bg-surface py-16 sm:py-20">
       <Container className="grid grid-cols-1 gap-8 lg:grid-cols-[13rem_1fr] lg:gap-12">
@@ -12,7 +11,7 @@ export function About() {
           </h2>
         </div>
         <div className="max-w-2xl space-y-5 text-[17px] leading-relaxed text-pretty text-fg-muted">
-          {profile.about.map((p) => (
+          {paragraphs.map((p) => (
             <p key={p}>{p}</p>
           ))}
         </div>

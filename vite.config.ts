@@ -44,7 +44,7 @@ function siteMeta(siteUrl: string, base: string): Plugin {
     }).replace(/</g, '\\u003c'),
   })
 
-  const tokens = tokensFor(profile.data, '/', 'og-image.png')
+  const tokens = tokensFor(profile.personas.software, '/', 'og-image.png')
 
   return {
     name: 'site-meta',

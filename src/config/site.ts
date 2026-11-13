@@ -12,6 +12,5 @@ export const navLinks = [
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'background', label: 'Background' },
-  { id: 'qa', label: 'Testing' },
   { id: 'contact', label: 'Contact' },
 ] as const

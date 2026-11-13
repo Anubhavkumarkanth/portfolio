@@ -1,7 +1,6 @@
 import type { Project, SkillGroup } from './types'
 
-// Content for the testing section at the end of the page. Facts come from the orderdesk-qa-suite
-// README.
+// Orderdesk, the third project of the software view. Facts come from the orderdesk-qa-suite README.
 
 export const orderdesk: Project = {
   slug: 'orderdesk-qa-suite',
@@ -70,6 +69,7 @@ export const orderdesk: Project = {
     'BUG-008 (a wrong total on the page) passed every API test. Only the browser test caught it, which is why the suite has three layers.',
     'CI blocks any change that fails a test, and also fails if any planted bug goes undetected.',
   ],
+  findingsTitle: 'What the tests showed',
   limits: [
     'I wrote both the app and the tests, so this shows how sensitive the tests are, not that I found bugs in someone else’s software.',
     'Not covered: load testing, security beyond payment signatures, accessibility audits, browsers other than Chromium, real phones.',

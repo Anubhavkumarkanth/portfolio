@@ -61,7 +61,7 @@ interface ProjectBlockProps {
   index: number
   /** Extra button next to the live and code links (none today). */
   action?: ReactNode
-  /** Extra case-study content (the QA bug table). */
+  /** Extra case-study content (the Orderdesk bug table). */
   children?: ReactNode
 }
 
@@ -73,7 +73,7 @@ export function ProjectBlock({ project, index, action, children }: ProjectBlockP
   const headingId = `${project.slug}-title`
   const panelId = useId()
   const [open, setOpen] = useState(() => linkedSlug() === project.slug)
-  const findingsTitle = project.slug === 'orderdesk-qa-suite' ? 'What the tests showed' : 'What the data showed'
+  const findingsTitle = project.findingsTitle ?? 'What the data showed'
 
   return (
     <article
