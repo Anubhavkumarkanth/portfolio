@@ -1,28 +1,56 @@
-import type { SkillGroup } from './types'
+import type { SkillGroup, Track } from './types'
 
 // Only what a project or the internship actually used.
 
-export const skills: SkillGroup[] = [
-  {
-    title: 'SQL',
-    plain: 'Asking questions of big tables',
-    items: ['Joins', 'CTEs', 'Window functions', 'CASE', 'Indexes', 'MySQL', 'PostgreSQL', 'DuckDB'],
-  },
-  {
-    title: 'Python',
-    plain: 'Cleaning, checking and modelling data',
-    items: ['pandas', 'NumPy', 'scikit-learn', 'matplotlib', 'Plotly', 'pytest'],
-  },
-  {
-    title: 'Reporting',
-    plain: 'Showing results so people act on them',
-    items: ['Power BI', 'DAX', 'Star schema', 'Excel', 'HTML dashboards'],
-  },
-  {
-    title: 'Statistics',
-    plain: 'Knowing when a number can be trusted',
-    items: ['Bootstrap confidence ranges', 'Outlier checks', 'Baselines', 'Train / test splits', 'KPI definitions'],
-  },
-]
+export const skills: Record<Track, SkillGroup[]> = {
+  software: [
+    {
+      title: 'Python',
+      plain: 'Writing the backend',
+      items: ['FastAPI', 'Pydantic', 'SQLAlchemy', 'pandas', 'pytest'],
+    },
+    {
+      title: 'APIs',
+      plain: 'Letting other software talk to mine',
+      items: ['REST APIs', 'Request validation', 'JWT sign-in', 'Database transactions'],
+    },
+    {
+      title: 'Databases',
+      plain: 'Storing data so it stays correct',
+      items: ['PostgreSQL', 'MySQL', 'DuckDB', 'Table design', 'Indexes', 'Query plans'],
+    },
+    {
+      title: 'Testing and delivery',
+      plain: 'Catching mistakes before users do',
+      items: ['pytest', 'Playwright', 'GitHub Actions CI', 'Deploys on Render'],
+    },
+  ],
+  data: [
+    {
+      title: 'SQL',
+      plain: 'Asking questions of big tables',
+      items: ['Joins', 'CTEs', 'Window functions', 'CASE', 'Indexes', 'MySQL', 'PostgreSQL', 'DuckDB'],
+    },
+    {
+      title: 'Python',
+      plain: 'Cleaning, checking and modelling data',
+      items: ['pandas', 'NumPy', 'scikit-learn', 'matplotlib', 'Plotly', 'pytest'],
+    },
+    {
+      title: 'Reporting',
+      plain: 'Showing results so people act on them',
+      items: ['Power BI', 'DAX', 'Star schema', 'Excel', 'HTML dashboards'],
+    },
+    {
+      title: 'Statistics',
+      plain: 'Knowing when a number can be trusted',
+      items: ['Bootstrap confidence ranges', 'Outlier checks', 'Baselines', 'Train / test splits', 'KPI definitions'],
+    },
+  ],
+}
 
-export const tooling = ['Git', 'GitHub', 'GitHub Actions', 'VS Code']
+/** The "Also in use" line under the skill groups. */
+export const tooling: Record<Track, string[]> = {
+  software: ['SQL', 'Java and Spring Boot (internship)', 'JavaScript', 'TypeScript', 'React', 'Git', 'VS Code'],
+  data: ['Git', 'GitHub', 'GitHub Actions', 'VS Code'],
+}

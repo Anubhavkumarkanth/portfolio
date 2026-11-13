@@ -14,9 +14,14 @@ export interface ResumeLink {
   label: string
 }
 
-/** Hero copy, resume and SEO for the page. */
+/** The two ways the page can be read. Software is the default. */
+export type Track = 'software' | 'data'
+
+/** Everything that changes with the role: hero copy, About, section intros, resume and SEO. */
 export interface Persona {
   role: string
+  /** Label on the role switch. */
+  short: string
   /** The big hero line. */
   headline: string
   /** One or two sentences under the headline. */
@@ -24,6 +29,14 @@ export interface Persona {
   resume: ResumeLink
   /** Small proof numbers under the hero. */
   stats: Stat[]
+  /** Short About paragraphs, in plain English. */
+  about: string[]
+  /** Heading and intro of the projects section. */
+  work: { title: string; description: string }
+  /** Line under the Contact heading. */
+  contact: string
+  /** Footer line. */
+  tagline: string
   seo: {
     title: string
     description: string
@@ -44,9 +57,7 @@ export interface Profile {
     github: SocialLink
     linkedin: SocialLink
   }
-  /** Short About paragraphs, in plain English. */
-  about: string[]
-  data: Persona
+  personas: Record<Track, Persona>
 }
 
 export interface Stat {
@@ -93,6 +104,8 @@ export interface Project {
   steps: string[]
   /** Case study: what the data showed. */
   findings: string[]
+  /** Heading above the findings. Defaults to "What the data showed". */
+  findingsTitle?: string
   /** Case study: what it can't do. */
   limits: string[]
   /** Optional note on who did what. */

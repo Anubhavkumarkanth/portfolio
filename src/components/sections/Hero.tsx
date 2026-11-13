@@ -9,12 +9,16 @@ import { Container } from '../ui/primitives'
 
 const iconLink = 'inline-flex items-center gap-2 text-sm text-fg-muted transition-colors hover:text-fg'
 
-/** Name, role, one big line, the resume, and a small visual on the right. */
-export function Hero({ persona, aside }: { persona: Persona; aside: ReactNode }) {
+/** Role switch, name, role, one big line, the resume, and a small visual on the right. */
+export function Hero({ persona, aside, switcher }: { persona: Persona; aside: ReactNode; switcher: ReactNode }) {
   return (
     <section id="home" aria-labelledby="home-heading" className="pt-28 pb-6 sm:pt-36 sm:pb-8">
       <Container className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.25fr_1fr] lg:gap-16">
         <div className="animate-rise">
+          <div className="mb-7 flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span className="text-sm text-fg-muted">Hiring for</span>
+            {switcher}
+          </div>
           <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-fg-muted">
             <span className="inline-flex items-center gap-2 font-medium text-fg">
               <span className="size-2 rounded-full bg-good" aria-hidden="true" />

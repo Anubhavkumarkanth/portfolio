@@ -1,9 +1,11 @@
-import type { Project } from './types'
+import { orderdesk } from './qa'
+import type { Project, Track } from './types'
 
 // Data projects, most relevant first. Every number comes from the project's
 // own README or resume line, so it can be checked against the repository.
+// The software view retells two of them from the engineering side, further down.
 
-export const projects: Project[] = [
+const dataProjects: Project[] = [
   {
     slug: 'upi-pulse',
     name: 'UPI Pulse',
@@ -287,4 +289,139 @@ export const projects: Project[] = [
   },
 ]
 
-export const getProject = (slug: string | null) => projects.find((p) => p.slug === slug) ?? null
+const bySlug = (slug: string) => dataProjects.find((p) => p.slug === slug)!
+
+// Software view: the same repositories, told from the engineering side. Screenshots,
+// links and anything not overridden come from the data version above.
+
+const sipSoftware: Project = {
+  ...bySlug('sip-friction-analyzer'),
+  hook: 'This app had its maths written twice, in two languages. I cut it to one.',
+  summary:
+    'A SIP is a fixed amount invested every month, and this app shows what skipping or pausing payments costs by the end of the plan. I built the backend in Python: it checks each request, runs the calculation once, on the server, and saves the run with its events in one database transaction (all of it saves, or none of it).',
+  results: [
+    { value: '55', label: 'backend tests, 34 of them against a real PostgreSQL database' },
+    { value: '0.80 → 0.06 ms', label: 'one user’s history lookup after adding an index' },
+    { value: '1 transaction', label: 'per run: the result and its events save together or not at all' },
+  ],
+  choices: [
+    {
+      pick: 'FastAPI',
+      over: 'Flask',
+      because: 'it checks every request against a typed schema by itself, so bad input is rejected before it reaches the maths.',
+    },
+    {
+      pick: 'PostgreSQL',
+      over: 'SQLite',
+      because:
+        'many users can save runs at the same time, and its query plans (EXPLAIN ANALYZE) showed exactly where an index would speed things up.',
+    },
+    {
+      pick: 'One calculation on the server',
+      over: 'a second copy in the browser',
+      because:
+        'the browser used to redo the maths in TypeScript, and nothing kept the two copies in step. Now one backend decides every result.',
+    },
+  ],
+  question:
+    'A money calculator is only useful if its answers are right, the same everywhere, and still explainable a month later. How do you build the backend so that holds?',
+  steps: [
+    'Wrote the calculation engine in Python: an ideal plan and an actual plan with your skips, pauses and cuts, compounded month by month, plus a Monte Carlo mode that plays out 1,000 random market paths.',
+    'Built the API with FastAPI. Pydantic, its validation library, checks every request, so a pause that ends before it starts gets a clear 422 error (a “fix your input” reply) instead of crashing the server.',
+    'Designed three tables (users, runs, events) with foreign keys, cascading deletes and CHECK constraints: rules the database itself enforces, so a score of 150 can never be saved.',
+    'Saved each run and the events behind it in one transaction, so a run is never stored without its events.',
+    'Added sign-in with JWT (a signed token the browser sends with each request), so each user sees only their own runs.',
+    'Removed the second copy of the calculation from the React front end.',
+    'Set up CI on GitHub Actions (automatic checks on every change): lint, type checks, the tests against PostgreSQL and a build.',
+  ],
+  findingsTitle: 'How it turned out',
+  findings: [
+    '55 backend tests pass: 21 check the engine against the textbook annuity formula, and 34 run the API against a real PostgreSQL database.',
+    'The tests cover the awkward cases: expired and forged sign-in tokens, one user trying to read another’s runs, the one-transaction save and the cascading delete.',
+    'An index on (user, date) made one user’s history lookup about 13 times faster, 0.80 ms to 0.06 ms on 20,000 rows. The whole endpoint gains less (3.84 ms to 2.83 ms), and the write-up says so.',
+    'Checked the maths by hand: skipping month 2 of a ₹5,000 plan at 12% leaves ₹5,578 less after a year, matching the app.',
+  ],
+  limits: [
+    'There is one seeded account and no sign-up, so the “only your own runs” rule is enforced and tested, but the live demo can’t show it with a second user.',
+    'Nothing limits sign-in attempts yet, and the Monte Carlo endpoint is public: capped per request, not per visitor.',
+    'Ignores tax, fund fees and inflation. A learning tool, not financial advice.',
+  ],
+}
+
+const upiSoftware: Project = {
+  ...bySlug('upi-pulse'),
+  hook: 'Anyone can ask this site a question. An AI writes the SQL, and my code decides whether it runs.',
+  summary:
+    'UPI Pulse tracks how often UPI payments fail at India’s 50 busiest banks. Behind the site is a Python pipeline that rebuilds everything from NPCI’s raw files, and a small FastAPI service that turns a plain-English question into a database query, checks it, runs it and shows the answer with the query beside it.',
+  results: [
+    { value: '30 of 30', label: 'test questions answered right' },
+    { value: '50', label: 'automatic data checks before every update' },
+    { value: '78 → 62', label: 'bank names in NPCI’s files, merged to one per bank' },
+  ],
+  choices: [
+    {
+      pick: 'DuckDB',
+      over: 'PostgreSQL',
+      because:
+        'it runs SQL straight on a file inside the Python script. No database server to set up, so the whole pipeline rebuilds for free on every update.',
+    },
+    {
+      pick: 'Checking the AI’s query in code',
+      over: 'trusting the prompt',
+      because:
+        'a prompt can be talked round, and code can’t. The query must be one read-only SELECT on one table, returns at most 200 rows and is stopped after 5 seconds.',
+    },
+    {
+      pick: 'Stand-in models in the tests',
+      over: 'calling the real AI on every push',
+      because:
+        'the tests stay free and repeatable, and a stand-in can be told to obey an attacker, which shows exactly what would reach the page.',
+    },
+  ],
+  tools: ['Python', 'FastAPI', 'DuckDB', 'SQL', 'pandas', 'pytest', 'Gemini API', 'GitHub Actions'],
+  question:
+    'How do you let anyone on the internet question a database through an AI model, without the model inventing numbers or an attacker steering it?',
+  steps: [
+    'Wrote the parser that reads NPCI’s saved monthly files and gives each bank one name. NPCI uses 78 names for 62 banks.',
+    'Put 50 data checks in front of the build, so a bad or changed NPCI file stops the update instead of reaching the site.',
+    'Built the question service in FastAPI. The model writes only the query; every number and name in the answer comes from running it.',
+    'Locked the database down: it lives in memory, holds only the rows the site shows, and cannot read files or reach the network.',
+    'Limited each visitor to 8 questions a minute and 50 a day, so the free service can’t be drained.',
+    'Set the deploy so Render publishes a change only after the tests pass on GitHub.',
+  ],
+  findingsTitle: 'How it turned out',
+  findings: [
+    '30 of 30 test questions answered right, and each question’s query is published.',
+    'Put 16 questions it should refuse to the live model: it refused 14. It turned down all 8 attacks, and the 2 it shouldn’t have answered are recorded as failures, not hidden.',
+    'The data checks caught a real error in NPCI’s own figures: August 2022 rates published without the decimal point.',
+    'The monthly AI summary is published only if every number in it matches the data.',
+  ],
+  limits: [
+    'A query can still work out a misleading number from real columns, which is why the query is always shown next to the answer.',
+    'The visitor limits are counted in memory, so they reset when the free service restarts.',
+    '16 red-team questions are a small sample, written by the same person who wrote the checks.',
+  ],
+}
+
+const orderdeskSoftware: Project = {
+  ...orderdesk,
+  name: 'Orderdesk',
+  hook: '500 buyers, 5 units left, and nobody gets charged twice.',
+  summary:
+    'Orderdesk is a small order and UPI checkout service I built in Python with FastAPI and MySQL. Every payment moves from pending to success or failed, payment messages are signed, and a success that arrives after a cancel is refunded. 144 automated tests guard it, and I planted 8 bugs to prove the tests catch them.',
+  choices: [
+    {
+      pick: 'PyMySQL',
+      over: 'mysqlclient',
+      because:
+        'it is a database driver written in plain Python, so it installs with one command on any computer. mysqlclient is faster and more popular, but needs a C compiler to install.',
+    },
+    ...orderdesk.choices.filter((c) => c.pick !== 'pytest and requests'),
+  ],
+  tools: ['Python', 'FastAPI', 'MySQL', 'pytest', 'Playwright', 'requests', 'GitHub Actions'],
+}
+
+export const projectsByTrack: Record<Track, Project[]> = {
+  software: [sipSoftware, upiSoftware, orderdeskSoftware],
+  data: dataProjects,
+}

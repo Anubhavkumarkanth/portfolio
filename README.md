@@ -1,12 +1,19 @@
 # Anubhav Kumar — Portfolio
 
-Personal portfolio for Anubhav Kumar, a data analyst working in SQL, Python and Power BI. One page:
+Personal portfolio for Anubhav Kumar, a Python software engineer and data analyst. One page with two
+views, picked with the role switch in the hero and the navigation:
 
-- **Data analyst first.** Four projects (UPI Pulse, retail cancellations, Dietbot and a SIP simulator), each
-  with a one-line hook, three headline numbers, why each tool was chosen and a real screenshot. The full
-  case study opens in place under each project.
-- **Testing last.** The Orderdesk test suite is the final project, in the same format, with the 8-bug table
-  and testing skills in its case study.
+- **Software Engineer (the default).** Three live services (SIP Friction Analyzer, UPI Pulse and Orderdesk),
+  told from the engineering side. Orderdesk's case study holds the 8-bug table and testing skills.
+- **Data Analyst.** Four projects (UPI Pulse, retail cancellations, Dietbot and the SIP simulator), told from
+  the analysis side.
+
+Each project has a one-line hook, three headline numbers, why each tool was chosen and a real screenshot;
+the full case study opens in place. The hero, About, skills, resume, contact line and footer change with
+the view.
+
+**Links.** `/` opens the software view and `/?role=data` (or the short `/data`) opens the data view, so
+each resume can link straight to its own view.
 
 Calm, light editorial design with an automatic dark mode.
 
@@ -40,10 +47,10 @@ All content lives in `src/data/`, separate from the UI.
 | To change…                                              | Edit                                         |
 | ------------------------------------------------------- | -------------------------------------------- |
 | Name, contact details, About text                       | `src/data/profile.ts`                        |
-| Hero line, intro, stats, resumes and SEO                | `src/data/profile.ts` → `data`               |
-| Data projects (hook, summary, numbers, tool choices…)   | `src/data/projects.ts`                       |
-| Testing project, bug table, testing skills              | `src/data/qa.ts` (shown in the last section) |
-| Skills on the main page                                 | `src/data/skills.ts`                         |
+| Hero, About, section intros, resume and SEO, per view   | `src/data/profile.ts` → `personas`           |
+| Projects of both views (hook, numbers, tool choices…)   | `src/data/projects.ts`                       |
+| Orderdesk, its bug table and testing skills             | `src/data/qa.ts` (software view)             |
+| Skills, per view                                        | `src/data/skills.ts`                         |
 | Internship, degree, certificates                        | `src/data/experience.ts`, `education.ts`, `certifications.ts` |
 | Navigation links                                        | `src/config/site.ts`                         |
 | Colours (light and dark) and fonts                      | `src/index.css`                              |
@@ -53,8 +60,9 @@ All content lives in `src/data/`, separate from the UI.
 it appears. Each project opens with a one-line hook, then two short sentences. Tool choices are written as
 "X instead of Y: because…".
 
-**Resume.** `public/resume/Anubhav-Kumar-Data-Analyst-Resume.pdf` (navigation, hero, contact). Replace the
-PDF to update it. `vercel.json` redirects older resume file names, the QA one included, to it.
+**Resumes.** `public/resume/Anubhav-Kumar-Software-Engineer-Python-Resume.pdf` and
+`public/resume/Anubhav-Kumar-Data-Analyst-Resume.pdf`; the navigation, hero and contact buttons offer the
+one for the current view. Replace a PDF to update it. `vercel.json` redirects older resume file names.
 
 **Screenshots.** Real screenshots of each live project, saved as WebP in `public/projects/`. List them in a
 project's `shots` with their pixel `width` and `height`. The first one appears with the project; the rest

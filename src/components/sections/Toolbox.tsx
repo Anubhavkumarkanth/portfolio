@@ -20,7 +20,7 @@ export function Toolbox({ groups, extras, description }: { groups: SkillGroup[];
           </div>
         ))}
       </div>
-      {extras && <p className="mt-5 text-sm text-fg-subtle">Also every day: {extras.join(', ')}.</p>}
+      {extras && <p className="mt-5 text-sm text-fg-subtle">Also in use: {extras.join(', ')}.</p>}
     </Section>
   )
 }

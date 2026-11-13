@@ -1,19 +1,22 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Download, Menu, X } from 'lucide-react'
-import type { ResumeLink } from '../../data/types'
+import type { ResumeLink, Track } from '../../data/types'
 import { profile } from '../../data/profile'
 import { useActiveSection } from '../../hooks/useActiveSection'
 import { useScrollLock } from '../../hooks/useScrollLock'
 import { buttonClasses } from '../../lib/button'
 import { cn, withBase } from '../../lib/utils'
 import { Container } from '../ui/primitives'
+import { TrackSwitch } from '../ui/TrackSwitch'
 
 interface NavbarProps {
   links: readonly { id: string; label: string }[]
   resume: ResumeLink
+  track: Track
+  onTrack: (track: Track) => void
 }
 
-export function Navbar({ links, resume }: NavbarProps) {
+export function Navbar({ links, resume, track, onTrack }: NavbarProps) {
   const ids = useMemo(() => links.map((l) => l.id), [links])
   const active = useActiveSection(ids)
   const [scrolled, setScrolled] = useState(() => window.scrollY > 8)
@@ -78,6 +81,10 @@ export function Navbar({ links, resume }: NavbarProps) {
             </ul>
 
             <div className="flex items-center gap-2">
+              {/* Wide screens only; smaller ones use the switch in the hero and the menu. */}
+              <div className="hidden lg:block">
+                <TrackSwitch track={track} onChange={onTrack} />
+              </div>
               <a
                 href={withBase(resume.href)}
                 target="_blank"
@@ -121,6 +128,13 @@ export function Navbar({ links, resume }: NavbarProps) {
               </ul>
             </nav>
             <div className="mt-auto space-y-3 pt-8">
+              <TrackSwitch
+                track={track}
+                onChange={(t) => {
+                  setOpen(false)
+                  onTrack(t)
+                }}
+              />
               <a
                 href={withBase(resume.href)}
                 download={resume.fileName}
