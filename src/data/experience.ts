@@ -5,7 +5,7 @@ export const experience: Experience[] = [
     company: 'Redevelopers Automate Solution Pvt. Ltd.',
     role: 'Full Stack Development Intern',
     start: '2026-02',
-    end: '2026-04',
+    end: '2026-05',
     location: 'Madhya Pradesh, India',
     highlights: [
       'Designed and managed the database side of an app, in SQL and NoSQL.',

@@ -50,7 +50,7 @@ export const profile: Profile = {
       about: [
         'I graduated in 2026 with a B.E. in Electronics and Communication from NMIT, Bangalore. I write backend software in Python: the part of an app that takes a request, applies the rules and stores the result.',
         'I like code that can show it works. Every project here ships with automated tests that run on each change, so a broken change is stopped before it goes live. On one of them, 34 tests run against a real PostgreSQL database instead of a stand-in.',
-        'Before this I spent three months as a full stack intern, building REST APIs in Java and Spring Boot and fixing defects in a real codebase.',
+        'Before this I was a full stack intern (Feb to May 2026), building REST APIs in Java and Spring Boot and fixing defects in a real codebase.',
       ],
       work: {
         title: 'Two services, both live and both tested.',
@@ -104,7 +104,7 @@ export const profile: Profile = {
       about: [
         'I graduated in 2026 with a B.E. in Electronics and Communication from NMIT, Bangalore. I got into data the practical way: I kept wanting to know whether a number was actually true.',
         'So I check before I chart. On every project I write small automated tests that try to prove the data wrong, and that habit once caught a decimal-point error in NPCI’s own published figures. Then I explain what I found in plain words, because a finding nobody understands doesn’t change anything.',
-        'Before this I spent three months as a backend intern on a Java and Spring Boot app, which is where I learned how data actually lives inside real software.',
+        'Before this I was a backend intern on a Java and Spring Boot app (Feb to May 2026), which is where I learned how data actually lives inside real software.',
       ],
       work: {
         title: 'Three projects, each starting with a real question.',
