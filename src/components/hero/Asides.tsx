@@ -99,7 +99,7 @@ function Bars({ rows, max, cols }: { rows: BarRow[]; max: number; cols: string }
   )
 }
 
-/** Software view: numbers from the SIP and UPI Pulse READMEs. */
+/** Software view: numbers from the Hybrid Intent Router and SIP READMEs. */
 export function SoftwareAside() {
   return (
     <Card className="p-6 sm:p-7">
@@ -107,14 +107,14 @@ export function SoftwareAside() {
 
       <figure className="mt-5">
         <figcaption className="text-[15px] leading-snug text-fg">
-          Both projects ship with checks that run by themselves on each change.
+          My AI router sends 88.9% fewer messages to the LLM, at the same accuracy.
         </figcaption>
         <Bars
-          max={55}
+          max={100}
           cols="grid-cols-[4.75rem_1fr_5.25rem]"
           rows={[
-            { label: 'SIP', value: 55, text: '55 tests', strong: true },
-            { label: 'UPI Pulse', value: 50, text: '50 checks' },
+            { label: 'LLM only', value: 100, text: '100%' },
+            { label: 'Router', value: 11.1, text: '11.1%', strong: true },
           ]}
         />
       </figure>
