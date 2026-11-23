@@ -330,7 +330,76 @@ const upiSoftware: Project = {
   ],
 }
 
+// Software only: it is on the Software Engineer resume, not the Data Analyst one.
+const hybridIntentRouter: Project = {
+  slug: 'hybrid-intent-router',
+  name: 'Hybrid Intent Router',
+  hook: 'Same accuracy as sending everything to an LLM, with 88.9% fewer LLM calls.',
+  summary:
+    'A voice bot first has to work out what the customer wants, and paying a large language model (LLM) to read every message is slow and costly. I fine-tuned a small model that answers when it is sure and sends only the unsure messages to Google’s Gemini, in English, Hindi and Kannada.',
+  results: [
+    { value: '84.2% vs 84.1%', label: 'router accuracy against sending everything to the LLM' },
+    { value: '88.9%', label: 'fewer LLM calls, so 88.9% lower LLM cost' },
+    { value: '41.2 req/s', label: 'under load through NGINX, with 0 failures out of 4,908' },
+  ],
+  choices: [
+    {
+      pick: 'MuRIL',
+      over: 'XLM-R (the more popular multilingual model)',
+      because:
+        'it was pre-trained on 17 Indian languages and does Hindi and Kannada better when trained on English only, going by published results on the same dataset.',
+    },
+    {
+      pick: 'My own PyTorch training loop',
+      over: 'the Hugging Face Trainer',
+      because: 'every step (forward pass, loss, backward pass, update) is in plain view, so it is easier to explain and debug.',
+    },
+    {
+      pick: 'Temperature scaling',
+      over: 'the model’s raw confidence scores',
+      because:
+        'a fine-tuned model is over-confident. One fitted number makes “90% sure” mean right about 90% of the time, and only then does a confidence cut-off make sense.',
+    },
+  ],
+  tools: ['Python', 'PyTorch', 'Hugging Face Transformers', 'Gemini API', 'Flask', 'gunicorn', 'NGINX', 'ONNX Runtime', 'PostgreSQL', 'pytest'],
+  shots: [
+    {
+      src: 'projects/hybrid-intent-router.webp',
+      alt: 'Hybrid Intent Router live page: “A voice assistant brain that understands India’s languages and only pays for an LLM when it has to”, with cards for 84.2% accuracy, 89% of messages answered without the LLM, 89% lower LLM cost and 7 times faster per message',
+      caption: 'The live demo. You can speak or type in English, Hindi, Kannada or Hinglish and hear the reply.',
+      width: 1600,
+      height: 920,
+    },
+  ],
+  links: {
+    github: 'https://github.com/Anubhavkumarkanth/hybrid-intent-router',
+    demo: 'https://hybrid-intent-router.onrender.com',
+  },
+  question:
+    'Before a voice bot can set an alarm or check the weather, it has to work out the customer’s intent. An LLM does that well but is billed per message and takes over a second. Can a small, free model take most of the messages, including in Indian languages it was never trained on, without losing accuracy?',
+  steps: [
+    'Used Amazon’s MASSIVE dataset: 60 intents, with the same sentences in English, Hindi and Kannada.',
+    'Fine-tuned MuRIL with my own PyTorch loop on English data only, then tested it on Hindi and Kannada it had never seen (called zero-shot transfer).',
+    'Ran the LLM baseline with Gemini, forcing its reply into one of the 60 labels, and cached every answer so the analysis re-runs without an API key.',
+    'Calibrated the small model’s confidence with temperature scaling, then picked the cut-off on separate dev data with a rule written down before seeing any test results.',
+    'Served it with Flask inside gunicorn behind NGINX on Linux, and load-tested it with 20 simulated users.',
+    'Shrank the model from 950 MB to 168 MB (kept only the English, Hindi and Kannada vocabulary and stored the weights in 8 bits), so it fits on Render’s free 512 MB server.',
+  ],
+  findingsTitle: 'How it turned out',
+  findings: [
+    'Across the three languages the router scored 84.2%, against 84.1% for the LLM alone, while sending only 11.1% of messages to the LLM.',
+    'LLM cost per 1,000 messages fell from $0.30 to $0.03, and typical time per message from 1,344 ms to 186 ms.',
+    'Trained on English only, the small model still scored 77.9% on Hindi and 70.7% on Kannada. In English the router beat both models, at 90.6%.',
+    'The smaller deployed model gives the same answer as the original on 98 to 100% of test sentences.',
+  ],
+  limits: [
+    'MASSIVE is voice-assistant data (alarms, music, weather), not banking or customer support.',
+    'The Hindi and Kannada sentences are professional translations, not real mixed-language speech.',
+    'The load test ran with the LLM switched off. With it on, an unsure message holds a worker for the whole LLM call, so throughput would be lower.',
+  ],
+}
+
 export const projectsByTrack: Record<Track, Project[]> = {
-  software: [sipSoftware, upiSoftware],
+  software: [hybridIntentRouter, sipSoftware, upiSoftware],
   data: dataProjects,
 }

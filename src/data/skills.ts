@@ -20,9 +20,14 @@ export const skills: Record<Track, SkillGroup[]> = {
       items: ['PostgreSQL', 'DuckDB', 'Table design', 'Indexes', 'Query plans'],
     },
     {
+      title: 'AI and machine learning',
+      plain: 'Using models without overpaying for them',
+      items: ['PyTorch', 'Hugging Face Transformers', 'Fine-tuning', 'Gemini API', 'ONNX Runtime'],
+    },
+    {
       title: 'Testing and delivery',
       plain: 'Catching mistakes before users do',
-      items: ['pytest', 'GitHub Actions CI', 'Deploys on Render'],
+      items: ['pytest', 'GitHub Actions CI', 'Flask, gunicorn and NGINX', 'Load testing', 'Deploys on Render'],
     },
   ],
   data: [
@@ -51,6 +56,6 @@ export const skills: Record<Track, SkillGroup[]> = {
 
 /** The "Also in use" line under the skill groups. */
 export const tooling: Record<Track, string[]> = {
-  software: ['SQL', 'Java and Spring Boot (internship)', 'JavaScript', 'TypeScript', 'React', 'Git', 'VS Code'],
+  software: ['SQL', 'MySQL', 'JavaScript', 'TypeScript', 'React', 'Linux', 'Git', 'VS Code'],
   data: ['Git', 'GitHub', 'GitHub Actions', 'VS Code'],
 }

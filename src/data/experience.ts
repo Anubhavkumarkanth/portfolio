@@ -8,8 +8,8 @@ export const experience: Experience[] = [
     end: '2026-05',
     location: 'Madhya Pradesh, India',
     highlights: [
-      'Designed and managed the database side of an app, in SQL and NoSQL.',
-      'Built REST APIs (the endpoints other software calls) in Java and Spring Boot.',
+      'Built REST APIs (the endpoints other software calls) in Python for a full-stack SIP behaviour-analysis product.',
+      'Designed the database side of the app in MySQL.',
       'Found and fixed defects, and wrote unit and integration tests to keep them fixed.',
     ],
   },

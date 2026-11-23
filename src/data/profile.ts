@@ -34,36 +34,37 @@ export const profile: Profile = {
     software: {
       role: 'Software Engineer (Python)',
       short: 'Software Engineer',
-      headline: 'I build Python backends, and the tests that keep them honest.',
+      headline: 'I build Python backends and AI features, and the tests that keep them honest.',
       intro:
-        'I write REST APIs (the endpoints other software calls) with FastAPI, store the data in PostgreSQL, and ship every project with automated tests that run on each change.',
+        'I write REST APIs (the endpoints other software calls) with FastAPI and Flask, store the data in PostgreSQL, fine-tune small AI models in PyTorch, and ship every project with automated tests that run on each change.',
       resume: {
         label: 'Software Engineer resume',
         href: 'resume/Anubhav-Kumar-Software-Engineer-Python-Resume.pdf',
         fileName: 'Anubhav_Kumar_Software_Engineer_Python_Resume.pdf',
       },
       stats: [
-        { value: '2', label: 'backend services live for you to open' },
+        { value: '3', label: 'projects live for you to open' },
+        { value: '88.9%', label: 'fewer LLM calls from my AI router, at the same accuracy' },
         { value: '55', label: 'backend tests on one service, 34 against a real database' },
-        { value: '30 of 30', label: 'test questions an AI question box got right' },
       ],
       about: [
         'I graduated in 2026 with a B.E. in Electronics and Communication from NMIT, Bangalore. I write backend software in Python: the part of an app that takes a request, applies the rules and stores the result.',
+        'Lately I build with AI too. In my newest project, a small model I fine-tuned in PyTorch answers most voice-bot messages by itself and passes only the unsure ones to an LLM, which keeps the accuracy and cuts the paid LLM calls by 88.9%.',
         'I like code that can show it works. Every project here ships with automated tests that run on each change, so a broken change is stopped before it goes live. On one of them, 34 tests run against a real PostgreSQL database instead of a stand-in.',
-        'Before this I was a full stack intern (Feb to May 2026), building REST APIs in Java and Spring Boot and fixing defects in a real codebase.',
+        'Before this I was a full stack intern (Feb to May 2026), building REST APIs in Python, designing the app’s MySQL database and fixing defects in a real codebase.',
       ],
       work: {
-        title: 'Two services, both live and both tested.',
+        title: 'Three projects, all live and all tested.',
         description:
-          'Both are running right now for you to open, and both have automated tests that run on each change. The more backend-heavy one comes first.',
+          'All three are running right now for you to open, and each has automated tests that run on each change. The newest, an AI router, comes first.',
       },
       contact: 'I’m looking for an entry-level Python software engineer role. Write to me, call, or message me on LinkedIn.',
-      tagline: 'Software Engineer (Python) · FastAPI, PostgreSQL, pytest',
+      tagline: 'Software Engineer (Python) · FastAPI, PyTorch, PostgreSQL, pytest',
       // This is the view the page opens on, so its SEO text covers both roles.
       seo: {
         title: 'Anubhav Kumar · Software Engineer (Python) and Data Analyst',
         description:
-          'Anubhav Kumar, entry-level Python software engineer and data analyst in Bengaluru (B.E. ECE, NMIT, 2026). FastAPI, PostgreSQL, SQL and pandas, with live projects: an investment simulator and a UPI payment-failure tracker for India’s top 50 banks.',
+          'Anubhav Kumar, entry-level Python software engineer and data analyst in Bengaluru (B.E. ECE, NMIT, 2026). FastAPI, PyTorch, PostgreSQL, SQL and pandas, with live projects: an AI router that cuts LLM calls by 88.9%, an investment simulator and a UPI payment-failure tracker for India’s top 50 banks.',
         keywords: [
           'Anubhav Kumar',
           'software engineer',
@@ -74,6 +75,9 @@ export const profile: Profile = {
           'data analyst',
           'FastAPI',
           'Python',
+          'PyTorch',
+          'LLM',
+          'machine learning',
           'PostgreSQL',
           'SQL',
           'pytest',
@@ -104,7 +108,7 @@ export const profile: Profile = {
       about: [
         'I graduated in 2026 with a B.E. in Electronics and Communication from NMIT, Bangalore. I got into data the practical way: I kept wanting to know whether a number was actually true.',
         'So I check before I chart. On every project I write small automated tests that try to prove the data wrong, and that habit once caught a decimal-point error in NPCI’s own published figures. Then I explain what I found in plain words, because a finding nobody understands doesn’t change anything.',
-        'Before this I was a backend intern on a Java and Spring Boot app (Feb to May 2026), which is where I learned how data actually lives inside real software.',
+        'Before this I was a full stack intern (Feb to May 2026), building REST APIs in Python on a MySQL database, which is where I learned how data actually lives inside real software.',
       ],
       work: {
         title: 'Three projects, each starting with a real question.',
